@@ -131,10 +131,11 @@ body {
     animation: barcodeFromLeft 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
-/* Rechts: vult resterende ruimte, barcode begint vanaf de tekstkant */
+/* Rechts: vult resterende ruimte, barcode herhaalt om volledig te vullen */
 .hero-tagline .line-barcode.right {
     flex: 1;
     background-position: left center;
+    background-repeat: repeat-x;
     animation: barcodeFromRight 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 

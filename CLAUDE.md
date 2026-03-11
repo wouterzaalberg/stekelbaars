@@ -50,19 +50,23 @@ Bestanden in `Huisstijl/`.
 1. **Hero** - Volledig scherm, gele achtergrond (`#FEDB00`)
    - Logo linksboven (zwart), kleiner als watermark
    - Slogan "MAAK JE IDEALEN WAAR MET STEKELBAARS" groot, links uitgelijnd
-   - Barcode/streepjespatronen vullen de ruimte naast de tekst (links: vaste breedte ~30%, rechts: flexibel)
+   - Barcodes als CSS background-image (geen `<img>`), afwisselend streepjes/barcode per regel (`.barcode-alt` class)
+   - Links: vaste breedte ~30%, `no-repeat`, `background-position: right center` (afgeknipt aan linkerkant)
+   - Rechts: `flex: 1`, `repeat-x`, `background-position: left center` (herhaalt tot rechterrand)
+   - Beide: `background-size: auto 400%` voor consistente schaal ongeacht containerbreedte
    - Gele pijl als scroll-indicator onderaan (90deg gedraaid)
    - **Desktop**: Barcodes naast de tekst, stromen van buitenaf naar binnen (water-effect)
    - **Mobiel**: Barcodes boven en onder de tekst (3 rijen elk), stromen afwisselend van links/rechts
 
 2. **Welkomstbanner** - Zwarte balk
-   - Tijdelijke tekst over launch 16 april
-   - "Op 16 april" in Barlow Semi Condensed Bold uppercase
+   - Tijdelijke tekst over launch half april
+   - "Half april" in Barlow Semi Condensed Bold uppercase
    - Email link in geel
 
 3. **Over Stekelbaars** - Witte achtergrond
    - Twee-koloms grid: foto Sebastiaan links, tekst rechts
-   - Drie alinea's over missie en methode
+   - Foto strekt mee met teksthoogte (`align-items: stretch`, `object-fit: cover`)
+   - Drie alinea's over missie, STROOMmodel™ en methode
    - Email link met gele onderstreping, gele achtergrond bij hover
    - Mobiel: foto boven tekst
 

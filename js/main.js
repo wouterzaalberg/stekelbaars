@@ -82,23 +82,27 @@ if (modelScroll) {
     }, { passive: false });
 }
 
-// News page: load posts from markdown files via index
+// News page: load posts automatically via GitHub API (public repo, no auth needed)
 async function loadNieuws() {
     const grid = document.querySelector('.nieuws-grid');
     if (!grid) return;
 
     try {
-        const response = await fetch('nieuws/index.json');
-        const postFiles = await response.json();
+        // List all .md files in nieuws/berichten/ via GitHub API
+        const apiUrl = 'https://api.github.com/repos/wouterzaalberg/stekelbaars/contents/nieuws/berichten?ref=nieuwe-site';
+        const response = await fetch(apiUrl);
+        const files = await response.json();
 
-        if (postFiles.length === 0) {
+        const mdFiles = files.filter(f => f.name.endsWith('.md'));
+
+        if (mdFiles.length === 0) {
             grid.innerHTML = '<div class="nieuws-empty"><p>Nog geen berichten.</p></div>';
             return;
         }
 
-        // Fetch all markdown files and parse frontmatter
-        const posts = await Promise.all(postFiles.map(async (file) => {
-            const res = await fetch(`nieuws/berichten/${file}`);
+        // Fetch each markdown file and parse frontmatter
+        const posts = await Promise.all(mdFiles.map(async (file) => {
+            const res = await fetch(file.download_url);
             const text = await res.text();
             return parseFrontmatter(text);
         }));

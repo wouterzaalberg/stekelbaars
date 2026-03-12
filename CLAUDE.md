@@ -1,20 +1,29 @@
 # Stekelbaars Website
 
-Website voor Stekelbaars, communicatiebureau. Gestart als landingspagina, wordt later uitgebreid.
+Website voor Stekelbaars, communicatiebureau.
 
 - **Klant**: Stekelbaars (communicatiebureau)
 - **Contact**: sebastiaan@stekelbaars.nl
-- **Launch**: 16 april
 - **GitHub**: https://github.com/wouterzaalberg/stekelbaars
-- **GitHub Pages**: wouterzaalberg.github.io/stekelbaars
+
+## Branches & Hosting
+
+| Branch | Hosting | URL | Doel |
+|---|---|---|---|
+| `main` | GitHub Pages | stekelbaars.nl | Live landingspagina |
+| `nieuwe-site` | Netlify | stekelbaars.netlify.app | Volledige site in ontwikkeling |
+
+- Tekstwijzigingen live site → op `main`
+- Nieuwe site bouwen → op `nieuwe-site`
+- CMS (Decap): `stekelbaars.netlify.app/admin/` via Netlify Identity (git-gateway)
 
 ## Huisstijl
 
 ### Kleuren
-- **Geel**: `#FEDB00` (rgb 254, 219, 0) - primaire merkkleur
+- **Geel**: `#FEDB00` — **punch-kleur**, alleen als accent (pijlen, highlights, links, hover), niet als grote achtergrondvlakken
 - **Wit**: `#FFFFFF`
 - **Zwart**: `#000000`
-- **Middengrijs**: `#808080` - diensten-sectie achtergrond
+- **Middengrijs**: `#808080`
 
 ### Typografie
 
@@ -39,76 +48,67 @@ Bestanden in `Huisstijl/`.
 
 ### Huisstijl kernprincipes
 - Streepjes/barcode-motief is centraal in de identiteit
-- Bold, grafisch, editoriaal
-- Hoog contrast: zwart-wit + fel geel als enige kleuraccent
+- Bold, grafisch, editoriaal — poster-style koppen
+- Hoog contrast: zwart-wit als basis, geel alleen als punch-accent
 - Pijlen prominent als decoratief element
+- Grote koppen met barcode/streepjes als decoratie (`.graphic-heading` component)
 
-## Landingspagina (index.html)
+## Sitemap (nieuwe-site branch)
 
-### Secties
+### Pagina's
 
-1. **Hero** - Volledig scherm, gele achtergrond (`#FEDB00`)
-   - Logo linksboven (zwart), kleiner als watermark
-   - Slogan "MAAK JE IDEALEN WAAR MET STEKELBAARS" groot, links uitgelijnd
-   - Barcodes als CSS background-image (geen `<img>`), afwisselend streepjes/barcode per regel (`.barcode-alt` class)
-   - Links: vaste breedte ~30%, `no-repeat`, `background-position: right center` (afgeknipt aan linkerkant)
-   - Rechts: `flex: 1`, `repeat-x`, `background-position: left center` (herhaalt tot rechterrand)
-   - Beide: `background-size: auto 400%` voor consistente schaal ongeacht containerbreedte
-   - Gele pijl als scroll-indicator onderaan (90deg gedraaid)
-   - **Desktop**: Barcodes naast de tekst, stromen van buitenaf naar binnen (water-effect)
-   - **Mobiel**: Barcodes boven en onder de tekst (3 rijen elk), stromen afwisselend van links/rechts
+1. **Home** (`index.html`) — Hero, intro, model preview, wie we zijn, wie helpen we, testimonials
+2. **Model** (`model.html`) — Horizontale scroll (desktop), 5 stappen: Analyse → Strategie → Verhaal → Activatie → Impact
+3. **Wat we doen** (`wat-we-doen.html`) — 4 diensten met afwisselende foto/tekst layout
+4. **Voor wie** (`voor-wie.html`) — 4 doelgroepen: wethouders, colleges, organisaties, bestuurders
+5. **Crisis hotline** (`crisis.html`) — Donkere hero, 3 pijlers, aanpak, CTA
+6. **Wie we zijn** (`wie-we-zijn.html`) — Sebastiaan intro, waarden, werkwijze
+7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
+8. **Contact** (`contact.html`) — Contactgegevens + formulier (demo, nog niet functioneel)
 
-2. **Welkomstbanner** - Zwarte balk
-   - Tijdelijke tekst over launch half april
-   - "Half april" in Barlow Semi Condensed Bold uppercase
-   - Email link in geel
+### Home secties
 
-3. **Over Stekelbaars** - Witte achtergrond
-   - Twee-koloms grid: foto Sebastiaan links, tekst rechts
-   - Foto strekt mee met teksthoogte (`align-items: stretch`, `object-fit: cover`)
-   - Drie alinea's over missie, STROOMmodel™ en methode
-   - Email link met gele onderstreping, gele achtergrond bij hover
-   - Mobiel: foto boven tekst
+1. **Hero** — Volledig scherm, gele achtergrond, slogan met barcodes, scroll-indicator
+2. **Intro** — Grafische kop "TEGEN DE STROOM IN" met barcode + pijl, introtekst
+3. **Model preview** — Zwarte achtergrond, grafische kop, 5 stappen dots, link naar model
+4. **Wie we zijn** — Foto Sebastiaan + tekst, grafische kop met streepjes
+5. **Wie helpen we** — Zwarte achtergrond, grafische kop met pijl, 3 doelgroep-kaarten
+6. **Testimonials** — Lichtgrijze achtergrond, 4 quote-kaarten met geel aanhalingsteken
 
-4. **Diensten** - Middengrijs achtergrond (`#808080`)
-   - Drie witte kaarten in grid: Wethouders, Colleges van B en W, Organisaties
-   - Kaart titels in geel (`#FEDB00`)
-   - Hover: zwarte balk (6px) verschijnt onderaan kaart
-   - Subtiel streepjespatroon in achtergrond (4% opacity)
-   - Ruimte tussen kaarten
-   - Mobiel: kaarten onder elkaar
+### Navigatie
+- Sticky nav, wit bij scroll, zwart logo + links
+- "Crisis hotline" als zwarte button met gele tekst
+- Hamburger-menu op mobiel (volledig scherm overlay)
 
-5. **Crisiscommunicatie** - Zwarte achtergrond
-   - Label "Direct hulp nodig?" in geel, uppercase, wide letter-spacing
-   - Grote kop "CRISISCOMMUNICATIE" (tot 5rem)
-   - Barcode decoratie rechts (6% opacity), verborgen op mobiel
-   - Email link in geel
+### Footer
+- Zwarte achtergrond, wit logo
+- 3 kolommen: brand, paginalinks, contact (email in geel)
 
-6. **Footer** - Gele achtergrond
-   - Zwart logo, klein (20px)
-   - Email link in zwart met underline
+## Nieuws CMS
 
-### Animaties
+- **Decap CMS** via Netlify Identity (git-gateway backend)
+- Admin: `stekelbaars.netlify.app/admin/`
+- Berichten: markdown files in `nieuws/berichten/` met frontmatter (title, date, image, excerpt, body)
+- Nieuwspagina laadt berichten automatisch via GitHub API (public repo, geen index nodig)
+- Publiceren via CMS → commit op GitHub → Netlify rebuild → live
 
-- **Hero logo**: Fade in (0.8s, delay 0.2s)
+## Animaties
+
 - **Hero slogan**: Elke regel schuift omhoog met stagger (0.5s - 1.1s delay)
 - **Hero barcodes desktop**: Stromen van buitenaf naar binnen met overshoot (1.2s, cubic-bezier)
-  - Links: vanuit rechts richting tekst
-  - Rechts: vanuit links richting tekst
-- **Hero barcodes mobiel**: Afwisselend van links en rechts (1.2s per barcode, gestaggerd)
+- **Hero barcodes mobiel**: Afwisselend van links en rechts (gestaggerd)
 - **Scroll indicator**: Pijl verschijnt na 2s, bounced zachtjes
-- **Scroll reveal**: Elementen met `.reveal` class faden in + schuiven omhoog bij 15% visibility
-- **Dienst cards hover**: Zwarte balk groeit van 0 naar 6px onderaan
+- **Scroll reveal**: `.reveal` class, fade in + schuif omhoog bij 15% visibility
+- **Model pagina**: Horizontale scroll met snap, muiswiel + pijltjestoetsen, flow indicator dots
 - **Reduced motion**: Alle animaties uitgeschakeld
 
-### Responsive breakpoints
+## Responsive
 
-- **> 600px (desktop)**: Volledige layout, barcodes naast tekst, foto naast tekst
-- **< 900px (tablet)**: Diensten 1 kolom, over-sectie 1 kolom, barcode decoratie verborgen
-- **< 600px (mobiel)**:
-  - Hero: slogan groter (15vw), barcodes boven/onder, logo 180px, content start op 15vh
-  - Over: foto volle breedte boven tekst
-  - Crisis: kleinere kop
+- Content max-width: 1200px (standaard), 1400px (wide)
+- Achtergronden en decoratie: full-width (ook ultra-wide)
+- **> 900px**: Volledige layout, grids naast elkaar
+- **600-900px**: 1-kolom grids, hamburger-menu
+- **< 600px**: Hero met mobiele barcodes, grotere slogan, model verticaal
 
 ## Bestandsstructuur
 
@@ -116,10 +116,27 @@ Bestanden in `Huisstijl/`.
 /
 ├── CLAUDE.md
 ├── index.html
+├── model.html
+├── wat-we-doen.html
+├── voor-wie.html
+├── crisis.html
+├── wie-we-zijn.html
+├── nieuws.html
+├── contact.html
 ├── sebas.jpg
-├── 534A4845.mp4          (watervideo, niet in gebruik)
+├── 534A4845.mp4              (watervideo, niet in gebruik)
 ├── css/
 │   └── styles.css
+├── js/
+│   └── main.js
+├── admin/
+│   ├── index.html            (Decap CMS)
+│   └── config.yml
+├── nieuws/
+│   └── berichten/
+│       └── *.md              (nieuwsberichten)
+├── img/
+│   └── uploads/              (CMS uploads)
 └── Huisstijl/
     ├── stekelbaars logo_in geel.png
     ├── stekelbaars logo_in zwart.png
@@ -137,6 +154,8 @@ Bestanden in `Huisstijl/`.
 ```
 
 ## Notities
-- Watervideo (`534A4845.mp4`) is beschikbaar maar momenteel niet in gebruik in de hero
-- Geen build tools nodig, plain HTML/CSS/JS
-- Calibri is Windows systeemfont, fallback naar sans-serif voor andere OS'en
+- Watervideo (`534A4845.mp4`) is beschikbaar maar niet in gebruik
+- Geen build tools, plain HTML/CSS/JS
+- Calibri is Windows systeemfont, fallback naar sans-serif
+- Alle dummy tekst en placeholder foto's moeten nog vervangen worden
+- Contactformulier is demo (alert), backend nog niet gekoppeld

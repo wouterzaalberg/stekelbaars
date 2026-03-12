@@ -1,11 +1,16 @@
 /* ============================================
-   STEKELBAARS - Landing Page
+   STEKELBAARS - Full Site
    ============================================ */
 
 :root {
     --geel: #FEDB00;
     --zwart: #000000;
     --wit: #FFFFFF;
+    --grijs: #808080;
+    --lichtgrijs: #f5f5f5;
+    --content-max: 1200px;
+    --content-wide: 1400px;
+    --nav-height: 70px;
 }
 
 /* Reset */
@@ -27,37 +32,227 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 /* ============================================
-   HERO
+   TYPOGRAPHY
    ============================================ */
+
+h1, h2, h3, h4 {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+
+p {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    line-height: 1.85;
+    color: #1a1a1a;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.container {
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.container--wide {
+    max-width: var(--content-wide);
+}
+
+.section {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.section--geel { background: var(--geel); }
+.section--zwart { background: var(--zwart); color: var(--wit); }
+.section--grijs { background: var(--grijs); }
+.section--lichtgrijs { background: var(--lichtgrijs); }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.nav--scrolled {
+    background: var(--geel);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-inner {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    height: 22px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.2rem, 2.5vw, 2.5rem);
+    list-style: none;
+}
+
+.nav-links a {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--zwart);
+    text-decoration: none;
+    position: relative;
+    padding: 0.3rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--zwart);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Crisis link special styling */
+.nav-links .nav-crisis {
+    background: var(--zwart);
+    color: var(--geel);
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.08em;
+}
+
+.nav-links .nav-crisis::after {
+    display: none;
+}
+
+.nav-links .nav-crisis:hover {
+    background: #222;
+}
+
+/* Hamburger */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    z-index: 101;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--zwart);
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile nav */
+.nav-mobile {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--geel);
+    z-index: 99;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-mobile.open {
+    display: flex;
+}
+
+.nav-mobile a {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--zwart);
+    text-decoration: none;
+}
+
+.nav-mobile a:hover {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+}
+
+/* ============================================
+   HERO (Home)
+   ============================================ */
+
 .hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background: var(--geel);
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: clamp(2rem, 4vw, 4rem);
+    padding-top: calc(var(--nav-height) + 2rem);
     overflow: hidden;
 }
 
-/* Logo linksboven */
-.hero-logo {
-    position: absolute;
-    top: clamp(1.5rem, 3vw, 3rem);
-    left: clamp(2rem, 4vw, 4rem);
-    width: clamp(150px, 20vw, 280px);
-    height: auto;
-    opacity: 0;
-    animation: logoFade 0.8s ease-out 0.2s forwards;
-}
-
-@keyframes logoFade {
-    to { opacity: 1; }
-}
-
-/* Tagline - groot over hele scherm */
 .hero-tagline {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
@@ -80,7 +275,6 @@ body {
     justify-content: flex-start;
 }
 
-/* Tekst links uitgelijnd */
 .hero-tagline .line-text {
     display: block;
     white-space: nowrap;
@@ -98,17 +292,11 @@ body {
 .hero-tagline .line:nth-child(4) .line-text { animation-delay: 1.1s; }
 
 @keyframes lineSlideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Barcode/streepjes vullen de ruimte aan beide kanten */
+/* Barcode/streepjes lines */
 .hero-tagline .line-barcode {
     overflow: hidden;
     opacity: 0;
@@ -123,7 +311,6 @@ body {
     background-image: url('../Huisstijl/stekelbaars_barcode.png');
 }
 
-/* Links: vaste breedte, barcode begint vanaf de tekstkant */
 .hero-tagline .line-barcode.left {
     width: 30%;
     flex-shrink: 0;
@@ -131,7 +318,6 @@ body {
     animation: barcodeFromLeft 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
-/* Rechts: vult resterende ruimte, barcode herhaalt om volledig te vullen */
 .hero-tagline .line-barcode.right {
     flex: 1;
     background-position: left center;
@@ -145,43 +331,24 @@ body {
 .hero-tagline .line:nth-child(4) .line-barcode { animation-delay: 1.6s; }
 
 @keyframes barcodeFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    60% {
-        opacity: 0.18;
-        transform: translateX(5%);
-    }
-    100% {
-        opacity: 0.15;
-        transform: translateX(0);
-    }
+    0% { opacity: 0; transform: translateX(-100%); }
+    60% { opacity: 0.18; transform: translateX(5%); }
+    100% { opacity: 0.15; transform: translateX(0); }
 }
 
 @keyframes barcodeFromRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    60% {
-        opacity: 0.18;
-        transform: translateX(-5%);
-    }
-    100% {
-        opacity: 0.15;
-        transform: translateX(0);
-    }
+    0% { opacity: 0; transform: translateX(100%); }
+    60% { opacity: 0.18; transform: translateX(-5%); }
+    100% { opacity: 0.15; transform: translateX(0); }
 }
 
-
-/* Barcodes boven/onder tagline - alleen mobiel */
+/* Mobile barcodes */
 .hero-barcode-top,
 .hero-barcode-bottom {
     display: none;
 }
 
-/* Pijl als scroll indicator */
+/* Scroll indicator */
 .scroll-indicator {
     position: absolute;
     bottom: 2.5rem;
@@ -208,92 +375,156 @@ body {
 }
 
 /* ============================================
-   WELKOMSTBANNER
+   HOME SECTIONS
    ============================================ */
-.welkomst {
+
+/* Intro */
+.intro {
+    text-align: center;
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.intro p {
+    font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto;
+    color: #1a1a1a;
+}
+
+/* Model preview (home) */
+.model-preview {
     background: var(--zwart);
     color: var(--wit);
-    padding: 1.8rem 2rem;
-    text-align: center;
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    line-height: 1.6;
-    letter-spacing: 0.02em;
+    padding: clamp(5rem, 10vw, 9rem) 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.welkomst a {
-    color: var(--geel);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s;
+.model-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../Huisstijl/stekelbaars_streepjes.png') repeat-x center;
+    background-size: auto 80%;
+    opacity: 0.03;
+    pointer-events: none;
 }
 
-.welkomst a:hover {
-    border-bottom-color: var(--geel);
-}
-
-.welkomst-datum {
+.model-preview-label {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.25em;
+    color: var(--geel);
+    margin-bottom: 1rem;
 }
 
-/* ============================================
-   OVER SECTIE
-   ============================================ */
-.over {
+.model-preview h2 {
+    margin-bottom: 2rem;
+}
+
+.model-preview p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 650px;
+    margin-bottom: 2.5rem;
+}
+
+.model-steps-preview {
+    display: flex;
+    gap: 2rem;
     position: relative;
-    padding: clamp(5rem, 10vw, 9rem) clamp(2rem, 8vw, 6rem);
-    max-width: 1100px;
-    margin: 0 auto;
+    margin-top: 3rem;
+}
+
+.model-steps-preview::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--geel);
+    opacity: 0.3;
+    transform: translateY(-50%);
+}
+
+.model-step-dot {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.model-step-dot .dot {
+    width: 50px;
+    height: 50px;
+    background: var(--geel);
+    color: var(--zwart);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.model-step-dot span {
+    display: block;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--wit);
+}
+
+/* Who we are (home) */
+.wie-zijn-wij {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.wie-grid {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
     gap: 0 clamp(2.5rem, 5vw, 5rem);
     align-items: stretch;
 }
 
-.over-foto img {
+.wie-foto img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: grayscale(100%);
 }
 
-.over-tekst p {
-    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-    line-height: 1.85;
+.wie-tekst h2 {
+    margin-bottom: 2rem;
+}
+
+.wie-tekst p {
     margin-bottom: 1.5rem;
-    color: #1a1a1a;
 }
 
-.over-tekst p:last-of-type {
+.wie-tekst p:last-of-type {
     margin-bottom: 0;
 }
 
-.over a {
-    color: var(--zwart);
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 2px solid var(--geel);
-    transition: background 0.3s;
-}
-
-.over a:hover {
-    background: var(--geel);
-}
-
-/* ============================================
-   DIENSTEN
-   ============================================ */
-.diensten {
-    background: #808080;
-    padding: clamp(5rem, 8vw, 8rem) clamp(2rem, 6vw, 4rem);
+/* Who we help (home) */
+.wie-helpen {
+    background: var(--grijs);
+    padding: clamp(5rem, 8vw, 8rem) 0;
     position: relative;
     overflow: hidden;
 }
 
-/* Streepjespatroon als achtergrond decoratie */
-.diensten::before {
+.wie-helpen::before {
     content: '';
     position: absolute;
     top: 0;
@@ -306,17 +537,24 @@ body {
     pointer-events: none;
 }
 
-.diensten-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.5rem, 2.5vw, 2.5rem);
-    max-width: 1200px;
-    margin: 0 auto;
+.wie-helpen .container {
     position: relative;
     z-index: 1;
 }
 
-.dienst-card {
+.wie-helpen h2 {
+    color: var(--wit);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.doelgroep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.doelgroep-card {
     background: var(--wit);
     padding: clamp(2rem, 3vw, 3rem);
     position: relative;
@@ -324,7 +562,7 @@ body {
     transition: background 0.4s ease;
 }
 
-.dienst-card::after {
+.doelgroep-card::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -335,85 +573,710 @@ body {
     transition: height 0.4s ease;
 }
 
-.dienst-card:hover::after {
+.doelgroep-card:hover::after {
     height: 6px;
 }
 
-.dienst-card h3 {
-    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.3rem, 2vw, 1.7rem);
-    text-transform: uppercase;
+.doelgroep-card h3 {
+    color: var(--geel);
     letter-spacing: 0.06em;
     margin-bottom: 1.2rem;
-    color: var(--geel);
 }
 
-.dienst-card p {
-    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-    line-height: 1.75;
+.doelgroep-card p {
     color: #333;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
 }
 
-/* Pijl accent bij dienst cards */
-.dienst-card .card-pijl {
-    width: 50px;
-    height: auto;
-    margin-top: 1.5rem;
-    opacity: 0.15;
-    transition: opacity 0.4s;
+/* Testimonials */
+.testimonials {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+    background: var(--lichtgrijs);
 }
 
-.dienst-card:hover .card-pijl {
-    opacity: 0.4;
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.testimonial-card {
+    background: var(--wit);
+    padding: clamp(2rem, 3vw, 3rem);
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '\201C';
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-size: 5rem;
+    color: var(--geel);
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    line-height: 1;
+}
+
+.testimonial-card blockquote {
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--zwart);
+}
+
+.testimonial-role {
+    font-size: 0.85rem;
+    color: var(--grijs);
+    margin-top: 0.2rem;
 }
 
 /* ============================================
-   CRISISCOMMUNICATIE
+   PAGE HEADERS
    ============================================ */
-.crisis {
+
+.page-header {
+    background: var(--geel);
+    padding: clamp(8rem, 15vw, 12rem) 0 clamp(4rem, 8vw, 6rem);
     position: relative;
-    background: var(--zwart);
-    color: var(--wit);
-    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 8vw, 6rem);
     overflow: hidden;
 }
 
-.crisis-inner {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../Huisstijl/stekelbaars_barcode.png') no-repeat right center;
+    background-size: auto 120%;
+    opacity: 0.08;
+    pointer-events: none;
 }
 
-.crisis-label {
+.page-header h1 {
+    position: relative;
+    z-index: 1;
+}
+
+.page-header p {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.5rem;
+    max-width: 650px;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+}
+
+/* ============================================
+   MODEL PAGE - Horizontal Scroll
+   ============================================ */
+
+.model-page {
+    padding-top: var(--nav-height);
+}
+
+.model-horizontal {
+    height: 100vh;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.model-horizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.model-slide {
+    min-width: 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: clamp(2rem, 4vw, 6rem);
+}
+
+.model-slide:nth-child(odd) {
+    background: var(--zwart);
+    color: var(--wit);
+}
+
+.model-slide:nth-child(even) {
+    background: var(--geel);
+    color: var(--zwart);
+}
+
+/* First slide = intro */
+.model-slide--intro {
+    background: var(--geel) !important;
+    color: var(--zwart) !important;
+}
+
+.model-slide-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+}
+
+.model-slide-number {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(6rem, 15vw, 12rem);
+    line-height: 1;
+    opacity: 0.1;
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
+}
+
+.model-slide h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 1.5rem;
+}
+
+.model-slide p {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    line-height: 1.8;
+}
+
+.model-slide:nth-child(odd) p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Flow indicator */
+.model-flow-indicator {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.model-flow-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--grijs);
+    opacity: 0.4;
+    transition: opacity 0.3s, background 0.3s, transform 0.3s;
+}
+
+.model-flow-dot.active {
+    opacity: 1;
+    background: var(--geel);
+    transform: scale(1.3);
+}
+
+/* Scroll hint */
+.model-scroll-hint {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.model-scroll-hint img {
+    height: 25px;
+    width: auto;
+}
+
+/* ============================================
+   WAT WE DOEN PAGE
+   ============================================ */
+
+.diensten-detail {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.dienst-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: center;
+    margin-bottom: clamp(5rem, 8vw, 8rem);
+}
+
+.dienst-block:last-child {
+    margin-bottom: 0;
+}
+
+.dienst-block:nth-child(even) {
+    direction: rtl;
+}
+
+.dienst-block:nth-child(even) > * {
+    direction: ltr;
+}
+
+.dienst-block-img img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.dienst-block-tekst h3 {
+    color: var(--geel);
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.dienst-block-tekst p {
+    margin-bottom: 1rem;
+}
+
+/* ============================================
+   VOOR WIE PAGE
+   ============================================ */
+
+.doelgroepen-detail {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.doelgroep-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: center;
+    padding: clamp(3rem, 5vw, 5rem) 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.doelgroep-block:last-child {
+    border-bottom: none;
+}
+
+.doelgroep-block:nth-child(even) {
+    direction: rtl;
+}
+
+.doelgroep-block:nth-child(even) > * {
+    direction: ltr;
+}
+
+.doelgroep-block-img img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.doelgroep-block-tekst h3 {
+    color: var(--zwart);
+    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.doelgroep-block-tekst .label {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--geel);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.doelgroep-block-tekst p {
+    margin-bottom: 1rem;
+}
+
+/* ============================================
+   CRISIS PAGE
+   ============================================ */
+
+.crisis-hero {
+    background: var(--zwart);
+    color: var(--wit);
+    padding: clamp(10rem, 18vw, 14rem) 0 clamp(5rem, 10vw, 8rem);
+    position: relative;
+    overflow: hidden;
+}
+
+.crisis-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    background: url('../Huisstijl/stekelbaars_barcode.png') no-repeat right center;
+    background-size: auto 150%;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.crisis-hero .crisis-label {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
     font-size: clamp(0.85rem, 1vw, 0.95rem);
     text-transform: uppercase;
     letter-spacing: 0.25em;
     color: var(--geel);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.crisis h2 {
-    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    line-height: 1.05;
+.crisis-hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
     margin-bottom: 2rem;
 }
 
-.crisis p {
-    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-    line-height: 1.85;
+.crisis-hero p {
     color: rgba(255, 255, 255, 0.85);
     max-width: 650px;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
 }
 
-.crisis a {
+.crisis-content {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.crisis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.crisis-card {
+    padding: clamp(2rem, 3vw, 3rem);
+    border-left: 4px solid var(--geel);
+}
+
+.crisis-card h3 {
+    margin-bottom: 1rem;
+}
+
+.crisis-card p {
+    color: #333;
+}
+
+.crisis-cta {
+    background: var(--geel);
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    text-align: center;
+}
+
+.crisis-cta h2 {
+    margin-bottom: 1.5rem;
+}
+
+.crisis-cta p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* ============================================
+   WIE WE ZIJN PAGE
+   ============================================ */
+
+.team-intro {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.team-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+    align-items: center;
+}
+
+.team-intro-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.team-intro-tekst h2 {
+    margin-bottom: 2rem;
+}
+
+.team-intro-tekst p {
+    margin-bottom: 1.5rem;
+}
+
+.team-values {
+    background: var(--zwart);
+    color: var(--wit);
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.team-values h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+}
+
+.value-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--geel);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+}
+
+.value-card h3 {
+    color: var(--geel);
+    margin-bottom: 1rem;
+}
+
+.value-card p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ============================================
+   NIEUWS PAGE
+   ============================================ */
+
+.nieuws-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.nieuws-card {
+    background: var(--wit);
+    border: 1px solid #e0e0e0;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.nieuws-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nieuws-card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+}
+
+.nieuws-card-body {
+    padding: 1.5rem;
+}
+
+.nieuws-card-date {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--grijs);
+    margin-bottom: 0.5rem;
+}
+
+.nieuws-card-body h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.nieuws-card-body p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+.nieuws-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--grijs);
+}
+
+/* ============================================
+   CONTACT PAGE
+   ============================================ */
+
+.contact-content {
+    padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+}
+
+.contact-info h2 {
+    margin-bottom: 2rem;
+}
+
+.contact-info p {
+    margin-bottom: 1.5rem;
+}
+
+.contact-detail {
+    margin-bottom: 2rem;
+}
+
+.contact-detail-label {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--grijs);
+    margin-bottom: 0.3rem;
+}
+
+.contact-detail a,
+.contact-detail p {
+    font-size: 1.1rem;
+    color: var(--zwart);
+    text-decoration: none;
+}
+
+.contact-detail a {
+    border-bottom: 2px solid var(--geel);
+    transition: background 0.3s;
+}
+
+.contact-detail a:hover {
+    background: var(--geel);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background: var(--wit);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--geel);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn--geel {
+    background: var(--geel);
+    color: var(--zwart);
+}
+
+.btn--geel:hover {
+    background: #e5c500;
+}
+
+.btn--zwart {
+    background: var(--zwart);
+    color: var(--wit);
+}
+
+.btn--zwart:hover {
+    background: #222;
+}
+
+.btn--outline {
+    background: transparent;
+    border: 2px solid var(--zwart);
+    color: var(--zwart);
+}
+
+.btn--outline:hover {
+    background: var(--zwart);
+    color: var(--wit);
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+
+.link-geel {
     color: var(--geel);
     text-decoration: none;
     font-weight: 700;
@@ -421,50 +1284,90 @@ body {
     transition: border-color 0.3s;
 }
 
-.crisis a:hover {
+.link-geel:hover {
     border-bottom-color: var(--geel);
 }
 
-/* Barcode decoratie */
-.crisis-barcode {
-    position: absolute;
-    top: 50%;
-    right: clamp(2rem, 6vw, 6rem);
-    transform: translateY(-50%);
-    width: clamp(120px, 15vw, 220px);
-    opacity: 0.06;
-    pointer-events: none;
+.link-zwart {
+    color: var(--zwart);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--geel);
+    transition: background 0.3s;
+}
+
+.link-zwart:hover {
+    background: var(--geel);
 }
 
 /* ============================================
    FOOTER
    ============================================ */
+
 .footer {
     background: var(--geel);
-    padding: 3rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    padding: clamp(3rem, 5vw, 5rem) 0;
 }
 
-.footer-logo {
+.footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.footer-brand .footer-logo {
     height: 20px;
     width: auto;
+    margin-bottom: 1rem;
 }
 
-.footer-contact {
+.footer-brand p {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+    max-width: 250px;
+}
+
+.footer-nav h4 {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.footer-nav ul {
+    list-style: none;
+}
+
+.footer-nav ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-nav ul a {
+    color: var(--zwart);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+}
+
+.footer-nav ul a:hover {
+    opacity: 0.6;
+}
+
+.footer-contact h4 {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
 }
 
 .footer-contact a {
     color: var(--zwart);
     text-decoration: none;
     border-bottom: 2px solid var(--zwart);
+    font-weight: 700;
     transition: border-color 0.3s, color 0.3s;
 }
 
@@ -473,9 +1376,19 @@ body {
     border-color: var(--wit);
 }
 
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 /* ============================================
-   SCROLL ANIMATIES
+   SCROLL ANIMATIONS
    ============================================ */
+
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -490,28 +1403,68 @@ body {
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
+
 @media (max-width: 900px) {
-    .over {
-        grid-template-columns: 1fr;
-        gap: clamp(2rem, 4vw, 3rem) 0;
-    }
-
-    .over-foto {
-        max-width: 400px;
-    }
-
-    .diensten-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        max-width: 600px;
-    }
-
-    .crisis-barcode {
+    .nav-links {
         display: none;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .wie-grid,
+    .team-intro-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .doelgroep-grid,
+    .crisis-grid,
+    .values-grid,
+    .nieuws-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dienst-block,
+    .doelgroep-block {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .dienst-block:nth-child(even),
+    .doelgroep-block:nth-child(even) {
+        direction: ltr;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .model-steps-preview {
+        flex-direction: column;
+    }
+
+    .model-steps-preview::before {
+        top: 0;
+        left: 50%;
+        width: 3px;
+        height: 100%;
+        transform: translateX(-50%);
     }
 }
 
@@ -519,27 +1472,18 @@ body {
     .hero {
         padding: 1.5rem;
         justify-content: center;
-        padding-top: 15vh;
+        padding-top: calc(var(--nav-height) + 10vh);
     }
 
-    .hero-logo {
-        width: 180px;
-        top: 2rem;
-        left: 1.5rem;
-    }
-
-    /* Slogan veel groter op mobiel */
     .hero-tagline {
         font-size: clamp(3rem, 15vw, 5rem);
         margin-top: 0;
     }
 
-    /* Inline barcodes verbergen op mobiel */
     .hero-tagline .line-barcode {
         display: none;
     }
 
-    /* Barcodes boven en onder de tagline */
     .hero-barcode-top,
     .hero-barcode-bottom {
         display: flex;
@@ -557,7 +1501,6 @@ body {
         opacity: 0;
     }
 
-    /* Boven: afwisselend van links en rechts */
     .hero-barcode-top img:nth-child(1) {
         animation: mobileBarcodeFromLeft 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
     }
@@ -568,7 +1511,6 @@ body {
         animation: mobileBarcodeFromLeft 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0.7s forwards;
     }
 
-    /* Onder: afwisselend van rechts en links */
     .hero-barcode-bottom img:nth-child(1) {
         animation: mobileBarcodeFromRight 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) 1.4s forwards;
     }
@@ -599,23 +1541,47 @@ body {
         margin-top: 1rem;
     }
 
-    /* Foto sebas zelfde breedte als tekst */
-    .over-foto {
-        max-width: 100%;
-    }
-
-    .crisis h2 {
-        font-size: clamp(1.8rem, 8vw, 2.5rem);
-    }
-
     .scroll-indicator img {
         height: 25px;
+    }
+
+    .page-header h1 {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .crisis-hero h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    /* Model page: vertical on mobile */
+    .model-horizontal {
+        height: auto;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-snap-type: none;
+    }
+
+    .model-slide {
+        min-width: unset;
+        width: 100%;
+        height: auto;
+        min-height: 80vh;
+        scroll-snap-align: none;
+    }
+
+    .model-flow-indicator,
+    .model-scroll-hint {
+        display: none;
+    }
+
+    .nieuws-grid {
+        grid-template-columns: 1fr;
     }
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    .hero-logo,
     .hero-tagline .line-text,
     .hero-tagline .line-barcode {
         animation: none;

@@ -3,7 +3,7 @@
 Website voor Stekelbaars, communicatiebureau.
 
 - **Klant**: Stekelbaars (communicatiebureau)
-- **Contact**: sebastiaan@stekelbaars.nl
+- **Contact**: sebastiaan@stekelbaars.nl, dorien@stekelbaars.nl, info@stekelbaars.nl
 - **GitHub**: https://github.com/wouterzaalberg/stekelbaars
 
 ## Branches & Hosting
@@ -20,7 +20,7 @@ Website voor Stekelbaars, communicatiebureau.
 ## Huisstijl
 
 ### Kleuren
-- **Geel**: `#FEDB00` — **punch-kleur**, alleen als accent (pijlen, highlights, links, hover), niet als grote achtergrondvlakken
+- **Geel**: `#FEDB00` — **punch-kleur**, accent + nav-tekst/logo op hero, links, hover
 - **Wit**: `#FFFFFF`
 - **Zwart**: `#000000`
 - **Middengrijs**: `#808080`
@@ -42,6 +42,8 @@ Website voor Stekelbaars, communicatiebureau.
 - **Barcode**: Losstaand streepjespatroon als decoratief element
 - **Pijlen**: Gele pijl naar rechts met transparante laagjes (normaal en dik)
 - **Streepjes**: Verticaal strepenpatroon
+- **Baarzen**: Gele stekelbaars-illustraties (baars_1_geel.png, baars_2_geel.png, baars_3_geel.png)
+- **Foto's**: Zwart-wit foto's (foto 1.jpg = stromend water, foto 2.jpg)
 - **Fotobehandeling**: Zwart-wit foto's met gele grafische elementen (pijlen, strepen) als overlay
 
 Bestanden in `Huisstijl/`.
@@ -51,38 +53,65 @@ Bestanden in `Huisstijl/`.
 - Bold, grafisch, editoriaal — poster-style koppen
 - Hoog contrast: zwart-wit als basis, geel alleen als punch-accent
 - Pijlen prominent als decoratief element
-- Grote koppen met barcode/streepjes als decoratie (`.graphic-heading` component)
+- Baarzen (stekelbaars-illustraties) als visueel element achter content
 
 ## Sitemap (nieuwe-site branch)
 
 ### Pagina's
 
-1. **Home** (`index.html`) — Hero, intro, model preview, wie we zijn, wie helpen we, testimonials
-2. **Model** (`model.html`) — Horizontale scroll (desktop), 5 stappen: Analyse → Strategie → Verhaal → Activatie → Impact
+1. **Home** (`index.html`) — Hero (zwart, video uit), STROOM split, stroommodel animatie, wat zoek jij, waar zijn we goed in, testimonials
+2. **Het Stroommodel** (`model.html`) — Vrije horizontale scroll (desktop, kinetic smooth), geen footer, 100vh, 6 scharnierpunten + intro
 3. **Wat we doen** (`wat-we-doen.html`) — 4 diensten met afwisselende foto/tekst layout
 4. **Voor wie** (`voor-wie.html`) — 4 doelgroepen: wethouders, colleges, organisaties, bestuurders
 5. **Crisis hotline** (`crisis.html`) — Donkere hero, 3 pijlers, aanpak, CTA
-6. **Wie we zijn** (`wie-we-zijn.html`) — Sebastiaan intro, waarden, werkwijze
+6. **Wie we zijn** (`wie-we-zijn.html`) — Zwarte visie-sectie met baars, Sebastiaan + Dorien intro's (gespiegeld)
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
-8. **Contact** (`contact.html`) — Contactgegevens + formulier (demo, nog niet functioneel)
+8. **Contact** (`contact.html`) — Contactgegevens (Dorien + Sebastiaan) + formulier (demo, nog niet functioneel)
 
 ### Home secties
 
-1. **Hero** — Volledig scherm, gele achtergrond, slogan met barcodes, scroll-indicator
-2. **Intro** — Grafische kop "TEGEN DE STROOM IN" met barcode + pijl, introtekst
-3. **Model preview** — Zwarte achtergrond, grafische kop, 5 stappen dots, link naar model
-4. **Wie we zijn** — Foto Sebastiaan + tekst, grafische kop met streepjes
-5. **Wie helpen we** — Zwarte achtergrond, grafische kop met pijl, 3 doelgroep-kaarten
-6. **Testimonials** — Lichtgrijze achtergrond, 4 quote-kaarten met geel aanhalingsteken
+1. **Hero** (100vh) — Zwart, video uitgeschakeld (css display:none), gele slogan + "Strategisch communicatiebureau" subtekst
+2. **STROOM** (90vh) — Split-screen: links foto 1 (55vw) met grote gele titel + Stekelbaars logo overlay, rechts tekst + baars_1 decoratie
+3. **Het Stroommodel** (90vh) — Gele achtergrond, gecentreerde kop + tekst, witte stromende balken-animatie, knop naar model.html
+4. **Wat zoek jij?** (90vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 480px) met baarzen erachter (scale 1.9), hover scale-effect
+5. **Waar zijn we goed in** (100vh) — Split-screen: links foto 3 (50vw) met hover-hotspots (Dorien rechts, Sebastiaan links — gele kader + naam, klikbaar naar wie-we-zijn), rechts tekst (max 800px) + knop (geel bij hover)
+6. **Testimonials** (50vh) — Horizontaal scrollende ticker, lichtgrijze achtergrond
+
+### Stroommodel pagina (model.html)
+
+- Horizontale scroll, geen footer, 100vh
+- **Intro slide**: Zwarte achtergrond, twee-koloms tekst, gele kop
+- **6 scharnierpunten**: Jij als leider → Je team → Relevantie → Naar buiten → Grote publiek → De bestemming
+- Flow indicator dots (7 stuks) + scroll hint
+
+### Wie we zijn pagina
+
+- Zwarte page-header
+- Zwarte visie-sectie met tekst links, halve baars_1_geel rechts (staartstuk zichtbaar, kop buiten pagina)
+- Sebastiaan: foto links (75% breedte), tekst rechts
+- Dorien: tekst links, foto rechts (75% breedte, rechts uitgelijnd) — gespiegelde layout
 
 ### Navigatie
-- Sticky nav, wit bij scroll, zwart logo + links
-- "Crisis hotline" als zwarte button met gele tekst
+- Sticky nav, transparant bovenaan, wit bij scroll
+- Bovenaan: geel logo + gele links; bij scroll: zwart logo + zwarte links, logo wordt geel bij hover
+- Links: Wat we doen, Het Stroommodel, Voor wie, Wie we zijn, Crisis hotline (button), Contact
+- "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
+- "Contact" als gewone tekstlink
 - Hamburger-menu op mobiel (volledig scherm overlay)
+- Nav-transitie uitgeschakeld bij page load (voorkomt gele flash), pas actief na eerste frame
+
+### Page headers (subpagina's)
+- Zwarte achtergrond met barcode-decoratie
+- Kop + subtekst (rgba wit 60%) in `container--wide` (uitgelijnd met logo en content)
+- Gebruikt op: wat-we-doen, voor-wie, wie-we-zijn, nieuws, contact
+- Niet op: model.html, crisis.html
 
 ### Footer
 - Zwarte achtergrond, wit logo
-- 3 kolommen: brand, paginalinks, contact (email in geel)
+- 5 kolommen: brand, paginalinks, overig (AV, AI-policy, nieuws), contact, vergaderlocatie
+- Contact: 3 emailadressen + NAW/KvK/BTW (placeholders) + Koningsplein
+- Vergaderlocatie: Het Stroomhuisje (eigen kolom)
+- Geen footer op model.html (100vh horizontale scroll pagina)
 
 ## Nieuws CMS
 
@@ -94,20 +123,23 @@ Bestanden in `Huisstijl/`.
 
 ## Animaties
 
+- **Kinetic smooth scrolling**: Custom JS op desktop — wheel events afgevangen, smooth interpolatie met momentum (ease 0.08), niet op touch-devices
 - **Hero slogan**: Elke regel schuift omhoog met stagger (0.5s - 1.1s delay)
-- **Hero barcodes desktop**: Stromen van buitenaf naar binnen met overshoot (1.2s, cubic-bezier)
-- **Hero barcodes mobiel**: Afwisselend van links en rechts (gestaggerd)
-- **Scroll indicator**: Pijl verschijnt na 2s, bounced zachtjes
+- **STROOM stroming**: Zelfstromende witte balken (150x20px) op gele achtergrond, spawnen links vanuit verticaal midden, waaieren uit naar rechts, delen zich (celdeling), muis-repulsie met smooth interpolatie. IntersectionObserver start/stopt animatie. `prefers-reduced-motion` gerespecteerd
+- **Foto hotspots**: JS-berekende positionering op basis van originele foto-coördinaten, corrigeert voor object-fit:cover crop. Hover toont gele kader (200x200px, 18px border, 50% opacity) + naam. data-ring-x/data-ring-y attributen (0-1 range)
 - **Scroll reveal**: `.reveal` class, fade in + schuif omhoog bij 15% visibility
-- **Model pagina**: Horizontale scroll met snap, muiswiel + pijltjestoetsen, flow indicator dots
+- **Wat zoek jij hover**: Kaarten schalen naar 1.03 bij hover
+- **Testimonial ticker**: Horizontaal scrollende kaarten, oneindige loop via CSS animation + JS duplicatie
+- **Model pagina**: Vrije horizontale scroll (geen snap), kinetic smooth scrolling via muiswiel, pijltjestoetsen, flow indicator dots
+- **Smooth anchor scroll**: Alle `href="#..."` links scrollen vloeiend naar hun doel
 - **Reduced motion**: Alle animaties uitgeschakeld
 
 ## Responsive
 
 - Content max-width: 1200px (standaard), 1400px (wide)
 - Achtergronden en decoratie: full-width (ook ultra-wide)
-- **> 900px**: Volledige layout, grids naast elkaar
-- **600-900px**: 1-kolom grids, hamburger-menu
+- **> 900px**: Volledige layout, grids naast elkaar, split-screens
+- **600-900px**: 1-kolom grids, hamburger-menu, stroom-split stacked
 - **< 600px**: Hero met mobiele barcodes, grotere slogan, model verticaal
 
 ## Bestandsstructuur
@@ -124,7 +156,7 @@ Bestanden in `Huisstijl/`.
 ├── nieuws.html
 ├── contact.html
 ├── sebas.jpg
-├── 534A4845.mp4              (watervideo, niet in gebruik)
+├── 534A4845.mp4              (watervideo, hero achtergrond)
 ├── css/
 │   └── styles.css
 ├── js/
@@ -147,6 +179,11 @@ Bestanden in `Huisstijl/`.
     ├── stekelbaars_pijl.png
     ├── stekelbaars_pijl_dik.png
     ├── stekelbaars_streepjes.png
+    ├── baars_1_geel.png
+    ├── baars_2_geel.png
+    ├── baars_3_geel.png
+    ├── foto 1.jpg                (stromend water, zwart-wit)
+    ├── foto 2.jpg
     └── stekelbaars logo jpg.jpg/
         ├── stekelbaars logo_in geel.jpg
         ├── stekelbaars logo_in wit.jpg
@@ -154,8 +191,9 @@ Bestanden in `Huisstijl/`.
 ```
 
 ## Notities
-- Watervideo (`534A4845.mp4`) is beschikbaar maar niet in gebruik
 - Geen build tools, plain HTML/CSS/JS
 - Calibri is Windows systeemfont, fallback naar sans-serif
-- Alle dummy tekst en placeholder foto's moeten nog vervangen worden
+- Placeholder foto Dorien moet nog vervangen worden (gebruikt sebas.jpg als placeholder)
+- KvK, BTW, adressen in footer zijn placeholders
 - Contactformulier is demo (alert), backend nog niet gekoppeld
+- Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)

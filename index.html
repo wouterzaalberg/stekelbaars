@@ -11,22 +11,21 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-<body>
+<body class="snap-page">
 
     <!-- NAVIGATION -->
     <nav class="nav">
         <div class="nav-inner">
             <a href="index.html">
-                <img src="Huisstijl/stekelbaars logo_in zwart.png" alt="Stekelbaars" class="nav-logo">
+                <img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="nav-logo">
             </a>
             <ul class="nav-links">
-                <li><a href="model.html">Model</a></li>
                 <li><a href="wat-we-doen.html">Wat we doen</a></li>
+                <li><a href="model.html">Het Stroommodel</a></li>
                 <li><a href="voor-wie.html">Voor wie</a></li>
                 <li><a href="wie-we-zijn.html">Wie we zijn</a></li>
-                <li><a href="nieuws.html">Nieuws</a></li>
-                <li><a href="contact.html">Contact</a></li>
                 <li><a href="crisis.html" class="nav-crisis">Crisis hotline</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="nav-hamburger" aria-label="Menu">
                 <span></span>
@@ -38,192 +37,182 @@
 
     <!-- MOBILE NAV -->
     <div class="nav-mobile">
-        <a href="model.html">Model</a>
         <a href="wat-we-doen.html">Wat we doen</a>
+        <a href="model.html">Het Stroommodel</a>
         <a href="voor-wie.html">Voor wie</a>
         <a href="wie-we-zijn.html">Wie we zijn</a>
-        <a href="nieuws.html">Nieuws</a>
-        <a href="contact.html">Contact</a>
         <a href="crisis.html">Crisis hotline</a>
+        <a href="contact.html">Contact</a>
     </div>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-barcode-top">
-            <img src="Huisstijl/stekelbaars_streepjes.png" alt="">
-            <img src="Huisstijl/stekelbaars_barcode.png" alt="">
-            <img src="Huisstijl/stekelbaars_streepjes.png" alt="">
-        </div>
-        <h1 class="hero-tagline">
-            <span class="line">
-                <span class="line-barcode left"></span>
-                <span class="line-text">MAAK JE</span>
-                <span class="line-barcode right"></span>
-            </span>
-            <span class="line barcode-alt">
-                <span class="line-barcode left"></span>
-                <span class="line-text">IDEALEN</span>
-                <span class="line-barcode right"></span>
-            </span>
-            <span class="line">
-                <span class="line-barcode left"></span>
-                <span class="line-text">WAAR MET</span>
-                <span class="line-barcode right"></span>
-            </span>
-            <span class="line barcode-alt">
-                <span class="line-barcode left"></span>
-                <span class="line-text">STEKELBAARS</span>
-                <span class="line-barcode right"></span>
-            </span>
-        </h1>
-        <div class="hero-barcode-bottom">
-            <img src="Huisstijl/stekelbaars_barcode.png" alt="">
-            <img src="Huisstijl/stekelbaars_streepjes.png" alt="">
-            <img src="Huisstijl/stekelbaars_barcode.png" alt="">
-        </div>
-        <div class="scroll-indicator">
-            <img src="Huisstijl/stekelbaars_pijl.png" alt="">
-        </div>
-    </section>
+    <!-- SNAP SCROLL WRAPPER -->
+    <div class="snap-container">
 
-    <!-- INTRO -->
-    <section class="intro">
-        <div class="container">
-            <div class="graphic-heading reveal">
-                <div class="graphic-heading-barcode"></div>
-                <h2>Tegen de<br>stroom in</h2>
-                <img src="Huisstijl/stekelbaars_pijl.png" alt="" class="graphic-heading-pijl">
+        <!-- SECTION 1: HERO — Video + barcodes -->
+        <section class="hero hero--video snap-section" id="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="img/video 1.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-tagline">
+                    <span class="line">
+                        <span class="line-text">MAAK JE</span>
+                    </span>
+                    <span class="line">
+                        <span class="line-text">IDEALEN</span>
+                    </span>
+                    <span class="line">
+                        <span class="line-text">WAAR MET</span>
+                    </span>
+                    <span class="line">
+                        <span class="line-text"><img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="hero-logo-text"></span>
+                    </span>
+                </h1>
+                <p class="hero-sub">Strategisch communicatiebureau</p>
             </div>
-            <p class="reveal">Stekelbaars is het strategisch communicatiebureau dat samen met jou je idealen waarmaakt. Net als de stekelbaars zwemmen we tegen de stroom in, houden we vol en maken we van strategie een succes. Want echte verandering vraagt om een helder verhaal en de juiste koers.</p>
-        </div>
-    </section>
+        </section>
 
-    <!-- MODEL PREVIEW -->
-    <section class="model-preview">
-        <div class="container">
-            <div class="graphic-heading graphic-heading--light reveal">
-                <div class="graphic-heading-barcode"></div>
-                <h2>Het STROOM&shy;model&trade;</h2>
-                <img src="Huisstijl/stekelbaars_pijl.png" alt="" class="graphic-heading-pijl">
-            </div>
-            <div class="model-preview-label reveal">Onze methode</div>
-            <p class="reveal">Via ons unieke STROOMmodel&trade; ontwikkelen we stap voor stap jouw verhaal en strategie. Van analyse tot impact &mdash; samen stromen we naar resultaat.</p>
-
-            <div class="model-steps-preview reveal">
-                <div class="model-step-dot">
-                    <div class="dot">1</div>
-                    <span>Analyse</span>
-                </div>
-                <div class="model-step-dot">
-                    <div class="dot">2</div>
-                    <span>Strategie</span>
-                </div>
-                <div class="model-step-dot">
-                    <div class="dot">3</div>
-                    <span>Verhaal</span>
-                </div>
-                <div class="model-step-dot">
-                    <div class="dot">4</div>
-                    <span>Activatie</span>
-                </div>
-                <div class="model-step-dot">
-                    <div class="dot">5</div>
-                    <span>Impact</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 3rem;" class="reveal">
-                <a href="model.html" class="btn btn--geel">Ontdek het model</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- WIE ZIJN WIJ -->
-    <section class="wie-zijn-wij">
-        <div class="container">
-            <div class="wie-grid">
-                <div class="wie-foto reveal">
-                    <img src="sebas.jpg" alt="Sebastiaan">
-                </div>
-                <div class="wie-tekst">
-                    <div class="graphic-heading graphic-heading--small reveal">
-                        <div class="graphic-heading-streepjes"></div>
-                        <h2>Wie we zijn</h2>
+        <!-- SECTION 2: STROOM (split: foto links met kop, tekst rechts) -->
+        <section class="snap-section section-stroom" id="visie">
+            <div class="stroom-split">
+                <div class="stroom-split-foto">
+                    <img src="img/foto 1.jpg" alt="Stromend water" class="stroom-split-img">
+                    <div class="stroom-split-heading">
+                        <span class="stroom-heading-word" data-from="left">HIER</span>
+                        <span class="stroom-heading-word" data-from="right">EEN</span>
+                        <span class="stroom-heading-word" data-from="left">TITEL</span>
+                        <div class="stroom-heading-swap">
+                            <img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="stroom-heading-logo">
+                            <img src="Huisstijl/baars_1_geel.png" alt="" class="stroom-heading-fish">
+                        </div>
                     </div>
-                    <p class="reveal">Stekelbaars is opgericht door Sebastiaan, een ervaren communicatiestrateeg die gelooft dat echte verandering begint met een helder verhaal. Met jarenlange ervaring in politieke en organisatorische communicatie weet hij wat er nodig is om impact te maken.</p>
-                    <p class="reveal">We werken niet alleen voor je, maar met je. Samen met jouw team brengen we in kaart wie we nodig hebben voor die verandering en hoe we dat vertellen. Net zolang totdat we de stroom hebben verlegd.</p>
+                </div>
+                <div class="stroom-split-tekst">
+                    <div class="stroom-split-tekst-inner">
+                        <div class="stroom-tekst">
+                            <p class="reveal">Je wilt iets veranderen in een wereld waarin nepnieuws, hypes en voortdurende crisis elke seconde om aandacht schreeuwen. Hoe zorg je dat je toch het vertrouwen van je achterban en andere beslissers krijgt om met jou mee te gaan?</p>
+                            <p class="reveal">Dat is precies waar Stekelbaars voor is opgericht. Wij zijn het strategisch communicatiebureau dat bestuurders en organisaties begeleidt in het realiseren van hun idealen.</p>
+                            <p class="reveal">Bij ons moet je als leider aan de bak. Je hebt een ideaal en stopt niet tot het gerealiseerd is. Dat doe je samen met je team, andere beslissers en je achterban. Maar bij Stekelbaars weten we wel: het begint bij jou als leider.</p>
+                        </div>
+                        <img src="Huisstijl/baars_1_geel.png" alt="" class="stroom-tekst-baars">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: HET STROOMMODEL (geel + witte animatie) -->
+        <section class="snap-section section-visie" id="stroommodel">
+            <div class="stroom-bars" id="stroom-bars"></div>
+            <div class="visie-inner">
+                <h2 class="stroom-word reveal">Het STROOMmodel</h2>
+                <div class="visie-tekst reveal">
+                    <p>Verandering realiseren betekent: tegen de stroom in zwemmen, volhouden, je niet uit het veld laten slaan en uiteindelijk zo veel mogelijk mensen met je mee laten zwemmen. Net zoals een stekelbaars.</p>
+                    <p>Hiervoor hebben we een uniek model ontwikkeld: het STROOMmodel. Via deze methode ontwikkelen we stap voor stap jouw verhaal en strategie. Dat kan nooit alleen, maar samen met je team. We brengen in kaart wie we nodig hebben voor die verandering en hoe we dat vertellen. Net zolang totdat we uiteindelijk de stroom hebben verlegd.</p>
+                </div>
+                <a href="model.html" class="btn btn--zwart reveal" style="margin-top: 1.5rem;">Ontdek het Stroommodel</a>
+            </div>
+        </section>
+
+        <!-- SECTION 4: WAT ZOEK JIJ? -->
+        <section class="snap-section section-watzoek" id="watzoekjij">
+            <div class="container">
+                <h2 class="watzoek-heading reveal">Wat zoek jij?</h2>
+                <div class="watzoek-grid">
+                    <div class="watzoek-cell reveal reveal-delay-1">
+                        <img src="Huisstijl/baars_1_geel.png" alt="" class="watzoek-baars">
+                        <a href="wat-we-doen.html" class="watzoek-card">
+                            <h3>Wethouders</h3>
+                            <p>Een speciaal programma voor wethouders. Hoe stuur je op jouw idealen? Wat is er voor nodig om politiek succesvol te zijn en verandering voor elkaar te krijgen?</p>
+
+                        </a>
+                    </div>
+                    <div class="watzoek-cell reveal reveal-delay-2">
+                        <img src="Huisstijl/baars_2_geel.png" alt="" class="watzoek-baars watzoek-baars--flip">
+                        <a href="wat-we-doen.html" class="watzoek-card">
+                            <h3>Colleges van B en W</h3>
+                            <p>Met elkaar heb je een coalitieprogramma en zit je boordevol plannen. Hoe zorg je de komende 4 jaar voor een helder verhaal dat ook aankomt bij je inwoners?</p>
+
+                        </a>
+                    </div>
+                    <div class="watzoek-cell reveal reveal-delay-3">
+                        <img src="Huisstijl/baars_3_geel.png" alt="" class="watzoek-baars">
+                        <a href="wat-we-doen.html" class="watzoek-card">
+                            <h3>Organisaties</h3>
+                            <p>Stekelbaars richt zich op alle bestuurders, bedrijven en organisaties die hun idealen waar willen maken. Neem contact op voor een vrijblijvend gesprek.</p>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: WAAR ZIJN WE GOED IN -->
+        <section class="snap-section section-wie" id="wiezijnwe">
+            <div class="wie-split">
+                <div class="wie-split-foto">
+                    <img src="img/foto 2.jpg" alt="" class="wie-split-img">
+                    <a href="wie-we-zijn.html" class="foto-hotspot" data-ring-x="0.57" data-ring-y="0.30" data-side="right">
+                        <div class="foto-hotspot-ring"></div>
+                        <span class="foto-hotspot-naam">Dorien</span>
+                    </a>
+                    <a href="wie-we-zijn.html" class="foto-hotspot" data-ring-x="0.43" data-ring-y="0.28" data-side="left">
+                        <div class="foto-hotspot-ring"></div>
+                        <span class="foto-hotspot-naam">Sebastiaan</span>
+                    </a>
+                </div>
+                <div class="wie-split-tekst">
+                    <h2 class="wie-split-heading reveal">Waar zijn we goed in?</h2>
+                    <p class="reveal">Stekelbaars is opgericht met een duidelijke missie. Wij willen dat bestuurders en organisaties hun idealen waarmaken. Oprichters Dorien en Sebastiaan hebben tientallen jaren ervaring in het begeleiden en adviseren hierin. Zowel in de commerci&euml;le als maatschappelijke sector.</p>
+                    <p class="reveal">Samen wilden ze een bureau oprichten dat zich duidelijk onderscheidt van andere bureaus. Bij ons staan de idealen van de leider centraal. We hebben ruim een jaar gewerkt aan onze methode: Het STROOM-model, waarin we de recentste wetenschappelijke inzichten combineren met onze eigen expertise.</p>
+                    <p class="reveal">Bij Stekelbaars geen accountmanagers, maar 1 inhoudelijk expert die het hele traject jouw aanspreekpunt is.</p>
                     <div class="reveal" style="margin-top: 2rem;">
                         <a href="wie-we-zijn.html" class="btn btn--zwart">Meer over ons</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- WIE HELPEN WE -->
-    <section class="wie-helpen">
-        <div class="container">
-            <div class="graphic-heading graphic-heading--light reveal">
-                <div class="graphic-heading-barcode"></div>
-                <h2>Voor wie we werken</h2>
-                <img src="Huisstijl/stekelbaars_pijl_dik.png" alt="" class="graphic-heading-pijl">
-            </div>
-            <div class="doelgroep-grid">
-                <div class="doelgroep-card reveal reveal-delay-1">
-                    <h3>Wethouders</h3>
-                    <p>Een speciaal programma voor wethouders. Hoe stuur je op jouw idealen? Wat is er voor nodig om politiek succesvol te zijn en verandering voor elkaar te krijgen?</p>
+        <!-- SECTION 6: TESTIMONIALS (50vh) -->
+        <section class="snap-section snap-section--half section-testimonials" id="testimonials">
+            <div class="container">
+                <div class="graphic-heading graphic-heading--small reveal">
+                    <div class="graphic-heading-streepjes"></div>
+                    <h2>Wat anderen zeggen</h2>
                 </div>
-                <div class="doelgroep-card reveal reveal-delay-2">
-                    <h3>Colleges van B en W</h3>
-                    <p>Met elkaar heb je een coalitieprogramma en zit je boordevol plannen. Hoe zorg je de komende 4 jaar voor een helder verhaal dat ook aankomt bij je inwoners?</p>
-                </div>
-                <div class="doelgroep-card reveal reveal-delay-3">
-                    <h3>Organisaties</h3>
-                    <p>Stekelbaars richt zich op alle bestuurders, bedrijven en organisaties die hun idealen waar willen maken. Neem contact op voor een vrijblijvend gesprek.</p>
+                <div class="testimonial-ticker">
+                    <div class="testimonial-ticker-track">
+                        <div class="testimonial-card-mini">
+                            <blockquote>&ldquo;Stekelbaars heeft ons geholpen om een heldere communicatiestrategie neer te zetten.&rdquo;</blockquote>
+                            <div class="testimonial-author">Jan de Vries</div>
+                            <div class="testimonial-role">Wethouder gemeente Utrecht</div>
+                        </div>
+                        <div class="testimonial-card-mini">
+                            <blockquote>&ldquo;De aanpak is verfrissend. Geen wollig advies, maar concrete stappen die echt werken.&rdquo;</blockquote>
+                            <div class="testimonial-author">Maria Jansen</div>
+                            <div class="testimonial-role">Directeur communicatie</div>
+                        </div>
+                        <div class="testimonial-card-mini">
+                            <blockquote>&ldquo;In een crisisperiode was Stekelbaars onze rots in de branding. Snel, helder en doeltreffend.&rdquo;</blockquote>
+                            <div class="testimonial-author">Peter van Dijk</div>
+                            <div class="testimonial-role">Burgemeester</div>
+                        </div>
+                        <div class="testimonial-card-mini">
+                            <blockquote>&ldquo;Het mooie is dat je het samen doet. Geen consultant die verdwijnt met een rapport.&rdquo;</blockquote>
+                            <div class="testimonial-author">Lisa de Groot</div>
+                            <div class="testimonial-role">Bestuurder woningcorporatie</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 3rem;" class="reveal">
-                <a href="voor-wie.html" class="btn btn--outline" style="border-color: var(--wit); color: var(--wit);">Bekijk alle doelgroepen</a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="graphic-heading graphic-heading--small reveal">
-                <div class="graphic-heading-streepjes"></div>
-                <h2>Wat anderen zeggen</h2>
-            </div>
-            <div class="testimonial-grid">
-                <div class="testimonial-card reveal reveal-delay-1">
-                    <blockquote>Stekelbaars heeft ons geholpen om een heldere communicatiestrategie neer te zetten. Het STROOMmodel gaf ons team richting en houvast in een complexe politieke situatie.</blockquote>
-                    <div class="testimonial-author">Jan de Vries</div>
-                    <div class="testimonial-role">Wethouder gemeente Utrecht</div>
-                </div>
-                <div class="testimonial-card reveal reveal-delay-2">
-                    <blockquote>De aanpak van Sebastiaan is verfrissend. Geen wollig advies, maar concrete stappen die echt werken. Onze boodschap is nu helder en consistent.</blockquote>
-                    <div class="testimonial-author">Maria Jansen</div>
-                    <div class="testimonial-role">Directeur communicatie, Waterschap Rivierenland</div>
-                </div>
-                <div class="testimonial-card reveal reveal-delay-3">
-                    <blockquote>In een crisisperiode was Stekelbaars onze rots in de branding. Snel, helder en doeltreffend. Ze wisten precies wat er nodig was.</blockquote>
-                    <div class="testimonial-author">Peter van Dijk</div>
-                    <div class="testimonial-role">Burgemeester gemeente Arnhem</div>
-                </div>
-                <div class="testimonial-card reveal reveal-delay-4">
-                    <blockquote>Het mooie aan de werkwijze is dat je het samen doet. Geen consultant die verdwijnt met een rapport, maar iemand die naast je staat.</blockquote>
-                    <div class="testimonial-author">Lisa de Groot</div>
-                    <div class="testimonial-role">Bestuurder woningcorporatie</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div><!-- /snap-container -->
 
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container container--wide">
-            <div class="footer-inner">
+            <div class="footer-inner footer-inner--4col">
                 <div class="footer-brand">
                     <img src="Huisstijl/stekelbaars logo_in wit.png" alt="Stekelbaars" class="footer-logo">
                     <p>Strategisch communicatiebureau dat samen met jou je idealen waarmaakt.</p>
@@ -231,16 +220,40 @@
                 <div class="footer-nav">
                     <h4>Pagina's</h4>
                     <ul>
-                        <li><a href="model.html">Model</a></li>
                         <li><a href="wat-we-doen.html">Wat we doen</a></li>
+                        <li><a href="model.html">Het Stroommodel</a></li>
                         <li><a href="voor-wie.html">Voor wie</a></li>
                         <li><a href="wie-we-zijn.html">Wie we zijn</a></li>
                         <li><a href="nieuws.html">Nieuws</a></li>
                     </ul>
                 </div>
+                <div class="footer-nav">
+                    <h4>Overig</h4>
+                    <ul>
+                        <li><a href="#">Algemene voorwaarden</a></li>
+                        <li><a href="#">AI-policy</a></li>
+                        <li><a href="nieuws.html">Nieuws</a></li>
+                    </ul>
+                </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
-                    <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a>
+                    <a href="mailto:dorien@stekelbaars.nl">dorien@stekelbaars.nl</a><br>
+                    <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a><br>
+                    <a href="mailto:info@stekelbaars.nl">info@stekelbaars.nl</a>
+                    <div class="footer-adres">
+                        <p>Stekelbaars B.V.</p>
+                        <p>Koningsplein [nummer]</p>
+                        <p>[postcode] [plaats]</p>
+                        <p>KvK: [nummer]</p>
+                        <p>BTW: [nummer]</p>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4>Vergaderlocatie</h4>
+                    <div class="footer-adres">
+                        <p>Het Stroomhuisje</p>
+                        <p>[adresgegevens]</p>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">

@@ -70,11 +70,11 @@ Bestanden in `Huisstijl/` en `img/`.
 
 ### Home secties
 
-1. **Hero** (100vh) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay), gele slogan (iets kleiner, clamp 2.8rem/8vw/8rem) + Stekelbaars logo (0.60em) + "Strategisch communicatiebureau" subtekst
-2. **DIT ZIJN WIJ** (90vh) — Witte achtergrond, 3 rijen (woord + alinea gekoppeld). Rij 1+3 van links, rij 2 van rechts. Alle koppen links van alinea. Power-curve animatie: snel binnenkomen → extreem langzaam midden → snel weg. Gecentreerd (max-width 850px). Logo/vis-swap eronder (tilt → vis verschijnt → zwemt weg).
+1. **Hero** (100vh, sticky) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay), gele slogan (clamp 2.8rem/8vw/8rem) + Stekelbaars logo (0.60em) + "Strategisch communicatiebureau" subtekst. Sticky: sectie 2 schuift erover heen (hero-stroom-wrapper).
+2. **DIT ZIJN WIJ** (90vh, z-index 2) — Witte achtergrond, 3 rijen (woord + alinea gekoppeld, 2-koloms grid 1fr/2fr, max-width 850px). Alle koppen links van alinea (kolom 1, rechts uitgelijnd). Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel binnenkomen → extreem langzaam midden → snel weg. Centered bij raw=0.95. Logo/vis-swap eronder (tilt → vis verschijnt → zwemt weg).
 3. **Het Stroommodel** (90vh) — Split-screen: links wit met kop + tekst, rechts geel met test1.png + knop "Bekijk het Stroommodel" + witte stromende balken-animatie (35 bars, fanning out)
 4. **Wat zoek jij?** (90vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 380px) met baarzen erachter (scale 1.3), scroll-gekoppelde vis-entrance, hover scale-effect
-5. **Waar zijn we goed in** (100vh) — Split-screen: links foto 2 (52vw, slow zoom, wit kader boven/links/onder) met hover-hotspots, rechts tekst + knop
+5. **Waar zijn we goed in** (90vh) — Split-screen: links foto 2 (52vw, slow zoom, wit kader boven/links/onder) met hover-hotspots, rechts tekst + knop
 6. **Testimonials** (50vh) — Slider met 3 kaarten per view, gele visjes als navigatie (links/rechts, 50%→100% opacity hover)
 
 ### Stroommodel pagina (model.html)

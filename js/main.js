@@ -13,15 +13,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Slow zoom on stroom-split photo when in view
-const zoomImg = document.querySelector('.stroom-split-img');
-if (zoomImg) {
-    const zoomObs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) zoomImg.classList.add('zoomed');
-    }, { threshold: 0.2 });
-    zoomObs.observe(zoomImg.closest('.stroom-split-foto'));
-}
-
 // Slow zoom on wie-split photo when in view
 const wieZoomImg = document.querySelector('.wie-split-img');
 if (wieZoomImg) {
@@ -31,15 +22,15 @@ if (wieZoomImg) {
     wieZoomObs.observe(wieZoomImg.closest('.wie-split-foto'));
 }
 
-// Scroll-linked animations: Section 2 (stroom) + Section 4 (watzoek vissen)
+// Scroll-linked animations: Section 2 (crossing) + Section 4 (watzoek vissen)
 (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // --- Section 2: Words + logo + fish ---
+    // --- Section 2: Row-based entrance + logo/fish swap ---
     var stroomSection = document.querySelector('.section-stroom');
-    var headingWords = document.querySelectorAll('.stroom-heading-word');
-    var headingLogo = document.querySelector('.stroom-heading-logo');
-    var headingFish = document.querySelector('.stroom-heading-fish');
+    var stroomRows = document.querySelectorAll('.stroom-row');
+    var swapLogo = document.querySelector('.stroom-swap-logo');
+    var swapFish = document.querySelector('.stroom-swap-fish');
 
     // --- Section 4: Watzoek fish ---
     var watzoekSection = document.querySelector('.section-watzoek');
@@ -48,48 +39,50 @@ if (wieZoomImg) {
     function clamp01(v) { return Math.max(0, Math.min(1, v)); }
 
     function updateStroom() {
-        if (!stroomSection || !headingWords.length) return;
+        if (!stroomSection || !stroomRows.length) return;
         var vh = window.innerHeight;
         var rect = stroomSection.getBoundingClientRect();
         var sectionH = stroomSection.offsetHeight;
         var raw = 1 - (rect.top / vh);
 
-        // Phase 1: entrance (raw 0.15→0.55) — words from alternating sides, logo from below
-        var entranceP = clamp01((raw - 0.15) / 0.4);
+        // Each row moves continuously: fast in → slow middle → fast out
+        // Center point at raw=0.95 (section ~95vh visible)
+        var p = clamp01((raw - 0.3) / 1.3);
 
-        // Phase 2: logo/fish tilt
+        // Power curve: very fast at edges, extremely flat/slow in middle
+        var t = p * 2 - 1; // map 0→1 to -1→1
+        var curved = 0.5 + 0.5 * Math.sign(t) * Math.pow(Math.abs(t), 3);
+
+        // Opacity: tied to position — fade in as approaching center, fade out as leaving
+        var op = 1 - Math.abs(1 - 2 * curved) * 0.9;
+
+        stroomRows.forEach(function(row) {
+            var fromLeft = row.dataset.from === 'left';
+            var dir = fromLeft ? -1 : 1;
+            var x = dir * (25 - 50 * curved);
+
+            row.style.transform = 'translateX(' + x.toFixed(2) + 'vw)';
+            row.style.opacity = clamp01(op).toFixed(3);
+        });
+
+        // Logo/fish swap — tilt + appear
         var exitRaw = (raw - 1) / (sectionH / vh);
+        var entranceP = clamp01((raw - 0.1) / 0.45);
         var tiltP = clamp01((exitRaw - 0.15) / 0.15);
         var fishP = clamp01((exitRaw - 0.3) / 0.15);
 
-        // Title: continuous gentle drift from the moment it arrives
-        var holdDrift = clamp01((raw - 0.55) / 1.0) * 3;
-        var titleExit = clamp01((exitRaw - 0.15) / 0.4); // same 0.4 range as entrance
-
-        headingWords.forEach(function(word) {
-            var fromLeft = word.dataset.from === 'left';
-            var dir = fromLeft ? -1 : 1;
-            var enterOffset = (1 - entranceP) * dir * 60;
-            var driftOffset = -holdDrift * dir;
-            var exitOffset = -dir * titleExit * 60;
-            var totalX = enterOffset + driftOffset + exitOffset;
-            var op = entranceP * (1 - titleExit);
-            word.style.transform = 'translateX(' + totalX.toFixed(2) + 'vw)';
-            word.style.opacity = Math.max(0, op).toFixed(3);
-        });
-
-        var logoY = (1 - entranceP) * 60; // logo from below (vh)
-
-        var logoRotX = tiltP * 90;
-        if (headingLogo) {
-            headingLogo.style.transform = 'translateY(' + logoY.toFixed(2) + 'vh) rotateX(' + logoRotX.toFixed(2) + 'deg)';
-            headingLogo.style.opacity = (tiltP >= 1 ? 0 : entranceP).toFixed(3);
+        if (swapLogo) {
+            var logoRotX = tiltP * 90;
+            swapLogo.style.transform = 'rotateX(' + logoRotX.toFixed(2) + 'deg)';
+            swapLogo.style.opacity = (tiltP >= 1 ? 0 : entranceP).toFixed(3);
         }
 
-        var fishRotX = (1 - fishP) * 90;
-        if (headingFish) {
-            headingFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg)';
-            headingFish.style.opacity = (tiltP >= 1 ? fishP : 0).toFixed(3);
+        if (swapFish) {
+            var fishRotX = (1 - fishP) * 90;
+            var swimP = clamp01((exitRaw - 0.45) / 3.0);
+            var fishSwimX = swimP * 120;
+            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg) translateX(' + fishSwimX.toFixed(1) + 'vw)';
+            swapFish.style.opacity = (tiltP >= 1 ? fishP : 0).toFixed(3);
         }
     }
 
@@ -107,12 +100,10 @@ if (wieZoomImg) {
         watzoekCells.forEach(function(cell, i) {
             var baars = cell.querySelector('.watzoek-baars');
             if (!baars) return;
-            // Fish 1 (i=0) and 3 (i=2): above → center → below
-            // Fish 2 (i=1): below → center → above
             var direction = (i === 1) ? 1 : -1;
             var offset = direction * 150 * (1 - 2 * wProgress);
             var rot = baars.classList.contains('watzoek-baars--flip') ? -90 : 90;
-            baars.style.transform = 'translate(-50%, calc(-50% + ' + offset.toFixed(1) + 'px)) rotate(' + rot + 'deg) scale(1.9)';
+            baars.style.transform = 'translate(-50%, calc(-50% + ' + offset.toFixed(1) + 'px)) rotate(' + rot + 'deg) scale(1.3)';
         });
     }
 
@@ -220,8 +211,8 @@ if (hamburger && mobileNav) {
     if (!container) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var section = container.closest('.section-visie');
-    var MAX_BARS = 50;
+    var section = container.closest('.visie-split-right') || container.closest('.section-visie');
+    var MAX_BARS = 35;
     var MOUSE_RADIUS = 200;
     var SPAWN_INTERVAL = 1500;
     var bars = [];
@@ -746,12 +737,56 @@ if (modelScroll) {
     window.addEventListener('load', init);
 })();
 
-// Testimonials ticker: duplicate items for seamless loop
-const tickerTrack = document.querySelector('.testimonial-ticker-track');
-if (tickerTrack) {
-    const items = tickerTrack.innerHTML;
-    tickerTrack.innerHTML = items + items;
-}
+// Testimonial slider
+(function() {
+    var slider = document.querySelector('.testimonial-slider-window');
+    var track = document.querySelector('.testimonial-slider-track');
+    var prevBtn = document.querySelector('.testimonial-nav--prev');
+    var nextBtn = document.querySelector('.testimonial-nav--next');
+    if (!slider || !track) return;
+
+    var cards = track.querySelectorAll('.testimonial-card-mini');
+    var currentIndex = 0;
+
+    function getCardsPerView() {
+        return window.innerWidth <= 600 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+    }
+
+    function updateCardWidths() {
+        var cpv = getCardsPerView();
+        var gap = parseFloat(getComputedStyle(track).gap) || 32;
+        var cardW = (slider.offsetWidth - gap * (cpv - 1)) / cpv;
+        cards.forEach(function(c) {
+            c.style.flex = '0 0 ' + cardW + 'px';
+            c.style.minWidth = cardW + 'px';
+            c.style.maxWidth = cardW + 'px';
+        });
+    }
+
+    function update() {
+        updateCardWidths();
+        var cpv = getCardsPerView();
+        var maxIndex = Math.max(0, cards.length - cpv);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+        var gap = parseFloat(getComputedStyle(track).gap) || 32;
+        var cardW = cards[0] ? cards[0].offsetWidth : 0;
+        var offset = currentIndex * (cardW + gap);
+        track.style.transform = 'translateX(-' + offset + 'px)';
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+        if (currentIndex > 0) { currentIndex--; update(); }
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+        var cpv = getCardsPerView();
+        var maxIndex = Math.max(0, cards.length - cpv);
+        if (currentIndex < maxIndex) { currentIndex++; update(); }
+    });
+
+    window.addEventListener('resize', update);
+    update();
+})();
 
 // News page: load posts automatically via GitHub API (public repo, no auth needed)
 async function loadNieuws() {

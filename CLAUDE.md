@@ -59,23 +59,23 @@ Bestanden in `Huisstijl/` en `img/`.
 
 ### Pagina's
 
-1. **Home** (`index.html`) — Hero (zwart, video achtergrond), STROOM split, stroommodel animatie, wat zoek jij, waar zijn we goed in, testimonials
+1. **Home** (`index.html`) — Hero (zwart, video), DIT ZIJN WIJ crossing, stroommodel split, wat zoek jij, waar zijn we goed in, testimonials slider
 2. **Het Stroommodel** (`model.html`) — Vrije horizontale scroll (desktop, kinetic smooth), geen footer, 100vh, 6 scharnierpunten + intro, snake-pijl achtergrond
-3. **Wat we doen** (`wat-we-doen.html`) — 4 diensten met afwisselende foto/tekst layout
+3. **Diensten** (`wat-we-doen.html`) — 4 diensten met afwisselende foto/tekst layout
 4. **Voor wie** (`voor-wie.html`) — 4 doelgroepen: wethouders, colleges, organisaties, bestuurders
 5. **Crisis hotline** (`crisis.html`) — Donkere hero, 3 pijlers, aanpak, CTA
-6. **Wie we zijn** (`wie-we-zijn.html`) — Zwarte visie-sectie met baars, Sebastiaan + Dorien intro's (gespiegeld)
+6. **Team** (`wie-we-zijn.html`) — Volledig zwarte pagina, visie + 6 teamleden (2 echt + 4 placeholder), baarzen links/rechts
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
 8. **Contact** (`contact.html`) — Contactgegevens (Dorien + Sebastiaan) + formulier (demo, nog niet functioneel)
 
 ### Home secties
 
-1. **Hero** (100vh) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay), gele slogan + Stekelbaars logo (i.p.v. tekst) + "Strategisch communicatiebureau" subtekst
-2. **STROOM** (90vh) — Split-screen: links foto 1 (45vw) met scroll-animatie titel (per woord van zijkanten) + logo (van onder) + vis-tilt overgang, rechts tekst
-3. **Het Stroommodel** (90vh) — Gele achtergrond, links-uitgelijnde kop + tekst (gecentreerd op pagina), witte stromende balken-animatie (recycling, nooit verdwijnen), knop naar model.html
-4. **Wat zoek jij?** (90vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 480px) met baarzen erachter (scale 1.9), scroll-gekoppelde vis-entrance (1+3 van boven, 2 van onder, doorlopend na midden), hover scale-effect
-5. **Waar zijn we goed in** (100vh) — Split-screen: links foto 2 (60vw, slow zoom vanuit midden) met hover-hotspots (Dorien x=0.57 y=0.30, Sebastiaan x=0.43 y=0.28 — gele kader 240x240px, 20px border), rechts tekst + knop
-6. **Testimonials** (50vh) — Horizontaal scrollende ticker, lichtgrijze achtergrond
+1. **Hero** (100vh) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay), gele slogan (iets kleiner, clamp 2.8rem/8vw/8rem) + Stekelbaars logo (0.60em) + "Strategisch communicatiebureau" subtekst
+2. **DIT ZIJN WIJ** (90vh) — Witte achtergrond, 3 rijen (woord + alinea gekoppeld). Rij 1+3 van links, rij 2 van rechts. Alle koppen links van alinea. Power-curve animatie: snel binnenkomen → extreem langzaam midden → snel weg. Gecentreerd (max-width 850px). Logo/vis-swap eronder (tilt → vis verschijnt → zwemt weg).
+3. **Het Stroommodel** (90vh) — Split-screen: links wit met kop + tekst, rechts geel met test1.png + knop "Bekijk het Stroommodel" + witte stromende balken-animatie (35 bars, fanning out)
+4. **Wat zoek jij?** (90vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 380px) met baarzen erachter (scale 1.3), scroll-gekoppelde vis-entrance, hover scale-effect
+5. **Waar zijn we goed in** (100vh) — Split-screen: links foto 2 (52vw, slow zoom, wit kader boven/links/onder) met hover-hotspots, rechts tekst + knop
+6. **Testimonials** (50vh) — Slider met 3 kaarten per view, gele visjes als navigatie (links/rechts, 50%→100% opacity hover)
 
 ### Stroommodel pagina (model.html)
 
@@ -85,19 +85,24 @@ Bestanden in `Huisstijl/` en `img/`.
 - **Snake-pijl**: SVG achtergrond-element, geel op zwarte slides (#FEEA70, opacity 0.18), wit op gele slides. Kronkelend pad met 90°-bochten incl. backward loop. Groeit mee met scroll (50% van slide 1 bij laden). Pijlpunt = stekelbaars_pijl_dik.png (chevron-gedeelte, horizontale balk weggeknipt). Staart stroke-width 73px, 37px ingekort voor naadloze aansluiting.
 - Flow indicator dots (7 stuks) + scroll hint (gele tekst, fade-out na 30% scroll)
 
-### Wie we zijn pagina
+### Team pagina (wie-we-zijn.html)
 
 - Zwarte page-header
-- Zwarte visie-sectie met tekst links, halve baars_1_geel rechts (staartstuk zichtbaar, kop buiten pagina)
-- Sebastiaan: foto links (`img/sebas.jpg`), tekst rechts
-- Dorien: tekst links, foto rechts (`img/dorien.jpg`) — gespiegelde layout
+- Volledig zwarte achtergrond
+- Visie-intro bovenaan (max-width 550px)
+- Baars rechts (25% hoogte) + baars links gespiegeld (55% hoogte)
+- 6 teamleden in grid (1fr 2fr), afwisselend foto links/rechts
+- Sebastiaan + Dorien met echte foto's, 4 placeholders (grijze vlakken)
+- Foto's 50% kleiner (1fr kolom), namen in geel, 1 alinea per persoon
+- Compacte spacing
 
 ### Navigatie
 - Sticky nav, transparant bovenaan, wit bij scroll
 - Bovenaan: geel logo + gele links; bij scroll: zwart logo + zwarte links, logo wordt geel bij hover
-- Links: Wat we doen, Het Stroommodel, Voor wie, Wie we zijn, Crisis hotline (button), Contact
+- Links: Het Stroommodel, Diensten, Voor wie, Team, Crisis hotline (button), Contact
 - "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
 - "Contact" als gewone tekstlink
+- Footer paginalinks: Diensten, Het Stroommodel, Voor wie, Team, Nieuws
 - Hamburger-menu op mobiel (volledig scherm overlay)
 - Nav-transitie uitgeschakeld bij page load (voorkomt gele flash), pas actief na eerste frame
 
@@ -126,14 +131,14 @@ Bestanden in `Huisstijl/` en `img/`.
 
 - **Kinetic smooth scrolling**: Custom JS op desktop — wheel events afgevangen, smooth interpolatie met momentum (ease 0.08), niet op touch-devices
 - **Hero slogan**: Elke regel schuift omhoog met stagger (0.5s - 1.1s delay), laatste regel = logo i.p.v. tekst
-- **Sectie 2 scroll-animatie**: Titel per woord van afwisselende zijkanten (links/rechts), logo van onder — scroll-gekoppeld. Na aankomst zachte drift. Logo tilt (rotateX 0→90°), vis verschijnt (90→0°). Titel schuift weg bij tilt. Alle transforms direct sync met scroll.
-- **Sectie 4 vissen**: Vis 1+3 van boven, vis 2 van onder, continu doorlopend (boven→midden→onder en vice versa), altijd zichtbaar, scroll-gekoppeld
-- **Sectie 5 foto zoom**: Langzame zoom (scale 1→1.06) vanuit midden, 8s ease-out, getriggerd door IntersectionObserver
-- **STROOM stroming**: Witte balken op gele achtergrond, spawnen links met smalle band (10% hoogte), waaieren uit naar rechts, recycleren (nooit verdwijnen), zeldzame celdeling (max 1x per blokje), muis-repulsie. Seed met 18 blokjes verspreid. MAX_BARS=50, spawn interval 1500ms.
-- **Foto hotspots**: JS-berekende positionering op basis van originele foto-coördinaten, corrigeert voor object-fit:cover crop. Hover toont gele kader (240x240px, 20px border, 50% opacity) + naam. data-ring-x/data-ring-y attributen (0-1 range)
+- **Sectie 2 crossing**: 3 rijen (kopwoord + alinea) bewegen als gekoppelde paren. Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel aan randen, extreem langzaam in midden. Centered bij raw=0.95. Opacity gekoppeld aan positie. Logo/vis-swap eronder met tilt + swim-away.
+- **Sectie 4 vissen**: Vis 1+3 van boven, vis 2 van onder, continu doorlopend, scroll-gekoppeld, scale 1.3
+- **Sectie 5 foto zoom**: Langzame zoom (scale 1→1.06) vanuit midden, 8s ease-out, getriggerd door IntersectionObserver. Wit kader (inset box-shadow) boven/links/onder.
+- **STROOM stroming**: Witte balken in rechter helft van sectie 3, spawnen links, waaieren uit naar rechts, recycleren. MAX_BARS=35, spawn interval 1500ms, muis-repulsie.
+- **Foto hotspots**: JS-berekende positionering op basis van originele foto-coördinaten, corrigeert voor object-fit:cover crop. Hover toont gele kader (240x240px, 20px border, 50% opacity) + naam.
 - **Scroll reveal**: `.reveal` class, fade in + schuif omhoog bij 15% visibility
 - **Wat zoek jij hover**: Kaarten schalen naar 1.03 bij hover
-- **Testimonial ticker**: Horizontaal scrollende kaarten, oneindige loop via CSS animation + JS duplicatie
+- **Testimonial slider**: 3 kaarten per view, gele visjes als prev/next navigatie, JS-berekende kaartbreedte, responsive (1/2/3 kaarten)
 - **Model pagina**: Vrije horizontale scroll (geen snap), kinetic smooth scrolling via muiswiel, pijltjestoetsen, flow indicator dots, snake-pijl achtergrond
 - **Smooth anchor scroll**: Alle `href="#..."` links scrollen vloeiend naar hun doel
 - **Reduced motion**: Alle animaties uitgeschakeld

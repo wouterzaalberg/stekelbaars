@@ -81,7 +81,7 @@ if (wieZoomImg) {
             var fishRotX = (1 - fishP) * 90;
             var swimP = clamp01((exitRaw - 0.45) / 3.0);
             var fishSwimX = swimP * 120;
-            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg) translateX(' + fishSwimX.toFixed(1) + 'vw)';
+            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg) scaleX(-1) translateX(' + fishSwimX.toFixed(1) + 'vw)';
             swapFish.style.opacity = (tiltP >= 1 ? fishP : 0).toFixed(3);
         }
     }
@@ -365,6 +365,77 @@ if (hamburger && mobileNav) {
         }
     }, { rootMargin: '200px' });
     visObs.observe(section);
+})();
+
+// Marquee heading: fit font-size to logo width, hover to scroll
+(function() {
+    var marquee = document.querySelector('.visie-stapel-marquee');
+    var logo = document.querySelector('.visie-stapel-logo');
+    if (!marquee || !logo) return;
+
+    var firstItem = marquee.querySelector('.visie-stapel-marquee-item');
+    if (!firstItem) return;
+
+    function fit() {
+        var logoW = logo.offsetWidth;
+        if (!logoW) return;
+        var lo = 8, hi = 200, mid;
+        while (hi - lo > 0.5) {
+            mid = (lo + hi) / 2;
+            firstItem.style.fontSize = mid + 'px';
+            if (firstItem.scrollWidth > logoW) hi = mid;
+            else lo = mid;
+        }
+        var items = marquee.querySelectorAll('.visie-stapel-marquee-item');
+        for (var i = 0; i < items.length; i++) items[i].style.fontSize = lo + 'px';
+    }
+
+    logo.addEventListener('load', fit);
+    if (logo.complete) fit();
+    window.addEventListener('resize', fit);
+
+    // JS-driven marquee: scroll left on hover, ease in/out
+    var track = marquee.querySelector('.visie-stapel-marquee-track');
+    var hovering = false;
+    var speed = 0;
+    var maxSpeed = 1.5;
+    var accel = 0.02;
+    var decel = 0.015;
+    var offset = 0;
+    var running = false;
+
+    // Start at -halfW so text is visible, scroll toward 0 (right), then reset
+    function getHalfW() { return track.scrollWidth / 2; }
+
+    var right = marquee.closest('.visie-split-right');
+    if (right) {
+        right.addEventListener('mouseenter', function() { hovering = true; if (!running) { running = true; tick(); } });
+        right.addEventListener('mouseleave', function() { hovering = false; });
+    }
+
+    function tick() {
+        if (hovering) {
+            speed = Math.min(speed + accel, maxSpeed);
+        } else {
+            speed = Math.max(speed - decel, 0);
+        }
+        if (speed < 0.001 && !hovering) { running = false; return; }
+
+        offset += speed;
+        var halfW = getHalfW();
+        if (halfW > 0 && offset >= 0) offset -= halfW;
+
+        track.style.transform = 'translateX(' + offset.toFixed(1) + 'px)';
+        requestAnimationFrame(tick);
+    }
+
+    // Initialize offset to -halfW
+    function initOffset() {
+        var halfW = getHalfW();
+        if (halfW > 0) offset = -halfW;
+    }
+    initOffset();
+    window.addEventListener('resize', initOffset);
 })();
 
 // Foto hotspots: position ring relative to original image coords, accounting for object-fit: cover

@@ -199,6 +199,75 @@ p {
     width: 100%;
 }
 
+/* Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--zwart);
+    list-style: none;
+    padding: 0.6rem 0;
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    display: block;
+}
+
+.nav-dropdown-menu li a {
+    display: block;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    color: var(--wit) !important;
+    white-space: nowrap;
+}
+
+.nav-dropdown-menu li a::after {
+    display: none !important;
+}
+
+.nav-dropdown-menu li a:hover {
+    color: var(--geel) !important;
+}
+
+.nav--scrolled .nav-dropdown-menu {
+    background: var(--wit);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.nav--scrolled .nav-dropdown-menu li a {
+    color: var(--zwart) !important;
+}
+
+.nav--scrolled .nav-dropdown-menu li a:hover {
+    color: var(--geel) !important;
+}
+
+/* Mobile nav sub-links */
+.nav-mobile-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-left: 1.5rem;
+}
+
+.nav-mobile-sub a {
+    font-size: clamp(1rem, 3.5vw, 1.5rem) !important;
+    opacity: 0.7;
+}
+
+.nav-mobile-sub a:hover {
+    opacity: 1;
+}
+
 /* Crisis link special styling */
 .nav-links .nav-crisis {
     background: var(--geel);
@@ -441,11 +510,40 @@ p {
     margin-top: 0.15em;
 }
 
-.hero-logo-text {
+/* Hero logo — fades in first */
+.hero-logo-flicker {
     height: 0.60em;
     width: auto;
     display: block;
     object-fit: contain;
+    opacity: 0;
+    animation: logoFadeIn 1.2s ease-out forwards;
+}
+
+@keyframes logoFadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Logo line spacing */
+.hero-tagline--delayed .line:nth-child(4) {
+    margin-top: 0.15em;
+}
+
+/* Delayed tagline — text appears 1s after logo starts */
+.hero-tagline--delayed .line:nth-child(1) .line-text { animation-delay: 1.5s; }
+.hero-tagline--delayed .line:nth-child(2) .line-text { animation-delay: 1.7s; }
+.hero-tagline--delayed .line:nth-child(3) .line-text { animation-delay: 1.9s; }
+/* Logo line: no slide-up, just the flicker */
+.hero-tagline--delayed .line:nth-child(4) .line-text {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+.hero-sub--delayed {
+    opacity: 0;
+    animation: lineSlideUp 0.7s ease-out 2.2s forwards;
 }
 
 @keyframes lineSlideUp {
@@ -1274,6 +1372,32 @@ p {
     margin-bottom: clamp(2rem, 4vw, 3rem);
 }
 
+.team-visie-sectie {
+    background: var(--wit);
+    padding: clamp(3rem, 6vw, 5rem) 0;
+}
+
+.team-visie-sectie .wie-visie-content p {
+    color: var(--zwart);
+}
+
+.wie-visie-content--centered {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.wie-visie-content--centered h2 {
+    color: var(--geel);
+    margin-bottom: 1.5rem;
+}
+
+.wie-visie-visje {
+    height: 2.5rem;
+    width: auto;
+    margin-top: 2rem;
+    opacity: 0.6;
+}
+
 .wie-visie-content {
     max-width: 550px;
 }
@@ -1295,9 +1419,10 @@ p {
     right: -20%;
     top: 25%;
     transform: translateY(-50%);
-    width: 55%;
+    width: 45%;
     height: auto;
     pointer-events: none;
+    opacity: 0.8;
 }
 
 .wie-visie-baars--left {
@@ -1310,9 +1435,9 @@ p {
 /* Team members */
 .team-member {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: clamp(1.5rem, 3vw, 3rem);
-    align-items: center;
+    grid-template-columns: 0.4fr 1fr;
+    gap: 0;
+    align-items: stretch;
     margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
@@ -1320,22 +1445,11 @@ p {
     margin-bottom: 0;
 }
 
-.team-member--reverse {
-    grid-template-columns: 2fr 1fr;
-}
-
-.team-member--reverse .team-member-img {
-    order: 2;
-}
-
-.team-member--reverse .team-member-tekst {
-    order: 1;
-}
-
 .team-member-img img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
     filter: grayscale(100%);
 }
 
@@ -1344,14 +1458,38 @@ p {
     background: #222;
 }
 
+.team-member-tekst {
+    background: var(--wit);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .team-member-tekst h2 {
-    color: var(--geel);
+    color: var(--zwart);
     margin-bottom: 0.8rem;
 }
 
 .team-member-tekst p {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 0;
+    color: var(--zwart);
+    margin-bottom: 1rem;
+}
+
+.team-member-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.team-member-contact a {
+    color: var(--zwart);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.team-member-contact a:hover {
+    color: var(--geel);
 }
 
 .team-values {
@@ -1733,7 +1871,7 @@ p {
 
 /* Left half: white, text */
 .visie-split-left {
-    flex: 1;
+    flex: 0 0 55vw;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -1767,6 +1905,15 @@ p {
     background: rgba(0, 0, 0, 0.45);
 }
 
+.visie-left-pijl {
+    position: absolute;
+    right: 50px;
+    height: clamp(9rem, 18vw, 15rem);
+    width: auto;
+    z-index: 1;
+    opacity: 0.5;
+}
+
 .visie-left-content {
     position: relative;
     z-index: 1;
@@ -1784,7 +1931,7 @@ p {
 
 /* Right half: yellow, logo met stapel */
 .visie-split-right {
-    flex: 1;
+    flex: 0 0 45vw;
     background: var(--geel);
     display: flex;
     flex-direction: column;
@@ -1983,13 +2130,13 @@ p {
     background: var(--zwart);
     padding: 0;
     align-items: stretch;
-    min-height: 90vh;
+    min-height: 85vh;
 }
 
 .section-watzoek .container {
     display: flex;
     flex-direction: column;
-    min-height: 90vh;
+    min-height: 85vh;
     padding-top: calc(var(--nav-height) + clamp(2rem, 4vw, 3rem));
     padding-bottom: clamp(2rem, 4vw, 3rem);
 }
@@ -2439,17 +2586,8 @@ p {
         gap: 2.5rem;
     }
 
-    .team-member,
-    .team-member--reverse {
+    .team-member {
         grid-template-columns: 1fr;
-    }
-
-    .team-member--reverse .team-member-img {
-        order: 0;
-    }
-
-    .team-member--reverse .team-member-tekst {
-        order: 0;
     }
 
     .doelgroep-grid,
@@ -2691,6 +2829,16 @@ p {
         animation: none;
         opacity: 1;
         transform: none;
+    }
+
+    .hero-logo-flicker {
+        animation: none;
+        opacity: 1;
+    }
+
+    .hero-sub--delayed {
+        animation: none;
+        opacity: 1;
     }
 
     .hero-tagline .line-barcode {

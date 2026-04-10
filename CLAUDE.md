@@ -70,10 +70,10 @@ Bestanden in `Huisstijl/` en `img/`.
 
 ### Home secties
 
-1. **Hero** (100vh, sticky) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay), gele slogan (clamp 2.8rem/8vw/8rem) + Stekelbaars logo (0.60em) + "Strategisch communicatiebureau" subtekst. Sticky: sectie 2 schuift erover heen (hero-stroom-wrapper).
+1. **Hero** (100vh, sticky) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay). Logo fadet als eerste in (1.2s), daarna tekst "MAAK JE / IDEALEN / WAAR MET" met stagger (1.2s-1.6s delay), subtekst op 2.2s. Sticky: sectie 2 schuift erover heen (hero-stroom-wrapper).
 2. **DIT ZIJN WIJ** (90vh, z-index 2) — Witte achtergrond, 3 rijen (woord + alinea gekoppeld, 2-koloms grid 1fr/2fr, max-width 850px). Alle koppen links van alinea (kolom 1, rechts uitgelijnd). Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel binnenkomen → extreem langzaam midden → snel weg. Centered bij raw=0.95. Logo/vis-swap eronder (tilt → vis verschijnt → zwemt weg).
-3. **Het Stroommodel** (90vh) — Split-screen: links wit met kop + tekst, rechts geel met test1.png + knop "Bekijk het Stroommodel" + witte stromende balken-animatie (35 bars, fanning out)
-4. **Wat zoek jij?** (90vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 380px) met baarzen erachter (scale 1.3), scroll-gekoppelde vis-entrance, hover scale-effect
+3. **Het Stroommodel** (90vh) — Split-screen (55vw/45vw): links foto 1 (slow zoom, donkere overlay) met tekst + gele pijl (50% opacity, JS-uitgelijnd op marquee-hoogte), rechts geel met barcode + marquee "Bekijk het Stroommodel". Scroll-gekoppelde slide-in: beide helften starten op 50% offset, schuiven per scroll naar centrum, locken bij sluiting.
+4. **Wat zoek jij?** (85vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 380px) met baarzen erachter (scale 1.3), scroll-gekoppelde vis-entrance, hover scale-effect
 5. **Waar zijn we goed in** (90vh) — Split-screen: links foto 2 (52vw, slow zoom, wit kader boven/links/onder) met hover-hotspots, rechts tekst + knop
 6. **Testimonials** (50vh) — Slider met 3 kaarten per view, gele visjes als navigatie (links/rechts, 50%→100% opacity hover)
 
@@ -89,17 +89,17 @@ Bestanden in `Huisstijl/` en `img/`.
 
 - Zwarte page-header
 - Volledig zwarte achtergrond
-- Visie-intro bovenaan (max-width 550px)
-- Baars rechts (25% hoogte) + baars links gespiegeld (55% hoogte)
-- 6 teamleden in grid (1fr 2fr), afwisselend foto links/rechts
+- Baars rechts (25% hoogte) + baars links gespiegeld (55% hoogte), 80% opacity, 45% width, parallax scroll-effect
+- 6 teamleden in grid (0.4fr foto / 1fr tekst), allemaal foto links + wit tekstvak rechts
 - Sebastiaan + Dorien met echte foto's, 4 placeholders (grijze vlakken)
-- Foto's 50% kleiner (1fr kolom), namen in geel, 1 alinea per persoon
-- Compacte spacing
+- Contactgegevens onder tekst (email, telefoon, LinkedIn) met scheidingslijn
+- Foto's object-fit cover, volledige hoogte kader, grayscale
+- "Over Stekelbaars" als aparte witte sectie onderaan, gecentreerde tekst met gele kop + klein visje
 
 ### Navigatie
 - Sticky nav, transparant bovenaan, wit bij scroll
 - Bovenaan: geel logo + gele links; bij scroll: zwart logo + zwarte links, logo wordt geel bij hover
-- Links: Het Stroommodel, Diensten, Voor wie, Team, Crisis hotline (button), Contact
+- Links: Het Stroommodel, Diensten, Voor wie (dropdown: B&W, Organisaties, Bedrijven), Team, Crisis hotline (button), Contact
 - "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
 - "Contact" als gewone tekstlink
 - Footer paginalinks: Diensten, Het Stroommodel, Voor wie, Team, Nieuws
@@ -131,7 +131,7 @@ Bestanden in `Huisstijl/` en `img/`.
 
 - **Kinetic smooth scrolling**: Custom JS op desktop — wheel events afgevangen, smooth interpolatie met momentum (ease 0.08), niet op touch-devices
 - **Hero slogan**: Elke regel schuift omhoog met stagger (0.5s - 1.1s delay), laatste regel = logo i.p.v. tekst
-- **Sectie 2 crossing**: 3 rijen (kopwoord + alinea) bewegen als gekoppelde paren. Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel aan randen, extreem langzaam in midden. Centered bij raw=0.95. Opacity gekoppeld aan positie. Logo/vis-swap eronder met tilt + swim-away.
+- **Sectie 2 crossing**: 3 rijen (kopwoord + alinea) bewegen als gekoppelde paren. Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel aan randen, extreem langzaam in midden. Centered bij raw=0.95. Opacity gekoppeld aan positie. Logo/vis-swap eronder met tilt (vis gespiegeld, blijft staan, zwemt niet weg).
 - **Sectie 4 vissen**: Vis 1+3 van boven, vis 2 van onder, continu doorlopend, scroll-gekoppeld, scale 1.3
 - **Sectie 5 foto zoom**: Langzame zoom (scale 1→1.06) vanuit midden, 8s ease-out, getriggerd door IntersectionObserver. Wit kader (inset box-shadow) boven/links/onder.
 - **STROOM stroming**: Witte balken in rechter helft van sectie 3, spawnen links, waaieren uit naar rechts, recycleren. MAX_BARS=35, spawn interval 1500ms, muis-repulsie.

@@ -13,6 +13,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+
 // Slow zoom on wie-split photo when in view
 const wieZoomImg = document.querySelector('.wie-split-img');
 if (wieZoomImg) {
@@ -79,11 +80,31 @@ if (wieZoomImg) {
 
         if (swapFish) {
             var fishRotX = (1 - fishP) * 90;
-            var swimP = clamp01((exitRaw - 0.45) / 3.0);
-            var fishSwimX = swimP * 120;
-            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg) scaleX(-1) translateX(' + fishSwimX.toFixed(1) + 'vw)';
+            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg)';
             swapFish.style.opacity = (tiltP >= 1 ? fishP : 0).toFixed(3);
         }
+    }
+
+    // --- Section 3: Visie split slide-in (scroll-coupled) ---
+    var visieSection = document.querySelector('.section-visie');
+    var visieLeft = visieSection ? visieSection.querySelector('.slide-from-left') : null;
+    var visieRight = visieSection ? visieSection.querySelector('.slide-from-right') : null;
+
+    var visieLocked = false;
+
+    function updateVisie() {
+        if (!visieSection || !visieLeft || !visieRight) return;
+        if (visieLocked) return;
+        var vh = window.innerHeight;
+        var rect = visieSection.getBoundingClientRect();
+        // progress 0 = section just entering bottom, 1 = fully in view
+        var p = clamp01((vh - rect.top) / (vh * 0.8));
+        // Start at 50% offset, move to 0
+        var offset = 50 * (1 - p);
+        visieLeft.style.transform = 'translateX(' + (-offset).toFixed(2) + '%)';
+        visieRight.style.transform = 'translateX(' + offset.toFixed(2) + '%)';
+        // Lock when fully closed
+        if (p >= 1) visieLocked = true;
     }
 
     // --- Section 4: watzoek fish (always visible, position moves with scroll) ---
@@ -107,14 +128,51 @@ if (wieZoomImg) {
         });
     }
 
+    // --- Team page: baars parallax ---
+    var teamBaarzen = document.querySelectorAll('.wie-visie-baars');
+    var teamPage = document.querySelector('.team-page');
+
+    function updateTeamBaarzen() {
+        if (!teamPage || !teamBaarzen.length) return;
+        var rect = teamPage.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var scrolled = vh - rect.top;
+        teamBaarzen.forEach(function(baars, i) {
+            var speed = i === 0 ? 0.2 : 0.15;
+            var yOffset = scrolled * speed;
+            var isLeft = baars.classList.contains('wie-visie-baars--left');
+            baars.style.transform = 'translateY(calc(-50% + ' + yOffset.toFixed(1) + 'px))' + (isLeft ? ' scaleX(-1)' : '');
+        });
+    }
+
     function onScroll() {
         updateStroom();
+        updateVisie();
         updateWatzoek();
+        updateTeamBaarzen();
     }
 
     window.addEventListener('scroll', onScroll);
     window.addEventListener('load', onScroll);
     onScroll();
+})();
+
+// Align visie-left-pijl to marquee height
+(function() {
+    var pijl = document.querySelector('.visie-left-pijl');
+    var marquee = document.querySelector('.visie-stapel-marquee');
+    var section = document.querySelector('.section-visie');
+    if (!pijl || !marquee || !section) return;
+    function align() {
+        var sRect = section.getBoundingClientRect();
+        var mRect = marquee.getBoundingClientRect();
+        var mCenter = mRect.top + mRect.height / 2 - sRect.top;
+        pijl.style.top = mCenter + 'px';
+        pijl.style.transform = 'translateY(-50%)';
+    }
+    window.addEventListener('load', align);
+    window.addEventListener('resize', align);
+    align();
 })();
 
 // Navigation scroll behavior

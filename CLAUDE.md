@@ -24,6 +24,7 @@ Website voor Stekelbaars, communicatiebureau.
 - **Wit**: `#FFFFFF`
 - **Zwart**: `#000000`
 - **Middengrijs**: `#808080`
+- **Snake-pijl-geel** (staart op zwarte slides): `#FFE980`
 
 ### Typografie
 
@@ -42,7 +43,7 @@ Website voor Stekelbaars, communicatiebureau.
 - **Barcode**: Losstaand streepjespatroon als decoratief element
 - **Pijlen**: Gele pijl naar rechts met transparante laagjes (normaal en dik)
 - **Streepjes**: Verticaal strepenpatroon
-- **Baarzen**: Gele stekelbaars-illustraties (baars_1_geel.png, baars_2_geel.png, baars_3_geel.png)
+- **Baarzen**: Gele + zwarte stekelbaars-illustraties (baars_1/2/3_geel.png + baars_1/2/3_zwart.png)
 - **Foto's**: Zwart-wit foto's (foto 1.jpg = stromend water, foto 2.jpg, foto 3.jpg)
 - **Fotobehandeling**: Zwart-wit foto's met gele grafische elementen (pijlen, strepen) als overlay
 
@@ -59,10 +60,13 @@ Bestanden in `Huisstijl/` en `img/`.
 
 ### Pagina's
 
-1. **Home** (`index.html`) — Hero (zwart, video), DIT ZIJN WIJ crossing, stroommodel split, wat zoek jij, waar zijn we goed in, testimonials slider
-2. **Het Stroommodel** (`model.html`) — Vrije horizontale scroll (desktop, kinetic smooth), geen footer, 100vh, 6 scharnierpunten + intro, snake-pijl achtergrond
-3. **Diensten** (`wat-we-doen.html`) — 4 diensten met afwisselende foto/tekst layout
-4. **Voor wie** (`voor-wie.html`) — 4 doelgroepen: wethouders, colleges, organisaties, bestuurders
+1. **Home** (`index.html`) — Hero video, Zwem met ons mee (stroom), Onze methode (v2 kinetische bars), Wat zoek jij? (kaarten), Hier zijn we goed in (sticky-scroll blur→sharp), testimonials slider
+2. **Het Stroommodel** (`model.html`) — Horizontale scroll (desktop, kinetic smooth), geen footer, 100vh, intro slide (100vw, video bg) + 6 scharnierpunten (80vw), snake-pijl achtergrond
+3. **Diensten** (`wat-we-doen.html`) — 5 hoofddiensten (Strategie, Training, Organic, ATL, Crisis) + 5 sub-diensten onder Organic (Social, PR, PA, Design, Events)
+4. **Voor wie** (`voor-wie.html`) — Overzicht met 3 klikbare kaarten → subpagina's
+    - `voor-wie-bw.html` — Wethouders & Colleges B&W (met STROOM-jaarprogramma checklist)
+    - `voor-wie-organisaties.html` — Maatschappelijke organisaties
+    - `voor-wie-bedrijven.html` — Bedrijven met een ideaal
 5. **Crisis hotline** (`crisis.html`) — Donkere hero, 3 pijlers, aanpak, CTA
 6. **Team** (`wie-we-zijn.html`) — Volledig zwarte pagina, visie + 6 teamleden (2 echt + 4 placeholder), baarzen links/rechts
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
@@ -70,20 +74,28 @@ Bestanden in `Huisstijl/` en `img/`.
 
 ### Home secties
 
-1. **Hero** (100vh, sticky) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay). Logo fadet als eerste in (1.2s), daarna tekst "MAAK JE / IDEALEN / WAAR MET" met stagger (1.2s-1.6s delay), subtekst op 2.2s. Sticky: sectie 2 schuift erover heen (hero-stroom-wrapper).
-2. **DIT ZIJN WIJ** (90vh, z-index 2) — Witte achtergrond, 3 rijen (woord + alinea gekoppeld, 2-koloms grid 1fr/2fr, max-width 850px). Alle koppen links van alinea (kolom 1, rechts uitgelijnd). Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel binnenkomen → extreem langzaam midden → snel weg. Centered bij raw=0.95. Logo/vis-swap eronder (tilt → vis verschijnt → zwemt weg).
-3. **Het Stroommodel** (90vh) — Split-screen (55vw/45vw): links gele achtergrond met tekst (rechts uitgelijnd), rechts geel met barcode + marquee "Bekijk het Stroommodel". Kop "Onze methode" JS-uitgelijnd op zelfde hoogte en font-size als marquee. Rechterhelft gecapt op max-width 945px (=45vw bij 2100px), sectie-achtergrond geel. Scroll-gekoppelde slide-in: beide helften starten op 50% offset, schuiven per scroll naar centrum, locken bij sluiting.
-4. **Wat zoek jij?** (85vh) — Zwarte achtergrond, grote kop, 3 kaarten (min-height 380px) met baarzen erachter (scale 1.3), scroll-gekoppelde vis-entrance, hover scale-effect
-5. **Waar zijn we goed in** (90vh) — Split-screen: links foto 2 (52vw, slow zoom, wit kader boven/links/onder) met hover-hotspots, rechts tekst + knop
-6. **Testimonials** (50vh) — Slider met 3 kaarten per view, gele visjes als navigatie (links/rechts, 50%→100% opacity hover)
+1. **Hero** (100vh, sticky) — Zwart, video 1 als achtergrond (object-fit cover, donkere overlay). Logo fadet als eerste in (1.2s), daarna tekst "MAAK JE / IDEALEN / WAAR MET" met stagger. Sticky: sectie 2 schuift erover heen (hero-stroom-wrapper).
+2. **Zwem met ons mee** (`.section-stroom`, 85vh, z-index 2) — Gele achtergrond. Kop "ZWEM MET ONS MEE" (Barlow, wit, font-size clamp(5rem, 10.5vw, 9.75rem), margin-top -0.34em voor cap-align). Broodtekst rechts (Calibri, wit). Zwarte baars op achtergrond (opacity 0.05, filter:brightness(0)) met idle drift + cursor-tracking. Content binnen 1200px container.
+3. **Onze methode** (`.section-methode-v2`, sticky top:0) — Gele achtergrond met animerende witte bars (`.vb-bars`, ~42 stuks, opacity 0.15, kinetic stream). Foto LINKS (`.vb-placeholder-photo`, foto 2.jpg grayscale contrast 1.1, breedte 420-540px, hoogte matcht content). Tekst RECHTS ("Onze methode" + lede + CTA "Bekijk het stroommodel"). Scroll-driven clip-path reveal van `.vb-photo` (achtergrond-foto, 3-stap snap: 10-22-36% breed → 50% volledige hoogte → phase 4 horizontaal naar 100%). Hover op foto → scale 1.025.
+4. **Wat zoek jij?** (`.section-watzoek`, 85vh) — **Gele achtergrond**, grote kop, 3 kaarten binnen 1400px container (gap 48px, padding 44×36, min-height 380). Kop 30px, broodtekst 16px. CTA-pijl is `stekelbaars_pijl.png` (28×14). 4 zwarte visjes (baars_1/2/3_zwart) op achtergrond met hover-push via JS mousemove (z-index 1 achter kaarten, mousemove-tracking detecteert cursor binnen bounding-box en togglet `.wz-fish-hovered` class voor 14px translate + 6px up spring-easing).
+5. **Hier zijn we goed in** (`.section-wie`, 200vh wrapper + 100vh sticky pane) — Scroll-driven blur-to-sharp: foto 2.jpg start blurred (14px), bij doorscrollen fadet tekst uit (fase 1: progress 0-0.7) EN foto wordt scherp tegelijk. In fase 2 (0.7-1.0) verschijnen hotspots direct (op hover van Dorien/Sebastiaan). Tekst-kader witte achtergrond 92%, tekst zwart, kop geel. Geel visje onder tekst roteert 0-90° synchroon met tekst-fade. Hele container is `<a>` naar team-pagina. Photo 5vh padding boven/onder (witte balk).
+6. **Testimonials** (50vh) — Slider met 3 kaarten per view, gele visjes als navigatie
 
 ### Stroommodel pagina (model.html)
 
-- Horizontale scroll, geen footer, 100vh
-- **Intro slide**: Zwarte achtergrond, twee-koloms tekst, gele kop, gecentreerd
-- **6 scharnierpunten**: Links uitgelijnd, "Scharnierpunt X" label boven de kop. Jij als leider → Je team → Relevantie → Naar buiten → Grote publiek → De bestemming
-- **Snake-pijl**: SVG achtergrond-element, geel op zwarte slides (#FEEA70, opacity 0.18), wit op gele slides. Kronkelend pad met 90°-bochten incl. backward loop. Groeit mee met scroll (50% van slide 1 bij laden). Pijlpunt = stekelbaars_pijl_dik.png (chevron-gedeelte, horizontale balk weggeknipt). Staart stroke-width 73px, 37px ingekort voor naadloze aansluiting.
-- Flow indicator dots (7 stuks) + scroll hint (gele tekst, fade-out na 30% scroll)
+- Horizontale scroll (desktop), `min-width: 80vw` voor alle slides **behalve** intro (100vw)
+- **Intro slide** (100vw): video 1 als achtergrond (autoplay muted loop), donkere overlay 55%. "Het / STROOM / model" in 3 regels (Barlow, geel, font-size clamp(4rem, 10vw, 9rem)). Broodtekst rechts, gele accent "We zitten vast.". Content gecentreerd in slide (max-width 1300px).
+- **6 scharnierpunten (S-T-R-O-O-M)**: 80vw elk
+    - S — Self / De leider (foto rechts)
+    - T — Team / Het Team (**full-bleed photo background**, foto 2.jpg, tekst over donkere gradient)
+    - R — Relevantie (foto rechts)
+    - O — Organisch / Organische stroming (**full-bleed photo background**, foto 3.jpg)
+    - O — Offensief / Media offensief (foto rechts)
+    - M — Maatschappelijke verandering / Het ideaal (foto rechts)
+- **Slide-animaties**: `.is-active` class op slide dichtst bij viewport-midden → staggered fade-in-up van `.model-slide-number` (0.1s delay), h2 (0.25s), p:nth (0.5/0.7/0.9/1.1/1.3s)
+- **Snake-pijl**: SVG-achtergrond-element, rendering in 2 paths (geel `#FFE980` gecliped op zwarte slides, wit op gele slides). Clip-rechthoeken gebruiken **echte** `offsetLeft/offsetWidth` van elke slide (niet `W/7`). Kronkelend pad met 90°-bochten. Staart op sectie 1 is **rechte horizontale lijn op y=0.75**, daarna curve omhoog. Stroke-width 72.5, opacity 0.3, linecap: square. Pijlpunt = stekelbaars_pijl_dik.png (chevron-crop), opacity 0.3, **gepositioneerd op `tailEnd + 36.3px * tangent(tailEnd)`** zodat de kop meedraait in bochten. `vis = drawLength - 36.3` voor naadloze aansluiting met linecap-extensie. **Start opacity 0, fadet in bij eerste scroll.**
+- Flow indicator dots: active-detectie via closest-to-viewport-center (werkt met 80/100vw mix)
+- Scroll hint: opacity 0.8, fadet uit na 30% scroll
 
 ### Team pagina (wie-we-zijn.html)
 
@@ -96,27 +108,49 @@ Bestanden in `Huisstijl/` en `img/`.
 - Foto's object-fit cover, volledige hoogte kader, grayscale
 - "Over Stekelbaars" als aparte witte sectie onderaan, gecentreerde tekst met gele kop + klein visje
 
+### Diensten pagina (wat-we-doen.html)
+
+- Page header + manifest-alinea
+- **5 hoofddiensten** (pijler-blocks, afwisselend foto L/R):
+    1. Communicatiestrategie (foto 1) — met CTA "Neem vooral een kijkje bij ons STROOM-model om meer te lezen"
+    2. Training en Begeleiding (foto 2)
+    3. Organic (foto 3)
+    4. ATL en Digitale campagnes (foto 1)
+    5. Crisiscommunicatie (foto 2) — met CTA naar crisis-hotline
+- **5 sub-diensten onder Organic** (tussen pijler 3 en 4, `.organic-specialismen` sectie met `.org-grid`):
+    - Social, PR, PA, Design/website/fotografie, Events
+    - Kaarten met alleen label + klanttekst (geen uitgevonden h3-koppen)
+- CTA-sectie met gele achtergrond
+
+### Voor wie (overzicht + 3 subpagina's)
+
+- **Overzichtspagina** (`voor-wie.html`): page header "Voor wie" + 3 grote klikbare kaarten (vw-card, 1400px container). Elke kaart: foto + H3 (klant-paginatitel) + preview (1e alinea van subpagina) + "Lees meer" pijl. Hover: geel→wit achtergrond, foto zoomt 1.04x, pijl groeit.
+- **3 subpagina's** met gedeelde structuur (page header met H1 klant-titel, body-secties met alleen klanttekst, CTA met klant-closing-regels + "Neem contact op" knop + "Terug naar voor wie" link):
+    - **voor-wie-bw.html**: Wethouders & Colleges B&W. Heeft STROOM-jaarprogramma checklist (4 items met `.vw-programma-check` gele vinkjes): Jouw ideaal als kompas, De munitiekist, De Red Phone, Autoriteit bouwen.
+    - **voor-wie-organisaties.html**: Maatschappelijke organisaties. Met middelenmix-kaarten (PR, Public Affairs, Eigen kanalen).
+    - **voor-wie-bedrijven.html**: Bedrijven met een ideaal. Zelfde middelenmix-structuur.
+
 ### Navigatie
 - Sticky nav, transparant bovenaan, wit bij scroll
 - Bovenaan: geel logo + gele links; bij scroll: zwart logo + zwarte links, logo wordt geel bij hover
-- Links: Het Stroommodel, Diensten, Voor wie (dropdown: B&W, Organisaties, Bedrijven), Team, Crisis hotline (button), Contact
+- Links: Het Stroommodel, Diensten, Voor wie (dropdown: B&W, Organisaties, Bedrijven → link **direct** naar subpagina's `voor-wie-bw.html` etc., niet naar ankers), Team, Crisis hotline (button), Contact
 - "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
 - "Contact" als gewone tekstlink
-- Footer paginalinks: Diensten, Het Stroommodel, Voor wie, Team, Nieuws
+- Footer paginalinks: Diensten, Het Stroommodel, Voor wie (met dropdown), Team, Nieuws
 - Hamburger-menu op mobiel (volledig scherm overlay)
 - Nav-transitie uitgeschakeld bij page load (voorkomt gele flash), pas actief na eerste frame
 
 ### Page headers (subpagina's)
 - Zwarte achtergrond met barcode-decoratie
 - Kop + subtekst (rgba wit 60%) in `container--wide` (uitgelijnd met logo en content)
-- Gebruikt op: wat-we-doen, voor-wie, wie-we-zijn, nieuws, contact
+- Gebruikt op: wat-we-doen, voor-wie (en 3 subs), wie-we-zijn, nieuws, contact
 - Niet op: model.html, crisis.html
 
 ### Footer
 - Zwarte achtergrond, wit logo
 - 5 kolommen: brand, paginalinks, overig (AV, AI-policy, nieuws), contact, vergaderlocatie
 - Contact: 3 emailadressen + NAW/KvK/BTW (placeholders) + Koningsplein
-- Vergaderlocatie: Het Stroomhuisje (eigen kolom)
+- Vergaderlocatie: Het Buurthuisje (eigen kolom)
 - Geen footer op model.html (100vh horizontale scroll pagina)
 
 ## Nieuws CMS
@@ -130,26 +164,39 @@ Bestanden in `Huisstijl/` en `img/`.
 ## Animaties
 
 - **Kinetic smooth scrolling**: Custom JS op desktop — wheel events afgevangen, smooth interpolatie met momentum (ease 0.08), niet op touch-devices
-- **Hero slogan**: Elke regel schuift omhoog met stagger (0.5s - 1.1s delay), laatste regel = logo i.p.v. tekst
-- **Sectie 2 crossing**: 3 rijen (kopwoord + alinea) bewegen als gekoppelde paren. Rij 1+3 van links, rij 2 van rechts. Power-curve (t³): snel aan randen, extreem langzaam in midden. Centered bij raw=0.95. Opacity gekoppeld aan positie. Logo/vis-swap eronder met tilt (vis gespiegeld, blijft staan, zwemt niet weg).
-- **Sectie 4 vissen**: Vis 1+3 van boven, vis 2 van onder, continu doorlopend, scroll-gekoppeld, scale 1.3
-- **Sectie 5 foto zoom**: Langzame zoom (scale 1→1.06) vanuit midden, 8s ease-out, getriggerd door IntersectionObserver. Wit kader (inset box-shadow) boven/links/onder.
-- **STROOM stroming**: Witte balken in rechter helft van sectie 3, spawnen links, waaieren uit naar rechts, recycleren. MAX_BARS=35, spawn interval 1500ms, muis-repulsie.
-- **Foto hotspots**: JS-berekende positionering op basis van originele foto-coördinaten, corrigeert voor object-fit:cover crop. Hover toont gele kader (240x240px, 20px border, 50% opacity) + naam.
+- **Hero slogan**: Elke regel schuift omhoog met stagger (1.5s/1.7s/1.9s delay), laatste regel = logo i.p.v. tekst
+- **Sectie 2 baars**: Zwarte baars (filter:brightness(0), opacity 0.05) met idle drift (dubbele sinusgolven) + cursor-tracking (80px/50px bereik, 0.05 ease). Continu via requestAnimationFrame.
+- **Sectie 2 heading**: "ZWEM MET ONS MEE" woord-voor-woord fade-in + slide-up (0.15s stagger), getriggerd door IntersectionObserver.
+- **Sectie 3 bars**: 42 gele bars die kinetisch van links→rechts stromen, opacity 0.15, willekeurig baselines/snelheden. Muis-repulsie. Clip-path `.vb-bars` groeit mee met scroll (3-staps snap: 10/22/36% breed → 50% full-height → horizontaal naar 100%).
+- **Sectie 3 foto-reveal**: `.vb-photo` achtergrond-foto (foto 1.jpg) met clip-path reveal synchroon met `.vb-bars`.
+- **Sectie 4 vissen**: 4 zwarte visjes achter kaarten. JS mousemove listener op section → togglet `.wz-fish-hovered` class op elke vis binnen bounding-box van cursor → 14px translate (richting kijkrichting) + 6px omhoog, 0.55s spring-easing.
+- **Sectie 5 sticky-scroll**: Scroll-driven CSS custom properties `--sharpen` (0→1), `--text-opacity` (1→0), `--ring-opacity` (step 0→1 op p=0.7). Photo filter `grayscale + blur(14px*(1-sharpen))`. Intro-overlay opacity = `--text-opacity`. Geel visje transform rotate = `(1-text-opacity)*90deg`. Hotspot opacity via `:hover` + `--ring-opacity`.
+- **Foto hotspots**: JS-berekende positionering op basis van originele foto-coördinaten, corrigeert voor object-fit:cover crop. Hover toont gele kader (240x240px, 20px border, 50% opacity) + naam. **Alleen actief na text-fade** (ring-opacity gate).
 - **Scroll reveal**: `.reveal` class, fade in + schuif omhoog bij 15% visibility
-- **Wat zoek jij hover**: Kaarten schalen naar 1.03 bij hover
 - **Testimonial slider**: 3 kaarten per view, gele visjes als prev/next navigatie, JS-berekende kaartbreedte, responsive (1/2/3 kaarten)
-- **Model pagina**: Vrije horizontale scroll (geen snap), kinetic smooth scrolling via muiswiel, pijltjestoetsen, flow indicator dots, snake-pijl achtergrond
+- **Model pagina slide-animaties**: Staggered fade-in-up per slide wanneer die het dichtst bij viewport-midden komt (via JS active-detection, `.is-active` class). Delays: number 0.1s, h2 0.25s, p's 0.5/0.7/0.9/1.1/1.3s.
+- **Model snake-pijl**: SVG stroke-dasharray animatie, tekent mee met scroll. Kop-positie via `getPointAtLength + tangent * 36.3px` voor naadloze aansluiting. Start opacity 0, fadet in bij eerste scroll.
+- **Model horizontale scroll**: Kinetisch smooth via muiswiel, pijltjestoetsen, active-dot via closest-to-center-detection.
 - **Smooth anchor scroll**: Alle `href="#..."` links scrollen vloeiend naar hun doel
 - **Reduced motion**: Alle animaties uitgeschakeld
 
-## Responsive
+## Responsive (mobile-first pass)
 
 - Content max-width: 1200px (standaard), 1400px (wide)
 - Achtergronden en decoratie: full-width (ook ultra-wide)
-- **> 900px**: Volledige layout, grids naast elkaar, split-screens
-- **600-900px**: 1-kolom grids, hamburger-menu, stroom-split stacked
-- **< 600px**: Hero met mobiele barcodes, grotere slogan, model verticaal
+- **> 900px**: Volledige layout, grids naast elkaar, sticky-secties
+- **≤ 900px** (tablets/grote telefoons):
+    - Header logo `22px → 14px`
+    - Hero kop `clamp(2rem, 9vw, 4rem)`, sticky uit (`position: relative`)
+    - Sectie 2: kop gecentreerd + groter (`clamp(3rem, 14vw, 5.5rem)`), baars zichtbaar
+    - Sectie 3: blijft desktop-animatie (bars + clip-path reveal)
+    - Sectie 4: kaarten 1-koloms, visjes 110px (70% opacity), kop `clamp(2.5rem, 12vw, 4rem)`
+    - Sectie 5: sticky-scroll blur-to-sharp blijft actief (JS + CSS vars)
+    - Pijler-blocks 1-koloms (foto onder tekst)
+    - Voor wie kaarten + sub-middelenmix 1-koloms
+    - Model page: horizontale scroll → verticale stack (`flex-direction: column`), snake-pijl verborgen, flow-dots + scroll-hint verborgen
+- **≤ 600px** (telefoons): extra typografie-schaling, testimonial cards 80vw breed
+- Breakpoints 900/600px worden consistent gebruikt in alle `@media` queries aan eind van `styles.css`
 
 ## Bestandsstructuur
 
@@ -160,6 +207,9 @@ Bestanden in `Huisstijl/` en `img/`.
 ├── model.html
 ├── wat-we-doen.html
 ├── voor-wie.html
+├── voor-wie-bw.html
+├── voor-wie-organisaties.html
+├── voor-wie-bedrijven.html
 ├── crisis.html
 ├── wie-we-zijn.html
 ├── nieuws.html
@@ -180,7 +230,7 @@ Bestanden in `Huisstijl/` en `img/`.
 │   ├── foto 3.jpg
 │   ├── sebas.jpg
 │   ├── dorien.jpg
-│   ├── video 1.mp4           (hero achtergrond)
+│   ├── video 1.mp4           (hero + intro model achtergrond)
 │   └── uploads/              (CMS uploads)
 └── Huisstijl/
     ├── stekelbaars logo_in geel.png
@@ -192,9 +242,8 @@ Bestanden in `Huisstijl/` en `img/`.
     ├── stekelbaars_pijl.png
     ├── stekelbaars_pijl_dik.png
     ├── stekelbaars_streepjes.png
-    ├── baars_1_geel.png
-    ├── baars_2_geel.png
-    ├── baars_3_geel.png
+    ├── baars_1_geel.png, baars_2_geel.png, baars_3_geel.png
+    ├── baars_1_zwart.png, baars_2_zwart.png, baars_3_zwart.png
     └── stekelbaars logo jpg.jpg/
         ├── stekelbaars logo_in geel.jpg
         ├── stekelbaars logo_in wit.jpg
@@ -207,3 +256,6 @@ Bestanden in `Huisstijl/` en `img/`.
 - KvK, BTW, adressen in footer zijn placeholders
 - Contactformulier is demo (alert), backend nog niet gekoppeld
 - Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)
+- Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)
+- Diensten-pagina idem: 5 hoofddiensten + 5 sub onder Organic met klant-tekst letterlijk
+- Cache-busting: `styles.css?v=mX` in alle HTML's, bumpen bij grote CSS-wijzigingen

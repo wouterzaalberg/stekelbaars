@@ -379,7 +379,7 @@ p {
 
 .hero-content {
     width: 100%;
-    max-width: var(--content-wide);
+    max-width: var(--content-max);
     padding: 0 clamp(1.5rem, 4vw, 4rem);
     padding-bottom: 2rem;
     position: relative;
@@ -1854,186 +1854,83 @@ p {
    HOME SNAP SECTIONS (NEW)
    ============================================ */
 
-/* Section 3: Het Stroommodel — split layout */
-.section-visie {
-    padding: 0;
+/* Section 3: Onze methode */
+.section-methode {
     position: relative;
-    overflow: hidden;
-    min-height: 90vh;
-    max-height: 90vh;
-}
-
-.visie-split {
-    display: flex;
-    width: 100%;
-    height: 90vh;
-}
-
-/* Left half: white, text */
-.visie-split-left {
-    flex: 0 0 55vw;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    min-height: 70vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    background: var(--geel);
 }
 
-.visie-left-foto {
+.methode-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.methode-heading {
+    margin-bottom: clamp(2rem, 4vh, 4rem);
+    color: var(--zwart);
+}
+
+.methode-body {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+    z-index: 3;
+}
+
+.methode-foto {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 55vw;
+    width: 35vw;
+    height: 100%;
+    overflow: hidden;
+}
+
+.methode-foto-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: visie-foto-zoom 12s ease-out forwards;
+    display: block;
+    filter: grayscale(100%);
 }
 
-@keyframes visie-foto-zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.15); }
+.methode-body p {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+    color: var(--zwart);
 }
 
-.visie-split-left::after {
-    content: '';
+.methode-body p:last-child {
+    margin-bottom: 0;
+}
+
+.methode-arrow-svg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+    z-index: 2;
 }
 
-.visie-left-pijl {
-    position: absolute;
-    right: 50px;
-    height: clamp(9rem, 18vw, 15rem);
-    width: auto;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-.visie-left-content {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    padding: clamp(2rem, 4vw, 4rem);
-}
-
-.visie-left-content .stroom-word {
-    color: var(--wit);
-}
-
-.visie-left-content .visie-tekst p {
-    color: var(--wit);
-}
-
-/* Right half: yellow, logo met stapel */
-.visie-split-right {
-    flex: 0 0 45vw;
-    background: var(--geel);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-}
-
-.visie-stapel-fill {
-    flex: 1;
-    width: 90%;
-    margin: 0 auto;
-    background: url('../Huisstijl/barcode zonder logo.png') repeat-y top center;
-    background-size: 100% auto;
-}
-
-.visie-stapel-wrapper {
-    width: 90%;
-    margin: 0 auto;
-    padding-bottom: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    flex-shrink: 0;
-}
-
-.visie-stapel-marquee {
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    text-decoration: none;
-    margin-bottom: 0.4rem;
-    cursor: pointer;
-}
-
-.visie-stapel-marquee-track {
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-    will-change: transform;
-}
-
-.visie-stapel-marquee-item {
-    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--wit);
-    line-height: 1;
-    flex-shrink: 0;
-}
-
-.visie-stapel-marquee-arrow {
-    height: 2.1em;
-    width: auto;
-    margin: 0 0.4em;
-    flex-shrink: 0;
-}
-
-.visie-stapel-marquee-track {
-    transition: none;
-}
-
-.visie-stapel-logo {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-/* Section heading */
-.stroom-word {
-    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--zwart);
-    text-align: left;
-    line-height: 1;
-    margin: 0 0 1.5rem 0;
-}
-
-/* Text block */
-.visie-tekst {
-    position: relative;
-    z-index: 1;
-    text-align: left;
-}
-
-.visie-tekst p {
-    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-    line-height: 1.85;
-    margin-bottom: 1.5rem;
-    color: var(--zwart);
-}
-
-.visie-tekst p:last-child {
-    margin-bottom: 0;
-}
-
-/* Section 2: DIT ZIJN WIJ — crossing animation */
+/* Section 2: WIJ ZIJN WIJ */
 .section-stroom {
-    background: var(--wit);
+    background: var(--geel);
     padding: 0;
     position: relative;
     min-height: 90vh;
@@ -2041,88 +1938,105 @@ p {
     z-index: 2;
 }
 
-/* no gradient overlay */
+.stroom-baars-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 900px;
+    filter: brightness(0);
+    opacity: 0.05;
+    pointer-events: none;
+    will-change: transform;
+    z-index: 0;
+}
 
-.stroom-content {
-    width: 100%;
-    max-width: var(--content-wide);
-    margin: 0 auto;
-    padding: 0 clamp(1.5rem, 4vw, 4rem);
+.stroom-layout {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: clamp(6rem, 15vh, 12rem);
+    padding: clamp(6rem, 15vh, 12rem) clamp(1.5rem, 4vw, 4rem) 0;
+    gap: clamp(2rem, 4vw, 4rem);
+    max-width: var(--content-max);
+    margin: 0 auto;
     min-height: 90vh;
     position: relative;
     z-index: 1;
 }
 
-.stroom-rows {
-    width: 100%;
-    max-width: 850px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.8rem, 1.5vw, 1.2rem);
-}
-
-.stroom-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    column-gap: clamp(1.5rem, 3vw, 3rem);
-    align-items: start;
-    will-change: transform;
-}
-
-.stroom-row-kop {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: end;
+.stroom-heading {
+    flex: 0 0 auto;
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
-    font-size: clamp(5rem, 12vw, 12rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    line-height: 0.85;
-    color: var(--geel);
-    margin-top: 0;
+    line-height: 1;
+    color: var(--wit);
+    white-space: nowrap;
+    margin-top: -0.05em;
 }
 
-.stroom-row-tekst {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: clamp(1rem, 1.3vw, 1.2rem);
-    line-height: 1.85;
-    color: #1a1a1a;
-    margin-top: 0.22em;
-}
-
-/* Logo/fish swap (centered below crossing) */
-.stroom-swap {
-    position: relative;
-    width: clamp(105px, 12.6vw, 182px);
-    margin-top: 2.5rem;
-    perspective: 800px;
-}
-
-.stroom-swap-logo {
-    display: block;
-    width: 100%;
-    height: auto;
-    will-change: transform, opacity;
-    transform-origin: bottom center;
-}
-
-.stroom-swap-fish {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
+.stroom-word-anim {
+    display: inline-block;
     opacity: 0;
-    will-change: transform, opacity;
-    transform-origin: top center;
-    transform: rotateX(90deg) scaleX(-1);
+    transform: translateY(0.3em);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.stroom-heading.visible .stroom-word-anim {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stroom-heading.visible .stroom-word-anim:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.stroom-heading.visible .stroom-word-anim:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.stroom-cta {
+    margin-top: 1.5rem;
+    background: var(--wit);
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.stroom-cta h3 {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--zwart);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.stroom-tekst {
+    flex: 0 1 28vw;
+    padding-right: clamp(2rem, 4vw, 4rem);
+}
+
+.stroom-tekst p {
+    font-family: Calibri, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+    color: var(--wit);
+}
+
+.stroom-tekst p:first-child {
+    margin-top: -0.4em;
+}
+
+.stroom-tekst p:last-child {
+    margin-bottom: 0;
 }
 
 /* Section 4: Wat zoek jij? */
@@ -2163,7 +2077,7 @@ p {
 /* Cell wrapper: fish behind card */
 .watzoek-cell {
     position: relative;
-    min-height: 380px;
+    min-height: 520px;
 }
 
 .watzoek-baars {
@@ -2187,7 +2101,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.92);
     padding: clamp(2rem, 3vw, 3rem);
     text-decoration: none;
     color: inherit;
@@ -2245,55 +2159,35 @@ p {
     transform: translateX(8px);
 }
 
-/* Section 5: Wie zijn we (duo) */
-/* Section 5: Waar zijn we goed in — card with photo + text */
+/* Section 5: Waar zijn we goed in — foto + tekst overlay */
 .section-wie {
     background: var(--wit);
     padding: 0;
 }
 
-.wie-split {
-    display: flex;
-    min-height: 90vh;
-    width: 100%;
-}
-
-.wie-split-foto {
-    flex: 0 0 52vw;
+.wie-container {
     position: relative;
+    width: 100%;
+    max-width: var(--content-max);
+    margin: 0 auto;
+    min-height: 90vh;
     overflow: hidden;
-    min-height: 55vh;
 }
 
-.wie-split-foto::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 5;
-    pointer-events: none;
-    --frame: clamp(1rem, 2vw, 2rem);
-    box-shadow:
-        inset var(--frame) 0 0 0 var(--wit),
-        inset 0 var(--frame) 0 0 var(--wit),
-        inset 0 calc(-1 * var(--frame)) 0 0 var(--wit);
-}
-
-.wie-split-img {
+.wie-bg-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: grayscale(100%);
     transform: scale(1);
     transform-origin: center center;
     transition: transform 8s ease-out;
 }
 
-.wie-split-foto .wie-split-img.zoomed {
+.wie-bg-img.zoomed {
     transform: scale(1.06);
 }
 
@@ -2342,14 +2236,14 @@ p {
     opacity: 1;
 }
 
-.wie-split-tekst {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(2rem, 4vw, 4rem);
-    padding-top: calc(var(--nav-height) + 2rem);
-    max-width: 800px;
+.wie-tekst-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 500px;
+    padding: clamp(2rem, 3vw, 3rem);
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 2;
 }
 
 .wie-split-heading {
@@ -2358,14 +2252,15 @@ p {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--zwart);
+    color: var(--wit);
     margin-bottom: 1.5rem;
 }
 
-.wie-split-tekst p {
+.wie-tekst-overlay p {
     margin-bottom: 1rem;
     font-size: clamp(0.95rem, 1.2vw, 1.1rem);
     line-height: 1.75;
+    color: var(--wit);
 }
 
 /* Section 6: Testimonials (50vh) */
@@ -2633,34 +2528,19 @@ p {
         transform: translateX(-50%);
     }
 
-    .visie-split {
+    .stroom-layout {
         flex-direction: column;
-        height: auto;
+        padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 3rem);
     }
 
-    .visie-split-left {
-        flex: 0 0 auto;
-        min-height: 50vh;
+    .stroom-heading {
+        margin-bottom: 1.5rem;
     }
 
-    .visie-split-right {
-        flex: 0 0 auto;
-    }
-
-    .stroom-word {
-        font-size: clamp(2.5rem, 10vw, 4rem);
-        letter-spacing: 0.08em;
-    }
-
-    .stroom-row {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-
-    .stroom-row-tekst,
-    .stroom-row-kop {
-        grid-column: 1;
-        justify-self: start;
+    .stroom-tekst {
+        flex: none;
+        width: 100%;
+        padding-right: 0;
     }
 
     .watzoek-grid {
@@ -2851,18 +2731,8 @@ p {
         transition: none;
     }
 
-    .stroom-row {
-        opacity: 1;
-        transform: none;
-    }
-
-    .stroom-swap-logo {
-        opacity: 1;
-        transform: none;
-    }
-
-    .stroom-swap-fish {
-        display: none;
+    .stroom-baars-bg {
+        transform: translate(-50%, -50%) !important;
     }
 
     .watzoek-baars {

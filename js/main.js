@@ -12,26 +12,43 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.stroom-heading').forEach(el => observer.observe(el));
 
 
-// Slow zoom on wie-split photo when in view
-const wieZoomImg = document.querySelector('.wie-split-img');
+// Slow zoom on wie photo when in view
+const wieZoomImg = document.querySelector('.wie-bg-img');
 if (wieZoomImg) {
     const wieZoomObs = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) wieZoomImg.classList.add('zoomed');
     }, { threshold: 0.2 });
-    wieZoomObs.observe(wieZoomImg.closest('.wie-split-foto'));
+    wieZoomObs.observe(wieZoomImg.closest('.wie-container'));
 }
 
 // Scroll-linked animations: Section 2 (crossing) + Section 4 (watzoek vissen)
 (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // --- Section 2: Row-based entrance + logo/fish swap ---
+    // --- Section 2: Baars parallax + cursor tracking + idle drift ---
     var stroomSection = document.querySelector('.section-stroom');
-    var stroomRows = document.querySelectorAll('.stroom-row');
-    var swapLogo = document.querySelector('.stroom-swap-logo');
-    var swapFish = document.querySelector('.stroom-swap-fish');
+    var stroomBaars = document.querySelector('.stroom-baars-bg');
+    var baarsMouseX = 0, baarsMouseY = 0;
+    var baarsCurrentX = 0, baarsCurrentY = 0;
+    var baarsHovering = false;
+    var baarsTime = Math.random() * 1000;
+
+    if (stroomSection) {
+        stroomSection.addEventListener('mousemove', function(e) {
+            var rect = stroomSection.getBoundingClientRect();
+            baarsMouseX = (e.clientX - rect.left) / rect.width - 0.5;
+            baarsMouseY = (e.clientY - rect.top) / rect.height - 0.5;
+            baarsHovering = true;
+        });
+        stroomSection.addEventListener('mouseleave', function() {
+            baarsMouseX = 0;
+            baarsMouseY = 0;
+            baarsHovering = false;
+        });
+    }
 
     // --- Section 4: Watzoek fish ---
     var watzoekSection = document.querySelector('.section-watzoek');
@@ -40,72 +57,32 @@ if (wieZoomImg) {
     function clamp01(v) { return Math.max(0, Math.min(1, v)); }
 
     function updateStroom() {
-        if (!stroomSection || !stroomRows.length) return;
+        if (!stroomSection || !stroomBaars) return;
+        baarsTime += 0.008;
         var vh = window.innerHeight;
         var rect = stroomSection.getBoundingClientRect();
-        var sectionH = stroomSection.offsetHeight;
-        var raw = 1 - (rect.top / vh);
+        var progress = (vh - rect.top) / (vh + stroomSection.offsetHeight);
+        var scrollY = (progress - 0.5) * 60;
 
-        // Each row moves continuously: fast in → slow middle → fast out
-        // Center point at raw=0.95 (section ~95vh visible)
-        var p = clamp01((raw - 0.3) / 1.3);
+        // Idle drift — slow sine waves so fish always moves
+        var driftX = Math.sin(baarsTime) * 40 + Math.sin(baarsTime * 0.7) * 25;
+        var driftY = Math.cos(baarsTime * 0.6) * 20 + Math.sin(baarsTime * 0.4) * 15;
 
-        // Power curve: very fast at edges, extremely flat/slow in middle
-        var t = p * 2 - 1; // map 0→1 to -1→1
-        var curved = 0.5 + 0.5 * Math.sign(t) * Math.pow(Math.abs(t), 3);
+        // Mouse target overrides drift when hovering
+        var targetX = baarsHovering ? baarsMouseX : 0;
+        var targetY = baarsHovering ? baarsMouseY : 0;
 
-        // Opacity: tied to position — fade in as approaching center, fade out as leaving
-        var op = 1 - Math.abs(1 - 2 * curved) * 0.9;
+        baarsCurrentX += (targetX - baarsCurrentX) * 0.05;
+        baarsCurrentY += (targetY - baarsCurrentY) * 0.05;
 
-        stroomRows.forEach(function(row) {
-            var fromLeft = row.dataset.from === 'left';
-            var dir = fromLeft ? -1 : 1;
-            var x = dir * (25 - 50 * curved);
+        var mx = baarsCurrentX * 120 + driftX;
+        var my = baarsCurrentY * 80 + driftY;
 
-            row.style.transform = 'translateX(' + x.toFixed(2) + 'vw)';
-            row.style.opacity = clamp01(op).toFixed(3);
-        });
-
-        // Logo/fish swap — tilt + appear
-        var exitRaw = (raw - 1) / (sectionH / vh);
-        var entranceP = clamp01((raw - 0.1) / 0.45);
-        var tiltP = clamp01((exitRaw - 0.15) / 0.15);
-        var fishP = clamp01((exitRaw - 0.3) / 0.15);
-
-        if (swapLogo) {
-            var logoRotX = tiltP * 90;
-            swapLogo.style.transform = 'rotateX(' + logoRotX.toFixed(2) + 'deg)';
-            swapLogo.style.opacity = (tiltP >= 1 ? 0 : entranceP).toFixed(3);
-        }
-
-        if (swapFish) {
-            var fishRotX = (1 - fishP) * 90;
-            swapFish.style.transform = 'rotateX(' + fishRotX.toFixed(2) + 'deg)';
-            swapFish.style.opacity = (tiltP >= 1 ? fishP : 0).toFixed(3);
-        }
+        stroomBaars.style.transform = 'translate(calc(-50% + ' + mx.toFixed(2) + 'px), calc(-50% + ' + (scrollY + my).toFixed(2) + 'px))';
     }
 
-    // --- Section 3: Visie split slide-in (scroll-coupled) ---
-    var visieSection = document.querySelector('.section-visie');
-    var visieLeft = visieSection ? visieSection.querySelector('.slide-from-left') : null;
-    var visieRight = visieSection ? visieSection.querySelector('.slide-from-right') : null;
-
-    var visieLocked = false;
-
-    function updateVisie() {
-        if (!visieSection || !visieLeft || !visieRight) return;
-        if (visieLocked) return;
-        var vh = window.innerHeight;
-        var rect = visieSection.getBoundingClientRect();
-        // progress 0 = section just entering bottom, 1 = fully in view
-        var p = clamp01((vh - rect.top) / (vh * 0.8));
-        // Start at 50% offset, move to 0
-        var offset = 50 * (1 - p);
-        visieLeft.style.transform = 'translateX(' + (-offset).toFixed(2) + '%)';
-        visieRight.style.transform = 'translateX(' + offset.toFixed(2) + '%)';
-        // Lock when fully closed
-        if (p >= 1) visieLocked = true;
-    }
+    // --- Section 3: (no slide-in, handled separately) ---
+    function updateVisie() {}
 
     // --- Section 4: watzoek fish (always visible, position moves with scroll) ---
     function updateWatzoek() {
@@ -146,7 +123,6 @@ if (wieZoomImg) {
     }
 
     function onScroll() {
-        updateStroom();
         updateVisie();
         updateWatzoek();
         updateTeamBaarzen();
@@ -155,24 +131,181 @@ if (wieZoomImg) {
     window.addEventListener('scroll', onScroll);
     window.addEventListener('load', onScroll);
     onScroll();
+
+    // Continuous loop for stroom baars (cursor + scroll)
+    function stroomLoop() {
+        updateStroom();
+        requestAnimationFrame(stroomLoop);
+    }
+    stroomLoop();
 })();
 
-// Align visie-left-pijl to marquee height
+// Section 3: Background fade (yellow → white) + snake arrow
 (function() {
-    var pijl = document.querySelector('.visie-left-pijl');
-    var marquee = document.querySelector('.visie-stapel-marquee');
-    var section = document.querySelector('.section-visie');
-    if (!pijl || !marquee || !section) return;
-    function align() {
-        var sRect = section.getBoundingClientRect();
-        var mRect = marquee.getBoundingClientRect();
-        var mCenter = mRect.top + mRect.height / 2 - sRect.top;
-        pijl.style.top = mCenter + 'px';
-        pijl.style.transform = 'translateY(-50%)';
+    var methode = document.querySelector('.section-methode');
+    if (!methode) return;
+
+    // --- Background fade (yellow → white) + heading fade (wit → zwart), fast ---
+    var methodeHeading = methode.querySelector('.methode-heading');
+    function updateMethodeBg() {
+        var rect = methode.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // Fade over ~60% of viewport scroll
+        var t = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.6)));
+        var r = Math.round(254 + t);
+        var g = Math.round(219 + 36 * t);
+        var b = Math.round(0 + 255 * t);
+        methode.style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+        // Heading: white → black
+        if (methodeHeading) {
+            var c = Math.round(255 * (1 - t));
+            methodeHeading.style.color = 'rgb(' + c + ',' + c + ',' + c + ')';
+        }
     }
-    window.addEventListener('load', align);
-    window.addEventListener('resize', align);
-    align();
+
+    // --- Snake arrow: SVG inside section ---
+    var ns = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(ns, 'svg');
+    svg.classList.add('methode-arrow-svg');
+    methode.appendChild(svg);
+
+    var arcDefs = {
+        'right-down': { s: 1, dx: 1, dy: 1 },
+        'right-up':   { s: 0, dx: 1, dy: -1 },
+        'down-right': { s: 0, dx: 1, dy: 1 },
+        'down-left':  { s: 1, dx: -1, dy: 1 },
+        'up-right':   { s: 1, dx: 1, dy: -1 },
+        'up-left':    { s: 0, dx: -1, dy: -1 },
+        'left-down':  { s: 0, dx: -1, dy: 1 },
+        'left-up':    { s: 1, dx: -1, dy: -1 },
+    };
+
+    function buildSnake(W, H, r, moves) {
+        var cx = moves[0].x * W, cy = moves[0].y * H;
+        var d = 'M ' + cx + ' ' + cy;
+        var lastDir = null;
+        for (var i = 1; i < moves.length; i++) {
+            var m = moves[i], dir = m.dir;
+            if (lastDir && lastDir !== dir) {
+                var a = arcDefs[lastDir + '-' + dir];
+                if (a) {
+                    var ex = cx + a.dx * r, ey = cy + a.dy * r;
+                    d += ' A ' + r + ' ' + r + ' 0 0 ' + a.s + ' ' + ex + ' ' + ey;
+                    cx = ex; cy = ey;
+                }
+            }
+            if (dir === 'right' || dir === 'left') {
+                cx = m.v * W; d += ' H ' + cx;
+            } else {
+                cy = m.v * H; d += ' V ' + cy;
+            }
+            lastDir = dir;
+        }
+        return d;
+    }
+
+    var arrowPath, arrowHead, totalLen;
+    var sw = 50;
+
+    function initArrow() {
+        var W = methode.offsetWidth;
+        var H = methode.offsetHeight;
+        var r = 35;
+
+        var moves = [
+            { dir: 'start', x: -0.03, y: 0.40 },
+            { dir: 'right', v: 0.22 },
+            { dir: 'down',  v: 0.75 },
+            { dir: 'right', v: 0.55 },
+            { dir: 'up',    v: 0.25 },
+            { dir: 'right', v: 0.78 },
+            { dir: 'down',  v: 0.70 },
+            { dir: 'right', v: 1.03 },
+        ];
+
+        var pathD = buildSnake(W, H, r, moves);
+
+        svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        svg.setAttribute('preserveAspectRatio', 'none');
+        svg.innerHTML = '';
+
+        var headH = sw / 0.30;
+        var headW = headH * 2;
+
+        var defs = document.createElementNS(ns, 'defs');
+        var chevClip = document.createElementNS(ns, 'clipPath');
+        chevClip.setAttribute('id', 'methode-chevron');
+        var cRect = document.createElementNS(ns, 'rect');
+        cRect.setAttribute('x', (headW * 0.55).toString());
+        cRect.setAttribute('y', '0');
+        cRect.setAttribute('width', (headW * 0.45).toString());
+        cRect.setAttribute('height', headH.toString());
+        chevClip.appendChild(cRect);
+        defs.appendChild(chevClip);
+        svg.appendChild(defs);
+
+        arrowPath = document.createElementNS(ns, 'path');
+        arrowPath.setAttribute('d', pathD);
+        arrowPath.setAttribute('fill', 'none');
+        arrowPath.setAttribute('stroke', '#FEDB00');
+        arrowPath.setAttribute('stroke-width', sw.toString());
+        arrowPath.setAttribute('stroke-linecap', 'round');
+        arrowPath.setAttribute('stroke-linejoin', 'round');
+        arrowPath.setAttribute('opacity', '0.25');
+        svg.appendChild(arrowPath);
+
+        totalLen = arrowPath.getTotalLength();
+        arrowPath.style.strokeDasharray = totalLen;
+        arrowPath.style.strokeDashoffset = totalLen;
+
+        arrowHead = document.createElementNS(ns, 'image');
+        arrowHead.setAttributeNS('http://www.w3.org/1999/xlink', 'href', 'Huisstijl/stekelbaars_pijl_dik.png');
+        arrowHead.setAttribute('width', headW);
+        arrowHead.setAttribute('height', headH);
+        arrowHead.setAttribute('opacity', '0.4');
+        arrowHead.setAttribute('clip-path', 'url(#methode-chevron)');
+        arrowHead.style.display = 'none';
+        svg.appendChild(arrowHead);
+    }
+
+    function updateArrow() {
+        if (!arrowPath || !totalLen) return;
+        var rect = methode.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // Arrow draws over full scroll range: from entering viewport to almost scrolled past
+        var sH = methode.offsetHeight;
+        var scrollRange = vh + sH * 0.85;
+        var progress = Math.max(0, Math.min(1, (vh - rect.top) / scrollRange));
+
+        var drawLen = progress * totalLen;
+        arrowPath.style.strokeDashoffset = (totalLen - drawLen).toFixed(1);
+
+        if (drawLen > 5) {
+            var pt = arrowPath.getPointAtLength(drawLen);
+            var sampleDist = Math.min(drawLen, 50);
+            var pt2 = arrowPath.getPointAtLength(drawLen - sampleDist);
+            var angle = Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI;
+
+            var headH = sw / 0.30;
+            var headW = headH * 2;
+            arrowHead.setAttribute('transform',
+                'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') translate(' + (-headW * 0.55) + ',' + (-headH / 2) + ')');
+            arrowHead.style.display = '';
+        } else {
+            arrowHead.style.display = 'none';
+        }
+    }
+
+    function onScroll() {
+        updateMethodeBg();
+        updateArrow();
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', function() { initArrow(); onScroll(); });
+    window.addEventListener('load', function() { initArrow(); onScroll(); });
+    initArrow();
+    onScroll();
 })();
 
 // Navigation scroll behavior
@@ -263,7 +396,9 @@ if (hamburger && mobileNav) {
     }
 })();
 
-// Stroom section: flowing bars, spawn from center, fan out to edges, never disappear
+// (Stroom flowing bars removed — section redesigned)
+
+// Legacy guard: skip if element not found
 (function() {
     var container = document.getElementById('stroom-bars');
     if (!container) return;
@@ -494,6 +629,30 @@ if (hamburger && mobileNav) {
     }
     initOffset();
     window.addEventListener('resize', initOffset);
+})();
+
+// Align visie-left-content heading to marquee: same vertical position + same font-size
+(function() {
+    var marquee = document.querySelector('.visie-stapel-marquee');
+    var section = document.querySelector('.section-visie');
+    var content = document.querySelector('.visie-left-content');
+    var heading = content && content.querySelector('.stroom-word');
+    var firstItem = marquee && marquee.querySelector('.visie-stapel-marquee-item');
+    if (!marquee || !section || !content || !heading || !firstItem) return;
+
+    function align() {
+        var sRect = section.getBoundingClientRect();
+        var mRect = marquee.getBoundingClientRect();
+        var marqueeTop = mRect.top - sRect.top;
+        content.style.paddingTop = marqueeTop + 'px';
+
+        var computedSize = window.getComputedStyle(firstItem).fontSize;
+        if (computedSize) heading.style.fontSize = computedSize;
+    }
+
+    window.addEventListener('load', align);
+    window.addEventListener('resize', align);
+    setTimeout(align, 100);
 })();
 
 // Foto hotspots: position ring relative to original image coords, accounting for object-fit: cover

@@ -4219,7 +4219,12 @@ p {
         padding: 0 1.25rem;
     }
 
-    /* --- Hero (home) — disable sticky on mobile --- */
+    /* --- Header logo kleiner --- */
+    .nav-logo {
+        height: 14px;
+    }
+
+    /* --- Hero (home) — disable sticky, kleinere kop --- */
     .hero {
         position: relative;
         top: auto;
@@ -4228,14 +4233,14 @@ p {
         padding: 0 1.25rem;
     }
     .hero-tagline {
-        font-size: clamp(2.5rem, 11vw, 5rem);
+        font-size: clamp(2rem, 9vw, 4rem);
     }
     .hero-sub,
     .hero-sub--delayed {
         font-size: 0.95rem;
     }
 
-    /* --- Home sectie 2 (stroom) --- */
+    /* --- Home sectie 2 (stroom): gecentreerd, grotere kop, baars zichtbaar --- */
     .section-stroom {
         min-height: auto;
         padding: 4rem 0;
@@ -4243,40 +4248,30 @@ p {
     .stroom-layout {
         min-height: auto;
         padding: 3rem 1.25rem;
+        align-items: center;
+        text-align: center;
     }
     .stroom-heading {
-        font-size: clamp(2.8rem, 12vw, 5rem);
+        font-size: clamp(3rem, 14vw, 5.5rem);
         margin-top: 0;
-        text-align: left;
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
     .stroom-tekst {
         flex: none;
         padding-right: 0;
+        text-align: left;
     }
     .stroom-tekst p {
         font-size: 1rem;
     }
     .stroom-baars-bg {
-        display: none;
+        display: block;
+        opacity: 0.05;
     }
 
-    /* --- Home sectie 3 (methode-v2): stop sticky, hide bars + photo-bg --- */
-    .methode-watzoek-wrapper {
-        position: static;
-    }
-    .section-methode-v2 {
-        position: relative;
-        top: auto;
-        min-height: auto;
-    }
-    .vb-photo,
-    .vb-bars {
-        display: none;
-    }
-    .vb-left {
-        max-width: 100%;
-    }
-    /* Hide the snake-arrow SVG on the home methode section */
+    /* --- Home sectie 3 (methode-v2): desktop-achtige animatie op mobiel --- */
+    /* .vb-photo en .vb-bars blijven zichtbaar (sticky-scroll animatie werkt) */
     .methode-arrow-svg {
         display: none;
     }
@@ -4290,7 +4285,7 @@ p {
         min-height: auto;
     }
     .wz-title {
-        font-size: clamp(2rem, 10vw, 3.5rem);
+        font-size: clamp(2.5rem, 12vw, 4rem);
     }
     .wz-card {
         padding: 32px 26px;
@@ -4307,25 +4302,10 @@ p {
         opacity: 0.7;
     }
 
-    /* --- Home sectie 5 (wie): simplify sticky-scroll on mobile --- */
-    .section-wie {
-        min-height: auto;
-        --sharpen: 1;
-        --text-opacity: 1;
-        --ring-opacity: 0;
-    }
-    .wie-sticky {
-        position: static;
-        height: auto;
-        padding: 3rem 0;
-    }
+    /* --- Home sectie 5 (wie): sticky-scroll animatie ook op mobiel --- */
+    /* min-height 200vh + sticky pane blijven; tekst-box en ring-vars gaan via JS */
     .wie-container {
         max-width: 100%;
-        height: auto;
-        min-height: 70vh;
-    }
-    .wie-bg-img {
-        filter: grayscale(100%);
     }
     .wie-intro-overlay {
         padding: 1.5rem;

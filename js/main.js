@@ -16,20 +16,12 @@ document.querySelectorAll('.stroom-heading').forEach(el => observer.observe(el))
 
 
 // Section 5: scroll-driven photo sharpen, text fade, hotspot reveal
-// (sticky-scroll: wrapper is 200vh, inner sticky pane is 100vh)
+// (sticky-scroll: wrapper is 200vh, inner sticky pane is 100vh — ook op mobiel)
 (function() {
     const section = document.querySelector('.section-wie');
     if (!section) return;
     const clamp01 = v => Math.max(0, Math.min(1, v));
-    const isMobile = () => window.innerWidth <= 900;
     function update() {
-        if (isMobile()) {
-            // On mobile: static state (photo sharp, text visible, no rings)
-            section.style.removeProperty('--sharpen');
-            section.style.removeProperty('--text-opacity');
-            section.style.removeProperty('--ring-opacity');
-            return;
-        }
         const rect = section.getBoundingClientRect();
         const vh = window.innerHeight;
         // Sticky engages for rect.top in [-vh, 0]. Animation runs over 85% of that.

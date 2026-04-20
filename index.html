@@ -7,8 +7,8 @@
     <meta name="description" content="Stekelbaars is het strategisch communicatiebureau dat samen met jou je idealen waarmaakt.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=m1">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body class="snap-page">
@@ -25,9 +25,9 @@
                 <li class="nav-dropdown">
                     <a href="voor-wie.html">Voor wie</a>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="voor-wie.html#bw">B&amp;W</a></li>
-                        <li><a href="voor-wie.html#organisaties">Organisaties</a></li>
-                        <li><a href="voor-wie.html#bedrijven">Bedrijven</a></li>
+                        <li><a href="voor-wie-bw.html">B&amp;W</a></li>
+                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
+                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
                     </ul>
                 </li>
                 <li><a href="wie-we-zijn.html">Team</a></li>
@@ -48,9 +48,9 @@
         <a href="wat-we-doen.html">Diensten</a>
         <a href="voor-wie.html">Voor wie</a>
         <div class="nav-mobile-sub">
-            <a href="voor-wie.html#bw">B&amp;W</a>
-            <a href="voor-wie.html#organisaties">Organisaties</a>
-            <a href="voor-wie.html#bedrijven">Bedrijven</a>
+            <a href="voor-wie-bw.html">B&amp;W</a>
+            <a href="voor-wie-organisaties.html">Organisaties</a>
+            <a href="voor-wie-bedrijven.html">Bedrijven</a>
         </div>
         <a href="wie-we-zijn.html">Team</a>
         <a href="crisis.html">Crisis hotline</a>
@@ -65,7 +65,7 @@
 
         <!-- SECTION 1: HERO — Video + barcodes -->
         <section class="hero hero--video snap-section" id="hero">
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video class="hero-video" autoplay muted loop playsinline poster="img/foto 1.jpg" style="object-fit:cover;width:100%;height:100%;">
                 <source src="img/video 1.mp4" type="video/mp4">
             </video>
             <div class="hero-video-overlay"></div>
@@ -93,9 +93,10 @@
             <img src="Huisstijl/baars_1_geel.png" alt="" class="stroom-baars-bg">
             <div class="stroom-layout">
                 <h2 class="stroom-heading">
-                    <span class="stroom-word-anim">WIE</span>
-                    <span class="stroom-word-anim">ZIJN</span>
-                    <span class="stroom-word-anim">WIJ</span>
+                    <span class="stroom-word-anim">ZWEM</span>
+                    <span class="stroom-word-anim">MET</span>
+                    <span class="stroom-word-anim">ONS</span>
+                    <span class="stroom-word-anim">MEE</span>
                 </h2>
                 <div class="stroom-tekst">
                     <p>Herken je dat gevoel? Dat gevoel dat het niet meer lukt je idealen waar te maken? Dat je meer bezig bent met niet verliezen dan met winnen?</p>
@@ -112,79 +113,90 @@
 
         </div><!-- /hero-stroom-wrapper -->
 
-        <!-- SECTION 3: ONZE METHODE -->
-        <section class="section-methode" id="stroommodel">
-            <div class="methode-foto">
-                <img src="img/foto 1.jpg" alt="" class="methode-foto-img">
-            </div>
-            <div class="methode-inner">
-                <h2 class="methode-heading stroom-heading">
-                    <span class="stroom-word-anim">ONZE</span>
-                    <span class="stroom-word-anim">METHODE</span>
-                </h2>
-                <div class="methode-body">
-                    <p>Het is nogal wat waar we het tegen op nemen. Een zee vol algoritmische, AI-gegenereerde internetslop, gestuurd door gigantische tech-platforms zonder idealen. Mensen weten niet meer wat ze moeten geloven, laat staan dat er zoiets kan zijn als vooruitgang.</p>
-                    <p>Bureau Stekelbaars kent de weg die tegen deze stroom ingaat. Want in het huidige landschap is de boodschapper net zo belangrijk als de boodschap. Onderzoek na onderzoek laat zien dat mensen bereid zijn iemand te volgen als ze geloven in de mens achter de visie. Dit is de basis van onze STROOM-methode: communicatie die &mdash; stap voor stap &mdash; van sterk leiderschap, via authentieke vertolkers en opvallende campagnes, maatschappelijke verandering teweeg brengt, tegen de stroom in.</p>
+        <!-- SECTIE 3 + SECTIE 4 WRAPPER (sticky overlay effect) -->
+        <div class="methode-watzoek-wrapper">
+
+        <!-- SECTION 3: STROOMMODEL — kinetische barcode-stroom -->
+        <section class="section-methode-v2" id="stroommodel">
+            <div class="vb-photo"></div>
+            <div class="vb-bars" id="vb-bars"></div>
+            <div class="vb-content">
+                <div class="vb-left">
+                    <h2 class="vb-title">Onze <em>methode</em></h2>
+                    <p class="vb-lede">Het is nogal wat waar we het tegen op nemen. Een zee vol algoritmische, AI-gegenereerde internetslop, gestuurd door gigantische tech-platforms zonder idealen. Mensen weten niet meer wat ze moeten geloven, laat staan dat er zoiets kan zijn als vooruitgang.<br><br>Bureau Stekelbaars kent de weg die tegen deze stroom ingaat. Want in het huidige landschap is de boodschapper net zo belangrijk als de boodschap. Dit is de basis van onze STROOM-methode: communicatie die &mdash; stap voor stap &mdash; van sterk leiderschap, via authentieke vertolkers en opvallende campagnes, maatschappelijke verandering teweeg brengt, tegen de stroom in.</p>
+                    <a href="model.html" class="vb-cta">Bekijk het stroommodel <span class="vb-cta-arrow"></span></a>
+                </div>
+                <div class="vb-right">
+                    <div class="vb-placeholder-photo" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
 
         <!-- SECTION 4: WAT ZOEK JIJ? -->
         <section class="snap-section section-watzoek" id="watzoekjij">
+            <div class="wz-floaters" id="wz-floaters" aria-hidden="true">
+                <img src="Huisstijl/baars_1_zwart.png" alt="" style="top: 78%; left: 42%;">
+                <img src="Huisstijl/baars_2_zwart.png" alt="" class="wz-fish-flip" style="top: 62%; left: 10%;">
+                <img src="Huisstijl/baars_3_zwart.png" alt="" style="top: 72%; left: 78%;">
+                <img src="Huisstijl/baars_1_zwart.png" alt="" style="top: 18%; left: 64%;">
+            </div>
             <div class="container">
-                <h2 class="watzoek-heading reveal">Voor wie werken we</h2>
-                <div class="watzoek-grid">
-                    <div class="watzoek-cell reveal reveal-delay-1">
-                        <img src="Huisstijl/baars_1_geel.png" alt="" class="watzoek-baars">
-                        <a href="wat-we-doen.html" class="watzoek-card">
-                            <h3>Maatschappelijke organisaties</h3>
-                            <p>Maatschappelijke organisaties bevinden zich misschien wel in de wildste zee ooit. Subsidies worden gekort, donateurs lopen terug, vechten voor een ideaal wordt publiekelijk gedemoniseerd. In deze nieuwe werkelijkheid is het al moeilijk om je hoofd boven water te houden, laat staan dat je vooruit komt. Met onze methode werken we vanuit een sterk vergezicht naar relevantie in het nu, waardoor onze campagnes daadwerkelijk effectief zijn en we duurzame verandering realiseren.</p>
-                        </a>
-                    </div>
-                    <div class="watzoek-cell reveal reveal-delay-2">
-                        <img src="Huisstijl/baars_2_geel.png" alt="" class="watzoek-baars watzoek-baars--flip">
-                        <a href="wat-we-doen.html" class="watzoek-card">
-                            <h3>Bedrijven met een ideaal</h3>
-                            <p>Welke koers varen jullie als merk? Jaag je vooral de volgende viral na of ben je echt aan het bouwen aan duurzame verandering? Grote A-merken lijken oneindige mediabudgetten te hebben, de rest lijkt ten onder te gaan in de strijd om aandacht. Door slimmer te werken &mdash; niet door harder te schreeuwen &mdash; bouwen wij met onze STROOM-methode aan relevantie in het nu en aan duurzame merkliefde voor bedrijven met een ideaal.</p>
-                        </a>
-                    </div>
-                    <div class="watzoek-cell reveal reveal-delay-3">
-                        <img src="Huisstijl/baars_3_geel.png" alt="" class="watzoek-baars">
-                        <a href="wat-we-doen.html" class="watzoek-card">
-                            <h3>Wethouders en Burgemeesters</h3>
-                            <p>Gisteren werd je ge&iuml;nstalleerd met een hoofd vol idealen, na 100 dagen word je wakker in een wereld van eindeloze dossiers en ambtelijke processen. Hoe voorkom je dat je alleen nog maar op de winkel past? Stekelbaars heeft een speciaal programma voor politieke bestuurders ontwikkeld. Hoe hou je vast aan jouw idealen in een complexe bestuurlijke omgeving?</p>
-                        </a>
-                    </div>
+                <div class="wz-head reveal">
+                    <div class="wz-eyebrow">Voor wie werken we</div>
+                    <h2 class="wz-title">Wij werken voor leiders die&nbsp;hun idealen waar willen&nbsp;maken</h2>
+                </div>
+                <div class="wz-grid">
+                    <a href="wat-we-doen.html" class="wz-card reveal reveal-delay-1">
+                        <h3>Maatschappelijke organisaties</h3>
+                        <p>Maatschappelijke organisaties bevinden zich misschien wel in de wildste zee ooit. Subsidies worden gekort, donateurs lopen terug, vechten voor een ideaal wordt publiekelijk gedemoniseerd. In deze nieuwe werkelijkheid is het al moeilijk om je hoofd boven water te houden, laat staan dat je vooruit komt. Met onze methode werken we vanuit een sterk vergezicht naar relevantie in het nu, waardoor onze campagnes daadwerkelijk effectief zijn en we duurzame verandering realiseren.</p>
+                        <span class="wz-card-cta">Lees verder</span>
+                    </a>
+                    <a href="wat-we-doen.html" class="wz-card reveal reveal-delay-2">
+                        <h3>Bedrijven met een ideaal</h3>
+                        <p>Welke koers varen jullie als merk? Jaag je vooral de volgende viral na of ben je echt aan het bouwen aan duurzame verandering? Grote A-merken lijken oneindige mediabudgetten te hebben, de rest lijkt ten onder te gaan in de strijd om aandacht. Door slimmer te werken &mdash; niet door harder te schreeuwen &mdash; bouwen wij met onze STROOM-methode aan relevantie in het nu en aan duurzame merkliefde voor bedrijven met een ideaal.</p>
+                        <span class="wz-card-cta">Lees verder</span>
+                    </a>
+                    <a href="wat-we-doen.html" class="wz-card reveal reveal-delay-3">
+                        <h3>Wethouders en burgemeesters</h3>
+                        <p>Gisteren werd je ge&iuml;nstalleerd met een hoofd vol idealen, na 100 dagen word je wakker in een wereld van eindeloze dossiers en ambtelijke processen. Hoe voorkom je dat je alleen nog maar op de winkel past? Stekelbaars heeft een speciaal programma voor politieke bestuurders ontwikkeld. Hoe hou je vast aan jouw idealen in een complexe bestuurlijke omgeving?</p>
+                        <span class="wz-card-cta">Lees verder</span>
+                    </a>
                 </div>
             </div>
         </section>
 
+        </div><!-- /methode-watzoek-wrapper -->
+
         <!-- SECTION 5: WAAR ZIJN WE GOED IN -->
-        <section class="snap-section section-wie" id="wiezijnwe">
-            <div class="wie-container">
-                <img src="img/foto 2.jpg" alt="" class="wie-bg-img">
-                <a href="wie-we-zijn.html" class="foto-hotspot" data-ring-x="0.57" data-ring-y="0.30" data-side="right">
-                    <div class="foto-hotspot-ring"></div>
-                    <span class="foto-hotspot-naam">Dorien</span>
-                </a>
-                <a href="wie-we-zijn.html" class="foto-hotspot" data-ring-x="0.43" data-ring-y="0.28" data-side="left">
-                    <div class="foto-hotspot-ring"></div>
-                    <span class="foto-hotspot-naam">Sebastiaan</span>
-                </a>
-                <div class="wie-tekst-overlay">
-                    <h2 class="wie-split-heading reveal">Waar zijn we goed in?</h2>
-                    <p class="reveal">Stekelbaars is opgericht met een duidelijke missie. Wij willen dat bestuurders en organisaties hun idealen waarmaken. Oprichters Dorien en Sebastiaan hebben tientallen jaren ervaring in het begeleiden en adviseren hierin. Zowel in de commerci&euml;le als maatschappelijke sector.</p>
-                    <p class="reveal">Samen wilden ze een bureau oprichten dat zich duidelijk onderscheidt van andere bureaus. Bij ons staan de idealen van de leider centraal. We hebben ruim een jaar gewerkt aan onze methode: Het STROOM-model, waarin we de recentste wetenschappelijke inzichten combineren met onze eigen expertise.</p>
-                    <p class="reveal">Bij Stekelbaars geen accountmanagers, maar 1 inhoudelijk expert die het hele traject jouw aanspreekpunt is.</p>
-                    <div class="reveal" style="margin-top: 1.5rem;">
-                        <a href="wie-we-zijn.html" class="btn btn--zwart">Meer over ons</a>
+        <section class="section-wie" id="wiezijnwe">
+            <div class="wie-sticky">
+                <a href="wie-we-zijn.html" class="wie-container">
+                    <img src="img/foto 2.jpg" alt="" class="wie-bg-img">
+                    <div class="foto-hotspot" data-ring-x="0.57" data-ring-y="0.30" data-side="right">
+                        <div class="foto-hotspot-ring"></div>
+                        <span class="foto-hotspot-naam">Dorien</span>
                     </div>
-                </div>
+                    <div class="foto-hotspot" data-ring-x="0.43" data-ring-y="0.28" data-side="left">
+                        <div class="foto-hotspot-ring"></div>
+                        <span class="foto-hotspot-naam">Sebastiaan</span>
+                    </div>
+                    <div class="wie-intro-overlay">
+                        <div class="wie-intro-box">
+                            <h2 class="wie-intro-heading">Hier zijn we goed in</h2>
+                            <div class="wie-intro-tekst">
+                                <p>Stekelbaars is opgericht met een duidelijke missie. Wij willen dat bestuurders en organisaties hun idealen waarmaken. Oprichters Dorien en Sebastiaan hebben tientallen jaren ervaring in het begeleiden en adviseren hierin. Zowel in de commerci&euml;le als maatschappelijke sector.</p>
+                                <p>Samen wilden ze een bureau oprichten dat zich duidelijk onderscheidt van andere bureaus. Bij ons staan de idealen van de leider centraal. We hebben ruim een jaar gewerkt aan onze methode: Het STROOM-model, waarin we de recentste wetenschappelijke inzichten combineren met onze eigen expertise.</p>
+                                <p>Bij Stekelbaars geen accountmanagers, maar 1 inhoudelijk expert die het hele traject jouw aanspreekpunt is.</p>
+                            </div>
+                            <img src="Huisstijl/baars_1_geel.png" alt="" class="wie-intro-vis">
+                        </div>
+                    </div>
+                </a>
             </div>
         </section>
 
         <!-- SECTION 6: TESTIMONIALS (50vh) -->
-        <section class="snap-section snap-section--half section-testimonials" id="testimonials">
+        <section class="snap-section snap-section--half section-testimonials" id="testimonials" style="display: none;">
             <div class="container">
                 <div class="graphic-heading graphic-heading--small reveal">
                     <div class="graphic-heading-streepjes"></div>
@@ -243,9 +255,9 @@
                         <li class="nav-dropdown">
                     <a href="voor-wie.html">Voor wie</a>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="voor-wie.html#bw">B&amp;W</a></li>
-                        <li><a href="voor-wie.html#organisaties">Organisaties</a></li>
-                        <li><a href="voor-wie.html#bedrijven">Bedrijven</a></li>
+                        <li><a href="voor-wie-bw.html">B&amp;W</a></li>
+                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
+                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
                     </ul>
                 </li>
                         <li><a href="wie-we-zijn.html">Team</a></li>
@@ -266,9 +278,9 @@
                     <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a><br>
                     <a href="mailto:info@stekelbaars.nl">info@stekelbaars.nl</a>
                     <div class="footer-adres">
-                        <p>Stekelbaars B.V.</p>
-                        <p>Koningsplein [nummer]</p>
-                        <p>[postcode] [plaats]</p>
+                        <p>Stekelbaars</p>
+                        <p>Singel 410</p>
+                        <p>1016 AK Amsterdam</p>
                         <p>KvK: [nummer]</p>
                         <p>BTW: [nummer]</p>
                     </div>
@@ -276,8 +288,9 @@
                 <div class="footer-contact">
                     <h4>Vergaderlocatie</h4>
                     <div class="footer-adres">
-                        <p>Het Stroomhuisje</p>
-                        <p>[adresgegevens]</p>
+                        <p>Het Buurthuisje</p>
+                        <p>Waterkersweg 416</p>
+                        <p>Amsterdam</p>
                     </div>
                 </div>
             </div>
@@ -287,7 +300,165 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2"></script>
+
+    <!-- Sectie 4: drijvende baarzen — zacht, scroll-reactief -->
+    <script>
+    (function() {
+      const host = document.getElementById('wz-floaters');
+      if (!host) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const section = host.closest('section');
+      const fish = Array.from(host.querySelectorAll('img')).map((el, i) => ({
+        el,
+        base: el.style.transform || '',
+        seed: Math.random() * 10 + i,
+        dirX: i % 2 === 0 ? 1 : -1,
+      }));
+      let scrollTarget = 0, scrollEased = 0;
+      function onScroll() {
+        const r = section.getBoundingClientRect();
+        // 0..1 progress through viewport
+        const p = 1 - (r.top + r.height) / (window.innerHeight + r.height);
+        scrollTarget = Math.max(0, Math.min(1, p));
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      let t = 0;
+      function tick() {
+        t += 0.006;
+        scrollEased += (scrollTarget - scrollEased) * 0.08;
+        for (const f of fish) {
+          const sx = (scrollEased - 0.5) * 90 * f.dirX;
+          const sy = (scrollEased - 0.5) * 60;
+          const dx = Math.sin(t * 0.9 + f.seed) * 22 + sx;
+          const dy = Math.cos(t * 1.1 + f.seed * 1.3) * 14 + sy;
+          const rot = Math.sin(t * 0.7 + f.seed) * 4;
+          f.el.style.transform = `${f.base} translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+    </script>
+
+    <!-- Sectie 3: stromende gele blokken -->
+    <script>
+    (function() {
+      const host = document.getElementById('vb-bars');
+      if (!host) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const section = host.closest('.section-methode-v2');
+      const NUM = 42;
+      const bars = [];
+      let W = window.innerWidth, H = window.innerHeight;
+      function measure() { const r = section.getBoundingClientRect(); W = r.width; H = r.height; }
+      measure();
+      window.addEventListener('resize', measure);
+
+      function spawnBar(initial) {
+        const el = document.createElement('div');
+        el.className = 'vb-bar';
+        const width = 80 + Math.random() * 260;
+        const y = Math.random() * H;
+        const speed = 0.25 + Math.random() * 0.55;
+        const x = initial ? (Math.random() * (W + 200) - 200) : (-width - Math.random() * 120);
+        el.style.width = width + 'px';
+        el.style.top = y + 'px';
+        host.appendChild(el);
+        bars.push({ el, x, y, baseY: y, speed, width, offX: 0, offY: 0 });
+      }
+      for (let i = 0; i < NUM; i++) spawnBar(true);
+
+      // Scroll-driven photo reveal: smooth growth from small top-anchored block
+      // to full height, then continues horizontal expansion to full width.
+      const photo = section.querySelector('.vb-photo');
+      let unfoldProgress = 0;
+      let unfoldComplete = false;
+      function updatePhotoClip() {
+        if (unfoldComplete) return;
+        const r = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // Start: rect.top = 0.95*vh (just as section 3 begins entering from below)
+        // End:   rect.top = 0.35*vh (section 3 ~65% in view — animation wraps up early)
+        const raw = (vh * 0.95 - r.top) / (vh * 0.6);
+        const p = Math.max(0, Math.min(1, raw));
+        if (p > unfoldProgress) unfoldProgress = p;
+        const up = unfoldProgress;
+
+        const VERT_END = 0.55; // progress at which block reaches full height
+        const easeOut = t => 1 - Math.pow(1 - t, 2);
+
+        let widthPct, bottomPct;
+        if (up < VERT_END) {
+          // Phase A: smooth simultaneous growth in width + height
+          const t = easeOut(up / VERT_END);
+          widthPct  = 10 + 45 * t;   // 10% → 55%
+          bottomPct = 82 - 82 * t;   // bottom at 82% → 0% (height 18% → 100%)
+        } else {
+          // Phase B: horizontal expansion only
+          const t = easeOut((up - VERT_END) / (1 - VERT_END));
+          widthPct  = 55 + 45 * t;   // 55% → 100%
+          bottomPct = 0;
+        }
+
+        const horizInset = (100 - widthPct) / 2;
+        const clip = `inset(0 ${horizInset.toFixed(2)}% ${bottomPct.toFixed(2)}% ${horizInset.toFixed(2)}%)`;
+        if (photo) photo.style.clipPath = clip;
+        host.style.clipPath = clip;
+        if (unfoldProgress >= 0.999) {
+          unfoldComplete = true;
+          if (photo) photo.style.clipPath = 'inset(0 0 0 0)';
+          host.style.clipPath = 'inset(0 0 0 0)';
+        }
+      }
+      updatePhotoClip();
+      window.addEventListener('scroll', updatePhotoClip, { passive: true });
+      window.addEventListener('resize', updatePhotoClip);
+
+      const mouse = { x: -9999, y: -9999, active: false };
+      section.addEventListener('mousemove', e => {
+        const r = section.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.active = true;
+      });
+      section.addEventListener('mouseleave', () => { mouse.active = false; mouse.x = -9999; mouse.y = -9999; });
+
+      function tick() {
+        const frozen = unfoldProgress < 0.999;
+        for (let i = bars.length - 1; i >= 0; i--) {
+          const b = bars[i];
+          if (!frozen) b.x += b.speed;
+          if (b.x > W + 50) {
+            b.el.remove();
+            bars.splice(i, 1);
+            spawnBar(false);
+            continue;
+          }
+          let targetOffX = 0, targetOffY = 0;
+          if (mouse.active) {
+            const cx = b.x + b.width / 2;
+            const dx = cx - mouse.x;
+            const dy = b.baseY - mouse.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const R = 180;
+            if (dist < R) {
+              const f = (1 - dist / R);
+              targetOffX = (dx / (dist || 1)) * f * 70;
+              targetOffY = (dy / (dist || 1)) * f * 70;
+            }
+          }
+          b.offX += (targetOffX - b.offX) * 0.08;
+          b.offY += (targetOffY - b.offY) * 0.08;
+          b.el.style.left = '0px';
+          b.el.style.top = b.baseY + 'px';
+          b.el.style.transform = `translate3d(${b.x + b.offX}px, ${b.offY}px, 0)`;
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+    </script>
 
 </body>
 </html>

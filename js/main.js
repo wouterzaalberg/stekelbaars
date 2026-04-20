@@ -15,14 +15,37 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 document.querySelectorAll('.stroom-heading').forEach(el => observer.observe(el));
 
 
-// Slow zoom on wie photo when in view
-const wieZoomImg = document.querySelector('.wie-bg-img');
-if (wieZoomImg) {
-    const wieZoomObs = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) wieZoomImg.classList.add('zoomed');
-    }, { threshold: 0.2 });
-    wieZoomObs.observe(wieZoomImg.closest('.wie-container'));
-}
+// Section 5: scroll-driven photo sharpen, text fade, hotspot reveal
+// (sticky-scroll: wrapper is 200vh, inner sticky pane is 100vh)
+(function() {
+    const section = document.querySelector('.section-wie');
+    if (!section) return;
+    const clamp01 = v => Math.max(0, Math.min(1, v));
+    const isMobile = () => window.innerWidth <= 900;
+    function update() {
+        if (isMobile()) {
+            // On mobile: static state (photo sharp, text visible, no rings)
+            section.style.removeProperty('--sharpen');
+            section.style.removeProperty('--text-opacity');
+            section.style.removeProperty('--ring-opacity');
+            return;
+        }
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // Sticky engages for rect.top in [-vh, 0]. Animation runs over 85% of that.
+        const total = 0.85 * vh;
+        const p = clamp01(-rect.top / total);
+        // Phase 1 (p = 0 → 0.7): photo sharpens + text fades
+        const phase1 = clamp01(p / 0.7);
+        section.style.setProperty('--sharpen', phase1.toFixed(4));
+        section.style.setProperty('--text-opacity', (1 - phase1).toFixed(4));
+        // Ring opacity: instant step from 0 to 1 the moment text is fully gone
+        section.style.setProperty('--ring-opacity', phase1 >= 1 ? '1' : '0');
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
 
 // Scroll-linked animations: Section 2 (crossing) + Section 4 (watzoek vissen)
 (function() {
@@ -84,7 +107,7 @@ if (wieZoomImg) {
     // --- Section 3: (no slide-in, handled separately) ---
     function updateVisie() {}
 
-    // --- Section 4: watzoek fish (always visible, position moves with scroll) ---
+    // --- Section 4: watzoek fish (scroll-linked move + parallax depth) ---
     function updateWatzoek() {
         if (!watzoekSection || !watzoekCells.length) return;
         var vh = window.innerHeight;
@@ -95,13 +118,20 @@ if (wieZoomImg) {
         var totalRange = 1 + (sH / vh);
         var wProgress = clamp01((rawW - 0.4) / (totalRange * 0.8));
 
+        // Parallax: 0 when section enters viewport center, negative when scrolling up
+        var sectionCenter = wRect.top + sH / 2;
+        var parallaxRaw = (sectionCenter - vh / 2) / vh; // -1..1-ish
+        // Depth per cell — middle fish moves fastest, sides slower
+        var depths = [0.25, 0.45, 0.3];
+
         watzoekCells.forEach(function(cell, i) {
             var baars = cell.querySelector('.watzoek-baars');
             if (!baars) return;
             var direction = (i === 1) ? 1 : -1;
             var offset = direction * 150 * (1 - 2 * wProgress);
+            var parallax = -parallaxRaw * vh * (depths[i] || 0.3);
             var rot = baars.classList.contains('watzoek-baars--flip') ? -90 : 90;
-            baars.style.transform = 'translate(-50%, calc(-50% + ' + offset.toFixed(1) + 'px)) rotate(' + rot + 'deg) scale(1.3)';
+            baars.style.transform = 'translate(-50%, calc(-50% + ' + (offset + parallax).toFixed(1) + 'px)) rotate(' + rot + 'deg) scale(1.3)';
         });
     }
 
@@ -737,21 +767,40 @@ if (modelScroll) {
 
     const scrollHint = document.querySelector('.model-scroll-hint');
 
-    // Update flow indicator dots + fade scroll hint
-    modelScroll.addEventListener('scroll', () => {
+    const slides = modelScroll.querySelectorAll('.model-slide');
+
+    const updateActive = () => {
         const scrollLeft = modelScroll.scrollLeft;
-        const slideWidth = modelScroll.offsetWidth;
-        const activeIndex = Math.round(scrollLeft / slideWidth);
+        const viewportW = modelScroll.offsetWidth;
+        const centerX = scrollLeft + viewportW / 2;
+
+        let activeIndex = 0;
+        let minDist = Infinity;
+        slides.forEach((slide, i) => {
+            const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+            const dist = Math.abs(slideCenter - centerX);
+            if (dist < minDist) {
+                minDist = dist;
+                activeIndex = i;
+            }
+        });
 
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === activeIndex);
         });
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('is-active', i === activeIndex);
+        });
 
-        // Fade out scroll hint after ~3 scrolls
         if (scrollHint) {
-            scrollHint.style.opacity = scrollLeft > slideWidth * 0.3 ? '0' : '';
+            scrollHint.style.opacity = scrollLeft > viewportW * 0.3 ? '0' : '';
         }
-    });
+    };
+
+    modelScroll.addEventListener('scroll', updateActive);
+    // Trigger initial state (intro slide animates in on page load)
+    updateActive();
+    window.addEventListener('load', updateActive);
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -866,9 +915,7 @@ if (modelScroll) {
 
         // Two arrows with different routes
         var moves1 = [
-            { dir: 'start', x: 0.00, y: 0.50 },
-            { dir: 'right', v: 0.04 },
-            { dir: 'down',  v: 0.62 },
+            { dir: 'start', x: 0.00, y: 0.75 },
             { dir: 'right', v: 0.17 },
             { dir: 'up',    v: 0.35 },
             { dir: 'right', v: 0.25 },
@@ -909,11 +956,12 @@ if (modelScroll) {
         clipBlack.setAttribute('id', 'clip-black');
         var clipYellow = document.createElementNS(ns, 'clipPath');
         clipYellow.setAttribute('id', 'clip-yellow');
-        for (var s = 0; s < 7; s++) {
+        var slideEls = modelScroll.querySelectorAll('.model-slide');
+        for (var s = 0; s < slideEls.length; s++) {
             var cr = document.createElementNS(ns, 'rect');
-            cr.setAttribute('x', s * slideW);
+            cr.setAttribute('x', slideEls[s].offsetLeft);
             cr.setAttribute('y', 0);
-            cr.setAttribute('width', slideW);
+            cr.setAttribute('width', slideEls[s].offsetWidth);
             cr.setAttribute('height', H);
             if (s % 2 === 0) clipBlack.appendChild(cr); else clipYellow.appendChild(cr);
         }
@@ -940,11 +988,11 @@ if (modelScroll) {
             var yp = document.createElementNS(ns, 'path');
             yp.setAttribute('d', pathData);
             yp.setAttribute('fill', 'none');
-            yp.setAttribute('stroke', '#FEEA70');
-            yp.setAttribute('stroke-width', '73');
+            yp.setAttribute('stroke', '#FFE980');
+            yp.setAttribute('stroke-width', '72.5');
             yp.setAttribute('stroke-linecap', 'square');
             yp.setAttribute('stroke-linejoin', 'miter');
-            yp.setAttribute('opacity', '0.18');
+            yp.setAttribute('opacity', '0.3');
             yp.setAttribute('clip-path', 'url(#clip-black)');
             svg.appendChild(yp);
 
@@ -952,10 +1000,10 @@ if (modelScroll) {
             wp.setAttribute('d', pathData);
             wp.setAttribute('fill', 'none');
             wp.setAttribute('stroke', '#FFFFFF');
-            wp.setAttribute('stroke-width', '73');
+            wp.setAttribute('stroke-width', '72.5');
             wp.setAttribute('stroke-linecap', 'square');
             wp.setAttribute('stroke-linejoin', 'miter');
-            wp.setAttribute('opacity', '0.18');
+            wp.setAttribute('opacity', '0.3');
             wp.setAttribute('clip-path', 'url(#clip-yellow)');
             svg.appendChild(wp);
 
@@ -991,14 +1039,23 @@ if (modelScroll) {
         modelPage.appendChild(svg);
 
         function updateArrow(a, drawLength) {
-            var vis = drawLength - 37;
+            var vis = drawLength - 36.3;
             var off = (a.tl - Math.max(0, vis)).toFixed(1);
             a.yp.style.strokeDashoffset = off;
             a.wp.style.strokeDashoffset = off;
 
-            var pt = a.yp.getPointAtLength(drawLength);
-            var pt2 = a.yp.getPointAtLength(Math.max(0, drawLength - 10));
-            var angle = Math.atan2(pt.y - pt2.y, pt.x - pt2.x) * 180 / Math.PI;
+            // Position head where the stroke's linecap extension lands:
+            // at tail-visible-end + 36.3px along the tangent direction at tail end.
+            var tailEnd = Math.max(0, vis);
+            var ptEnd = a.yp.getPointAtLength(tailEnd);
+            var ptBehind = a.yp.getPointAtLength(Math.max(0, tailEnd - 10));
+            var rad = Math.atan2(ptEnd.y - ptBehind.y, ptEnd.x - ptBehind.x);
+            var extend = 36.3;
+            var pt = {
+                x: ptEnd.x + extend * Math.cos(rad),
+                y: ptEnd.y + extend * Math.sin(rad)
+            };
+            var angle = rad * 180 / Math.PI;
             var tf = 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') translate(' + (-headW * 0.55) + ',' + (-headH / 2) + ')';
             a.hy.setAttribute('transform', tf);
             a.hw.setAttribute('transform', tf);
@@ -1006,12 +1063,19 @@ if (modelScroll) {
             a.hw.style.display = '';
         }
 
+        // Snake arrow starts invisible until first scroll
+        svg.style.opacity = '0';
+        svg.style.transition = 'opacity 0.5s ease-out';
+
         function updateSnake() {
             var scrollLeft = modelScroll.scrollLeft;
             var maxScroll = modelScroll.scrollWidth - modelScroll.offsetWidth;
             var progress = maxScroll > 0 ? scrollLeft / maxScroll : 0;
 
             svg.style.transform = 'translateX(' + (-scrollLeft) + 'px)';
+
+            // Hide snake entirely before the user has scrolled
+            svg.style.opacity = scrollLeft > 0 ? '1' : '0';
 
             var baseLength = modelScroll.offsetWidth * 0.5;
             var dl1 = baseLength + progress * (arrow1.tl - baseLength);
@@ -1152,3 +1216,25 @@ function formatDate(dateStr) {
 
 // Init news if on news page
 loadNieuws();
+
+// Section 4: fish hover via mousemove tracking
+// (fish sit behind cards at z-index 1, so :hover can't trigger via cursor)
+(function() {
+    const section = document.querySelector('.section-watzoek');
+    if (!section) return;
+    const fishes = section.querySelectorAll('.wz-floaters img');
+    if (!fishes.length) return;
+
+    section.addEventListener('mousemove', (e) => {
+        const x = e.clientX, y = e.clientY;
+        fishes.forEach(fish => {
+            const r = fish.getBoundingClientRect();
+            const inside = x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+            fish.classList.toggle('wz-fish-hovered', inside);
+        });
+    });
+
+    section.addEventListener('mouseleave', () => {
+        fishes.forEach(fish => fish.classList.remove('wz-fish-hovered'));
+    });
+})();

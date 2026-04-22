@@ -208,8 +208,7 @@ p {
     display: none;
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     background: var(--zwart);
     list-style: none;
     padding: 0.6rem 0;
@@ -1018,6 +1017,135 @@ p {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* Wrapper: compact black page-header + photo-hero that together fill 100vh */
+.page-head-block {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.page-head-block .page-header {
+    padding: clamp(6rem, 10vw, 8rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+    flex-shrink: 0;
+}
+.page-head-block .page-header h1 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin: 0;
+}
+
+.page-photo-hero {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+}
+.page-photo-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/foto 8.jpg") center / cover no-repeat;
+    animation: contactSubtleZoom 24s ease-in-out infinite;
+    will-change: transform;
+    z-index: -2;
+}
+.page-photo-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.65);
+    z-index: -1;
+}
+.page-photo-hero-inner {
+    width: 100%;
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.page-photo-hero-heading {
+    color: var(--geel);
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    max-width: 900px;
+    margin: 0;
+}
+.page-photo-hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.page-photo-hero-heading.visible .page-photo-hero-word {
+    opacity: 1;
+    transform: translateY(0);
+}
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(1) { transition-delay: 0.05s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(2) { transition-delay: 0.15s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(3) { transition-delay: 0.25s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(4) { transition-delay: 0.35s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(5) { transition-delay: 0.45s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(6) { transition-delay: 0.55s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(7) { transition-delay: 0.65s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(8) { transition-delay: 0.75s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(9) { transition-delay: 0.85s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(10) { transition-delay: 0.95s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(11) { transition-delay: 1.05s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(12) { transition-delay: 1.15s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(13) { transition-delay: 1.25s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(14) { transition-delay: 1.35s; }
+
+/* Photo-hero modifiers */
+.page-photo-hero--85 {
+    min-height: 85vh;
+    flex: none;
+}
+
+.page-photo-hero--foto6::before {
+    background-image: url("../img/foto 6.JPG");
+}
+
+.page-photo-hero--foto7::before {
+    background-image: url("../img/foto 7.jpg");
+}
+
+.page-photo-hero-eyebrow {
+    margin: 0 0 1rem;
+    color: var(--zwart);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    line-height: 1;
+}
+
+.page-photo-hero-eyebrow::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: var(--zwart);
+    margin-top: 0.9rem;
+    opacity: 0.5;
+}
+
+/* Nav variant: zwarte bg bovenin (wisselt naar scrolled-stijl bij scrollen) */
+.nav--zwart:not(.nav--scrolled) {
+    background: var(--zwart);
+}
+
+.page-photo-hero-text {
+    color: var(--zwart);
+    margin: 1.5rem 0 0;
+    max-width: 720px;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.6;
+}
+
+.page-photo-hero-cta {
+    margin-top: 2rem;
+}
+
 /* ============================================
    MODEL PAGE - Horizontal Scroll
    ============================================ */
@@ -1685,7 +1813,218 @@ p {
     margin: 0;
 }
 
-/* --- Extra diensten --- */
+/* --- Diensten editorial lijst --- */
+.diensten-lijst {
+    background: var(--wit);
+    padding: clamp(4rem, 7vw, 7rem) 0 clamp(5rem, 8vw, 8rem);
+}
+
+.dienst-row {
+    display: grid;
+    grid-template-columns: clamp(100px, 12vw, 160px) 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    padding: clamp(3rem, 5vw, 5rem) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dienst-row:last-of-type {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dienst-row--no-border {
+    border-bottom: none;
+}
+
+.dienst-num {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    color: var(--geel);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    perspective: 900px;
+    height: 1em;
+}
+
+.dienst-num-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    transform: rotateX(0deg);
+}
+
+.dienst-num-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.dienst-num-face--fish {
+    transform: rotateX(180deg);
+}
+
+.dienst-num-face--fish img {
+    height: 0.85em;
+    width: auto;
+    display: block;
+}
+
+.dienst-row.is-fish .dienst-num-flipper {
+    transform: rotateX(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dienst-num-flipper,
+    .dienst-row.is-fish .dienst-num-flipper {
+        transition: none;
+        transform: rotateX(0deg);
+    }
+    .dienst-num-face--fish { display: none; }
+}
+
+.dienst-body h3 {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    text-transform: uppercase;
+    color: var(--zwart);
+    letter-spacing: -0.005em;
+    line-height: 1;
+    margin: 0 0 1.25rem;
+}
+
+.dienst-body p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--zwart);
+    margin: 0 0 1rem;
+    max-width: 720px;
+}
+
+.dienst-body p:last-of-type {
+    margin-bottom: 0;
+}
+
+.dienst-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 1.5rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--zwart);
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--geel);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.dienst-cta:hover {
+    color: var(--geel);
+    border-color: var(--zwart);
+}
+
+.dienst-cta-arrow {
+    width: 28px;
+    height: 14px;
+    background: url('../Huisstijl/stekelbaars_pijl.png') no-repeat right center;
+    background-size: contain;
+    filter: brightness(0);
+    transition: transform 0.2s ease;
+}
+
+.dienst-cta:hover .dienst-cta-arrow {
+    transform: translateX(5px);
+}
+
+/* Organic sub-specialismen nested onder pijler 03 */
+.dienst-sub {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(3rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem) clamp(4rem, 6vw, 6rem);
+    margin: clamp(2rem, 3.5vw, 3.5rem) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dienst-sub::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/foto 3.jpg") center / cover no-repeat;
+    animation: contactSubtleZoom 24s ease-in-out infinite;
+    will-change: transform;
+    z-index: -2;
+}
+
+.dienst-sub::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.78);
+    z-index: -1;
+}
+
+.dienst-sub-eyebrow {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--grijs);
+    margin-bottom: 1.75rem;
+}
+
+.dienst-sub-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(1.25rem, 2vw, 2rem);
+}
+
+.dienst-sub-card:nth-child(1),
+.dienst-sub-card:nth-child(2),
+.dienst-sub-card:nth-child(3) { grid-column: span 2; }
+
+.dienst-sub-card:nth-child(4) { grid-column: 2 / span 2; }
+.dienst-sub-card:nth-child(5) { grid-column: 4 / span 2; }
+
+.dienst-sub-card {
+    background: #f6f5ef;
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.dienst-sub-label {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--zwart);
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--geel);
+    align-self: flex-start;
+}
+
+.dienst-sub-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--zwart);
+    margin: 0;
+}
+
+/* --- Extra diensten (legacy) --- */
 .diensten-extra {
     background: #fff;
     padding: clamp(6rem, 10vw, 10rem) 0;
@@ -2035,6 +2374,18 @@ p {
 .vw-body .vw-programma-grid {
     max-width: 1100px;
     margin: clamp(2rem, 3.5vw, 3.5rem) auto;
+}
+
+.vw-body-photo {
+    margin: clamp(2rem, 4vw, 3rem) 0;
+}
+.vw-body-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05);
 }
 
 .vw-body-wrap .vw-body-intro {
@@ -2521,6 +2872,17 @@ p {
     color: var(--geel);
 }
 
+/* Witte variant (subpagina's voor-wie) */
+.vw-cta:not(.section--zwart) {
+    background: var(--wit);
+}
+.vw-cta:not(.section--zwart) h2 { color: var(--zwart); }
+.vw-cta:not(.section--zwart) h2 em { color: var(--geel); }
+.vw-cta:not(.section--zwart) p { color: var(--zwart); }
+.vw-cta:not(.section--zwart) .vw-cta-back { color: rgba(0, 0, 0, 0.55); }
+.vw-cta:not(.section--zwart) .vw-cta-back:hover { color: var(--zwart); }
+.vw-cta:not(.section--zwart)::before { filter: invert(1); opacity: 0.04; }
+
 @media (max-width: 900px) {
     .vw-card {
         grid-template-columns: 1fr;
@@ -2627,9 +2989,9 @@ p {
 
 /* Team page: full black background */
 .team-page {
-    background: var(--zwart);
-    color: var(--wit);
-    padding: clamp(3rem, 5vw, 5rem) 0;
+    background: var(--geel);
+    color: var(--zwart);
+    padding: clamp(4rem, 7vw, 7rem) 0 clamp(5rem, 8vw, 8rem);
     position: relative;
     overflow: hidden;
 }
@@ -2664,6 +3026,32 @@ p {
     opacity: 0.6;
 }
 
+/* Visje fade: zwart → geel als in beeld */
+.wie-visje-fade {
+    position: relative;
+    display: inline-block;
+    margin-top: 2rem;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+.wie-visje-fade .wie-visie-visje {
+    margin-top: 0;
+    display: block;
+}
+.wie-visje-fade .wie-visje-fade-geel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-out;
+}
+.wie-visje-fade .wie-visje-fade-zwart {
+    transition: opacity 1.2s ease-out;
+}
+.wie-visje-fade.visible .wie-visje-fade-zwart { opacity: 0; }
+.wie-visje-fade.visible .wie-visje-fade-geel { opacity: 0.6; }
+
 .wie-visie-content {
     max-width: 550px;
 }
@@ -2672,7 +3060,7 @@ p {
     font-size: clamp(1rem, 1.3vw, 1.15rem);
     line-height: 1.85;
     margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--zwart);
 }
 
 .wie-visie-content p:last-child {
@@ -2682,33 +3070,47 @@ p {
 /* Decoratieve baarzen */
 .wie-visie-baars {
     position: absolute;
-    right: -20%;
-    top: 25%;
+    right: -22%;
+    top: 12%;
     transform: translateY(-50%);
-    width: 45%;
+    width: 48%;
     height: auto;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.08;
+    z-index: 0;
 }
 
 .wie-visie-baars--left {
     right: auto;
-    left: -20%;
-    top: 55%;
+    left: -22%;
+    top: 70%;
     transform: translateY(-50%) scaleX(-1);
 }
 
-/* Team members */
-.team-member {
+/* Team grid: 2 kaarten per rij op desktop */
+.team-grid {
     display: grid;
-    grid-template-columns: 0.4fr 1fr;
-    gap: 0;
-    align-items: stretch;
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(3rem, 5vw, 5rem) clamp(2rem, 3vw, 3rem);
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
 }
 
-.team-member:last-child {
+/* Team member card */
+.team-member {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
     margin-bottom: 0;
+}
+
+.team-member-img {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: visible;
+    background: #000;
 }
 
 .team-member-img img {
@@ -2716,46 +3118,75 @@ p {
     height: 100%;
     display: block;
     object-fit: cover;
-    filter: grayscale(100%);
+    filter: grayscale(100%) contrast(1.05);
 }
 
 .team-member-img--placeholder {
-    aspect-ratio: 3 / 4;
-    background: #222;
+    background: #1a1a1a;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #1a1a1a 0,
+        #1a1a1a 10px,
+        #222 10px,
+        #222 20px
+    );
+}
+
+.team-member-name {
+    position: absolute;
+    left: 0;
+    bottom: -18px;
+    background: var(--zwart);
+    color: var(--geel);
+    margin: 0;
+    padding: 12px clamp(18px, 2.5vw, 28px);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    z-index: 2;
+    max-width: calc(100% - 40px);
 }
 
 .team-member-tekst {
     background: var(--wit);
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.team-member-tekst h2 {
-    color: var(--zwart);
-    margin-bottom: 0.8rem;
+    padding: clamp(2rem, 3vw, 2.5rem);
+    padding-top: calc(18px + clamp(1.75rem, 3vw, 2.5rem));
+    flex: 1;
 }
 
 .team-member-tekst p {
     color: var(--zwart);
     margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.65;
 }
 
 .team-member-contact {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    margin-top: 1rem;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1.25rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 2px solid var(--geel);
 }
 
 .team-member-contact a {
     color: var(--zwart);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
 }
 
 .team-member-contact a:hover {
-    color: var(--geel);
+    border-bottom-color: var(--zwart);
 }
 
 .team-values {
@@ -2868,6 +3299,32 @@ p {
 .contact-content {
     padding: clamp(5rem, 10vw, 9rem) 0;
     min-height: 70vh;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.contact-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/foto 8.jpg") center / cover no-repeat;
+    animation: contactSubtleZoom 24s ease-in-out infinite;
+    will-change: transform;
+    z-index: -2;
+}
+
+.contact-content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.65);
+    z-index: -1;
+}
+
+@keyframes contactSubtleZoom {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
 }
 
 .contact-grid {
@@ -2879,6 +3336,29 @@ p {
 .contact-info h2 {
     margin-bottom: 2rem;
 }
+
+.contact-animated-heading {
+    color: var(--geel);
+    font-size: clamp(2.75rem, 5.5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+}
+
+.contact-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+.contact-animated-heading.visible .contact-word {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-animated-heading.visible .contact-word:nth-of-type(1) { transition-delay: 0.05s; }
+.contact-animated-heading.visible .contact-word:nth-of-type(2) { transition-delay: 0.15s; }
+.contact-animated-heading.visible .contact-word:nth-of-type(3) { transition-delay: 0.25s; }
 
 .contact-info p {
     margin-bottom: 1.5rem;
@@ -3200,7 +3680,7 @@ p {
     padding: 0;
     position: relative;
     min-height: 85vh;
-    overflow: hidden;
+    overflow: clip;
     z-index: 2;
 }
 
@@ -3235,14 +3715,15 @@ p {
     flex: 0 0 auto;
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
-    font-size: clamp(5rem, 10.5vw, 9.75rem);
+    font-size: clamp(5rem, 10.5vw, 10rem);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: -0.03em;
     line-height: 1;
     color: var(--wit);
     white-space: nowrap;
     /* align cap-top with paragraph first line — Barlow has ~0.41em slack above caps */
-    margin-top: -0.34em;
+    margin-top: -0.2em;
+    will-change: transform, opacity;
     text-align: right;
 }
 
@@ -3361,6 +3842,23 @@ p {
     font-size: clamp(44px, 5.5vw, 88px); line-height: 0.95;
     color: #000; max-width: 780px; letter-spacing: -0.005em;
 }
+.wz-word-anim {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.wz-head.visible .wz-word-anim { opacity: 1; transform: translateY(0); }
+.wz-head.visible .wz-word-anim:nth-child(1)  { transition-delay: 0.05s; }
+.wz-head.visible .wz-word-anim:nth-child(2)  { transition-delay: 0.15s; }
+.wz-head.visible .wz-word-anim:nth-child(3)  { transition-delay: 0.25s; }
+.wz-head.visible .wz-word-anim:nth-child(4)  { transition-delay: 0.35s; }
+.wz-head.visible .wz-word-anim:nth-child(5)  { transition-delay: 0.45s; }
+.wz-head.visible .wz-word-anim:nth-child(6)  { transition-delay: 0.55s; }
+.wz-head.visible .wz-word-anim:nth-child(7)  { transition-delay: 0.65s; }
+.wz-head.visible .wz-word-anim:nth-child(8)  { transition-delay: 0.75s; }
+.wz-head.visible .wz-word-anim:nth-child(9)  { transition-delay: 0.85s; }
+.wz-head.visible .wz-word-anim:nth-child(10) { transition-delay: 0.95s; }
 .wz-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
 }
@@ -3426,131 +3924,111 @@ p {
     background: var(--wit);
     padding: 0;
     position: relative;
-    min-height: 200vh;
-    display: block;
-    align-items: initial;
-    --sharpen: 0;
-    --text-opacity: 1;
-    --ring-opacity: 0;
 }
 
-.wie-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-    padding: 5vh 0;
-    box-sizing: border-box;
+.wie-split {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    min-height: 100vh;
 }
 
-.wie-container {
+.wie-split-photo {
     position: relative;
-    display: block;
-    width: 100%;
-    max-width: 80vw;
-    margin: 0 auto;
-    height: 100%;
     overflow: hidden;
+    display: block;
     text-decoration: none;
     color: inherit;
-    cursor: pointer;
 }
 
-.wie-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.wie-split-photo-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(100%) blur(calc((1 - var(--sharpen)) * 14px));
-    transform: scale(1.06);
-    transform-origin: center center;
-    will-change: filter;
+    filter: grayscale(100%) contrast(1.05);
+    animation: wieSubtleZoom 22s ease-in-out infinite;
+    will-change: transform;
 }
 
-/* Foto hover hotspots */
-.foto-hotspot {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    z-index: 1;
-    cursor: pointer;
+@keyframes wieSubtleZoom {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
 }
 
-.foto-hotspot[data-side="right"] {
-    right: 0;
-}
-
-.foto-hotspot[data-side="left"] {
-    left: 0;
-}
-
-.foto-hotspot-ring {
-    position: absolute;
-    width: 240px;
-    height: 240px;
-    border: 20px solid rgba(254, 219, 0, 0.5);
-    opacity: 0;
-}
-
-.foto-hotspot-naam {
-    position: absolute;
-    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--geel);
-    opacity: 0;
-    white-space: nowrap;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-.foto-hotspot:hover .foto-hotspot-ring,
-.foto-hotspot:hover .foto-hotspot-naam {
-    opacity: var(--ring-opacity, 0);
-}
-
-.wie-intro-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
+.wie-split-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
     padding: clamp(2rem, 5vw, 5rem);
-    opacity: var(--text-opacity, 1);
-    pointer-events: none;
-}
-
-.wie-intro-box {
-    background: rgba(255, 255, 255, 0.92);
-    padding: clamp(2rem, 3vw, 3.2rem) clamp(2rem, 3.5vw, 3.6rem);
-    max-width: 720px;
-    text-align: center;
+    background: var(--wit);
 }
 
 .wie-intro-heading {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
-    font-weight: 700;
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 5.5vw, 5.5rem);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: -0.005em;
     color: var(--geel);
     margin-bottom: 1.5rem;
+    line-height: 0.95;
 }
 
+/* Hotspots on wie-split photo (per-person hover reveal) */
+.wie-split-photo .foto-hotspot {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+.wie-split-photo .foto-hotspot-ring {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border: 18px solid rgba(254, 219, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: auto;
+    cursor: pointer;
+}
+.wie-split-photo .foto-hotspot-naam {
+    position: absolute;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--geel);
+    opacity: 0;
+    white-space: nowrap;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+}
+.wie-split-photo .foto-hotspot:hover .foto-hotspot-ring,
+.wie-split-photo .foto-hotspot:hover .foto-hotspot-naam {
+    opacity: 1;
+}
+.wie-word-anim {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.wie-intro-heading.visible .wie-word-anim { opacity: 1; transform: translateY(0); }
+.wie-intro-heading.visible .wie-word-anim:nth-of-type(1) { transition-delay: 0.1s; }
+.wie-intro-heading.visible .wie-word-anim:nth-of-type(2) { transition-delay: 0.25s; }
+.wie-intro-heading.visible .wie-word-anim:nth-of-type(3) { transition-delay: 0.4s; }
+.wie-intro-heading.visible .wie-word-anim:nth-of-type(4) { transition-delay: 0.55s; }
+.wie-intro-heading.visible .wie-word-anim:nth-of-type(5) { transition-delay: 0.7s; }
+
 .wie-intro-tekst {
-    max-width: 620px;
-    margin: 0 auto;
+    max-width: 50%;
 }
 
 .wie-intro-tekst p {
     margin-bottom: 1rem;
-    font-size: clamp(1rem, 1.25vw, 1.15rem);
-    line-height: 1.75;
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    line-height: 1.7;
     color: var(--zwart);
 }
 
@@ -3558,14 +4036,42 @@ p {
     margin-bottom: 0;
 }
 
-.wie-intro-vis {
-    width: 44px;
-    height: auto;
-    display: block;
-    margin: 1.5rem auto 0;
-    transform: rotate(calc((1 - var(--text-opacity, 1)) * 90deg));
-    transform-origin: center center;
-    will-change: transform;
+.wie-cta {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 14px;
+    margin-top: 1.75rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #000;
+    background: var(--geel);
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.wie-cta:hover {
+    transform: translateX(6px);
+    background: #000;
+    color: var(--geel);
+}
+
+.wie-cta-arrow {
+    width: 28px;
+    height: 14px;
+    flex-shrink: 0;
+    background: url('../Huisstijl/stekelbaars_pijl.png') no-repeat right center;
+    background-size: contain;
+    filter: brightness(0);
+    transition: filter 0.2s ease;
+}
+
+.wie-cta:hover .wie-cta-arrow {
+    filter: brightness(1);
 }
 
 /* Section 6: Testimonials (50vh) */
@@ -3786,8 +4292,12 @@ p {
         gap: 2.5rem;
     }
 
-    .team-member {
+    .team-grid {
         grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .team-member-name {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
     }
 
     .doelgroep-grid,
@@ -3815,7 +4325,30 @@ p {
         direction: ltr;
     }
 
-    /* Diensten nieuwe opbouw */
+    /* Diensten editorial lijst */
+    .dienst-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2.5rem 0;
+    }
+    .dienst-num {
+        font-size: clamp(2.25rem, 10vw, 3.25rem);
+    }
+    .dienst-sub {
+        padding-left: clamp(1rem, 4vw, 2rem);
+        padding-right: clamp(1rem, 4vw, 2rem);
+    }
+    .dienst-sub-grid {
+        grid-template-columns: 1fr;
+    }
+    .dienst-sub-card:nth-child(1),
+    .dienst-sub-card:nth-child(2),
+    .dienst-sub-card:nth-child(3),
+    .dienst-sub-card:nth-child(4),
+    .dienst-sub-card:nth-child(5) {
+        grid-column: 1;
+    }
+    /* Legacy pijler/extra/org rules (verouderd) */
     .pijler-block,
     .pijler-block--flip {
         grid-template-columns: 1fr;
@@ -4088,14 +4621,12 @@ p {
    SECTION 3 — STROOMMODEL (kinetische barcode-stroom)
    ============================================ */
 .section-methode-v2 {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    position: relative;
     width: 100%; min-height: 90vh;
     background: var(--geel); color: #fff; overflow: hidden;
 }
 .methode-watzoek-wrapper { position: relative; }
-.methode-watzoek-wrapper .section-watzoek { position: relative; z-index: 2; }
+.methode-watzoek-wrapper .section-watzoek { position: relative; }
 .vb-photo {
     position: absolute; inset: 0;
     background-color: #000;
@@ -4130,16 +4661,32 @@ p {
 .vb-placeholder-photo {
     width: 100%;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    opacity: 0;
+    will-change: opacity, transform;
+    transition: opacity 1.6s ease-out, transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.vb-placeholder-photo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: #000;
-    background-image: url("../img/foto 2.jpg");
+    background-image: url("../img/foto 4.jpg");
     background-size: cover;
     background-position: center;
     filter: grayscale(1) contrast(1.1);
-    position: relative;
-    margin-top: 0;
-    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+    z-index: 0;
 }
-
+.vb-placeholder-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 6px rgba(254, 219, 0, 0.25);
+    pointer-events: none;
+    z-index: 1;
+}
 .vb-placeholder-photo:hover {
     transform: scale(1.025);
 }
@@ -4156,6 +4703,19 @@ p {
     margin-bottom: 3vh; color: var(--geel);
 }
 .vb-title em { font-style: normal; display: block; color: var(--geel); }
+.vb-word-anim {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.vb-title.visible .vb-word-anim { opacity: 1; transform: translateY(0); }
+.vb-title.visible .vb-word-anim:nth-of-type(1) { transition-delay: 0.05s; }
+.vb-title.visible .vb-word-anim:nth-of-type(2) { transition-delay: 0.15s; }
+.vb-title.visible .vb-word-anim:nth-of-type(3) { transition-delay: 0.25s; }
+.vb-title.visible .vb-word-anim:nth-of-type(4) { transition-delay: 0.35s; }
+.vb-title.visible .vb-word-anim:nth-of-type(5) { transition-delay: 0.45s; }
+.vb-title.visible .vb-word-anim:nth-of-type(6) { transition-delay: 0.55s; }
 .vb-lede {
     font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.85);
     max-width: 520px; margin-bottom: 4vh;
@@ -4302,17 +4862,16 @@ p {
         opacity: 0.7;
     }
 
-    /* --- Home sectie 5 (wie): sticky-scroll animatie ook op mobiel --- */
-    /* min-height 200vh + sticky pane blijven; tekst-box en ring-vars gaan via JS */
-    .wie-container {
-        max-width: 100%;
+    /* --- Home sectie 5 (wie): split 60/40 → 1-koloms op mobiel --- */
+    .wie-split {
+        grid-template-columns: 1fr;
+        min-height: auto;
     }
-    .wie-intro-overlay {
-        padding: 1.5rem;
+    .wie-split-photo {
+        min-height: 50vh;
     }
-    .wie-intro-box {
-        padding: 1.5rem 1.25rem;
-        max-width: 100%;
+    .wie-split-text {
+        padding: 2rem 1.5rem;
     }
     .wie-intro-heading {
         font-size: clamp(1.8rem, 7vw, 2.5rem);
@@ -4322,8 +4881,8 @@ p {
         font-size: 0.95rem;
         line-height: 1.65;
     }
-    .wie-intro-vis {
-        width: 36px;
+    .wie-intro-tekst {
+        max-width: 100%;
     }
 
     /* --- Testimonials --- */

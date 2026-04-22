@@ -13,31 +13,34 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 document.querySelectorAll('.stroom-heading').forEach(el => observer.observe(el));
+document.querySelectorAll('.vb-title').forEach(el => observer.observe(el));
+document.querySelectorAll('.wie-intro-heading').forEach(el => observer.observe(el));
+document.querySelectorAll('.contact-animated-heading').forEach(el => observer.observe(el));
+document.querySelectorAll('.page-photo-hero-heading').forEach(el => observer.observe(el));
 
-
-// Section 5: scroll-driven photo sharpen, text fade, hotspot reveal
-// (sticky-scroll: wrapper is 200vh, inner sticky pane is 100vh — ook op mobiel)
+// Section 2 (stroom): koptekst fade + translate upward tijdens scrollen
 (function() {
-    const section = document.querySelector('.section-wie');
+    const section = document.querySelector('.section-stroom');
     if (!section) return;
-    const clamp01 = v => Math.max(0, Math.min(1, v));
+    const heading = section.querySelector('.stroom-heading');
+    if (!heading) return;
+
     function update() {
         const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // Sticky engages for rect.top in [-vh, 0]. Animation runs over 85% of that.
-        const total = 0.85 * vh;
-        const p = clamp01(-rect.top / total);
-        // Phase 1 (p = 0 → 0.7): photo sharpens + text fades
-        const phase1 = clamp01(p / 0.7);
-        section.style.setProperty('--sharpen', phase1.toFixed(4));
-        section.style.setProperty('--text-opacity', (1 - phase1).toFixed(4));
-        // Ring opacity: instant step from 0 to 1 the moment text is fully gone
-        section.style.setProperty('--ring-opacity', phase1 >= 1 ? '1' : '0');
+        const sh = section.offsetHeight;
+        const scrolled = -rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / sh));
+        // Start vroeg (progress 0.03) en loop door tot 0.8; smoothstep easing voor soepele beweging
+        const raw = Math.max(0, Math.min(1, (progress - 0.03) / 0.77));
+        const eased = raw * raw * (3 - 2 * raw);
+        heading.style.transform = 'translateY(' + (-eased * 110).toFixed(2) + '%)';
+        heading.style.opacity = (1 - eased).toFixed(3);
     }
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
     update();
 })();
+
 
 // Scroll-linked animations: Section 2 (crossing) + Section 4 (watzoek vissen)
 (function() {
@@ -685,7 +688,7 @@ if (hamburger && mobileNav) {
     function position() {
         hotspots.forEach(function(hs) {
             var container = hs.parentElement;
-            var img = container.querySelector('img');
+            var img = container.querySelector('.wie-split-photo-img') || container.querySelector('img');
             if (!img || !img.naturalWidth) return;
 
             var ringX = parseFloat(hs.dataset.ringX);
@@ -740,6 +743,41 @@ if (hamburger && mobileNav) {
     window.addEventListener('load', position);
     window.addEventListener('resize', position);
     position();
+})();
+
+// Diensten page: number → fish flip when dienst-row passes viewport center
+(function() {
+    const rows = document.querySelectorAll('.dienst-row');
+    if (!rows.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    function update() {
+        const vh = window.innerHeight;
+        const viewCenter = vh / 2;
+        const zone = vh * 0.25; // max afstand tot viewport-midden voor een flip
+        let closestRow = null;
+        let closestDist = Infinity;
+        rows.forEach(row => {
+            const rect = row.getBoundingClientRect();
+            const rowCenter = rect.top + rect.height / 2;
+            const dist = Math.abs(rowCenter - viewCenter);
+            if (dist < closestDist) {
+                closestDist = dist;
+                closestRow = row;
+            }
+        });
+        rows.forEach(row => {
+            if (row === closestRow && closestDist < zone) {
+                row.classList.add('is-fish');
+            } else {
+                row.classList.remove('is-fish');
+            }
+        });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
 })();
 
 // Smooth scroll for anchor links (e.g. #contact)

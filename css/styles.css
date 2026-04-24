@@ -6,6 +6,7 @@
     --geel: #FEDB00;
     --zwart: #000000;
     --wit: #FFFFFF;
+    --content-wide: 1400px;
 }
 
 /* Reset */
@@ -641,4 +642,379 @@ body {
     .scroll-indicator img {
         animation: none;
     }
+}
+
+/* ============================================
+   WETHOUDERS PAGE (geportet van nieuwe-site)
+   Stijl van voor-wie-bw.html (nieuwe site)
+   ============================================ */
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+.container--wide {
+    max-width: var(--content-wide);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+.btn--zwart {
+    background: var(--zwart);
+    color: var(--wit);
+}
+.btn--zwart:hover {
+    background: var(--geel);
+    color: var(--zwart);
+}
+
+/* Simpele header (alleen voor deze pagina — geen volledige nav) */
+.simple-header {
+    background: var(--geel);
+    padding: 1rem 0;
+    position: relative;
+    z-index: 10;
+}
+.simple-header-inner {
+    width: 100%;
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.simple-header-logo img {
+    display: block;
+    height: clamp(28px, 3vw, 38px);
+    width: auto;
+}
+.simple-header-back {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    color: var(--zwart);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+.simple-header-back:hover {
+    opacity: 0.6;
+}
+
+/* Page photo hero (uit nieuwe site) */
+.page-photo-hero {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+}
+.page-photo-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("../img/foto 8.jpg") center / cover no-repeat;
+    animation: contactSubtleZoom 24s ease-in-out infinite;
+    will-change: transform;
+    z-index: -2;
+}
+.page-photo-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.65);
+    z-index: -1;
+}
+.page-photo-hero--85 {
+    min-height: 85vh;
+    flex: none;
+}
+.page-photo-hero--80 {
+    min-height: 80vh;
+    flex: none;
+}
+.page-photo-hero--foto9::before {
+    background-image: url("../img/foto 9.jpg");
+}
+
+/* Visje-divider — visje zit op overgangslijn hero/body en kantelt
+   in 3 snap-stappen om de Y-as (van naar links → naar rechts) */
+.fish-divider {
+    background: var(--wit);
+    padding: 0 0 clamp(2.5rem, 5vw, 4.5rem);
+    text-align: center;
+    perspective: 900px;
+    position: relative;
+    z-index: 1;
+}
+.fish-rotator {
+    display: inline-block;
+    width: clamp(120px, 14vw, 180px);
+    height: auto;
+    margin-top: calc(clamp(120px, 14vw, 180px) * -0.2418);
+    transform: rotateY(0deg);
+    transform-origin: center center;
+    will-change: transform;
+    transition: transform 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.fish-rotator.is-flipped {
+    transform: rotateY(180deg);
+}
+.page-photo-hero-inner {
+    width: 100%;
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.page-photo-hero-eyebrow {
+    margin: 0 0 1rem;
+    color: var(--zwart);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    line-height: 1;
+}
+.page-photo-hero-eyebrow::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 1px;
+    background: var(--zwart);
+    margin-top: 0.9rem;
+    opacity: 0.5;
+}
+.page-photo-hero-heading {
+    color: var(--geel);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    max-width: 900px;
+    margin: 0;
+}
+.page-photo-hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.3em);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+.page-photo-hero-heading.visible .page-photo-hero-word { opacity: 1; transform: translateY(0); }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(1) { transition-delay: 0.05s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(2) { transition-delay: 0.15s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(3) { transition-delay: 0.25s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(4) { transition-delay: 0.35s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(5) { transition-delay: 0.45s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(6) { transition-delay: 0.55s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(7) { transition-delay: 0.65s; }
+.page-photo-hero-heading.visible .page-photo-hero-word:nth-of-type(8) { transition-delay: 0.75s; }
+.page-photo-hero-text {
+    color: var(--zwart);
+    margin: 1.5rem 0 0;
+    max-width: 720px;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.6;
+}
+
+@keyframes contactSubtleZoom {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+
+/* Body content */
+.vw-body {
+    background: var(--wit);
+    padding: clamp(4rem, 7vw, 6rem) 0 clamp(4rem, 7vw, 6rem);
+}
+.vw-body-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+}
+.vw-body-wrap p {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    line-height: 1.8;
+    color: #222;
+    margin-bottom: 1.2rem;
+}
+.vw-body-wrap p:last-child { margin-bottom: 0; }
+.vw-body .vw-programma-grid {
+    max-width: 820px;
+    margin: clamp(2rem, 3.5vw, 3.5rem) auto;
+}
+.vw-body-photo { margin: clamp(2rem, 4vw, 3rem) 0; }
+.vw-body-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05);
+}
+.vw-body-wrap .vw-body-heading {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    color: var(--zwart);
+    margin-bottom: 1.8rem;
+}
+
+.vw-body-wrap .vw-body-intro {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    line-height: 1.1;
+    color: var(--zwart);
+    margin-top: 2.2rem;
+    margin-bottom: 0;
+}
+
+/* Programma grid */
+.vw-programma-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.2rem, 2vw, 2rem);
+    position: relative;
+    z-index: 1;
+}
+.vw-programma-item {
+    background: var(--wit);
+    padding: clamp(1.6rem, 2.3vw, 2.2rem) clamp(1.6rem, 2.3vw, 2.2rem) clamp(1.6rem, 2.3vw, 2.2rem) clamp(3.8rem, 5vw, 5rem);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid #eee;
+}
+.vw-programma-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+}
+.vw-programma-check {
+    position: absolute;
+    left: clamp(1.2rem, 1.8vw, 1.8rem);
+    top: clamp(1.8rem, 2.5vw, 2.4rem);
+    width: 28px;
+    height: 28px;
+    background: var(--geel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vw-programma-check::after {
+    content: '';
+    width: 12px;
+    height: 6px;
+    border-left: 2.5px solid var(--zwart);
+    border-bottom: 2.5px solid var(--zwart);
+    transform: rotate(-45deg) translate(2px, -1px);
+}
+.vw-programma-item h3 {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    letter-spacing: -0.005em;
+    color: var(--zwart);
+    margin-bottom: 0.7rem;
+    line-height: 1.15;
+}
+.vw-programma-item p {
+    font-size: 0.97rem;
+    line-height: 1.65;
+    color: #333;
+}
+
+/* CTA onderaan wethouders-pagina (eigen, simpel) */
+.wethouders-cta {
+    background: var(--geel);
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    text-align: center;
+}
+.wethouders-cta-text {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.15;
+    color: var(--zwart);
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    letter-spacing: -0.005em;
+}
+.wethouders-cta-back {
+    margin-top: 2rem;
+}
+.wethouders-cta-back a {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.wethouders-cta-back a:hover {
+    color: var(--zwart);
+}
+
+/* Link op homepage naar wethouders-pagina */
+.dienst-card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    color: var(--zwart);
+    text-decoration: none;
+    border-bottom: 2px solid var(--geel);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.dienst-card-link:hover {
+    color: var(--geel);
+    border-color: var(--zwart);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .vw-programma-grid { grid-template-columns: 1fr; }
+    .vw-body { padding: 3rem 0; }
+    .vw-body-wrap p { font-size: 0.98rem; }
+    .vw-programma-item { padding: 1.4rem 1.4rem 1.4rem 3.5rem; }
+    .wethouders-cta { padding: 3.5rem 0; }
+    .simple-header-back { font-size: 0.75rem; letter-spacing: 0.12em; }
+    .simple-header-logo img { height: 14px; }
+}
+
+/* Reduced motion — wethouders-page additions */
+@media (prefers-reduced-motion: reduce) {
+    .page-photo-hero::before { animation: none; }
+    .page-photo-hero-word { opacity: 1; transform: none; transition: none; }
 }

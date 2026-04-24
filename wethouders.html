@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wethouders &mdash; Stekelbaars</title>
+    <meta name="description" content="Het Stekelbaars wethoudersprogramma: 12 maanden strategische rugdekking voor wethouders en colleges van B&W.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+<body>
+
+    <!-- SIMPELE HEADER -->
+    <header class="simple-header">
+        <div class="simple-header-inner">
+            <a href="index.html" class="simple-header-logo">
+                <img src="Huisstijl/stekelbaars logo_in zwart.png" alt="Stekelbaars">
+            </a>
+            <a href="index.html" class="simple-header-back">&larr; Terug naar home</a>
+        </div>
+    </header>
+
+    <!-- PHOTO HERO (80vh) -->
+    <section class="page-photo-hero page-photo-hero--80 page-photo-hero--foto9">
+        <div class="container container--wide page-photo-hero-inner">
+            <h1 class="page-photo-hero-eyebrow">Wethoudersprogramma</h1>
+            <h2 class="page-photo-hero-heading">
+                <span class="page-photo-hero-word">Hoe</span>
+                <span class="page-photo-hero-word">stuur</span>
+                <span class="page-photo-hero-word">je</span>
+                <span class="page-photo-hero-word">op</span>
+                <span class="page-photo-hero-word">jouw</span>
+                <span class="page-photo-hero-word">politieke</span>
+                <span class="page-photo-hero-word">idealen?</span>
+            </h2>
+        </div>
+    </section>
+
+    <!-- VISJE-DIVIDER (kantelt naar 90° als je voorbij scrollt) -->
+    <div class="fish-divider">
+        <img src="Huisstijl/baars_1_geel.png" alt="" class="fish-rotator" aria-hidden="true">
+    </div>
+
+    <!-- BODY -->
+    <section class="vw-body">
+        <div class="container container--wide">
+            <div class="vw-body-wrap reveal">
+                <h2 class="vw-body-heading">12 maanden strategische rugdekking</h2>
+                <p>Speciaal voor individuele wethouders en voltallige colleges biedt Stekelbaars een uniek programma aan: het Stekelbaars wethouders-programma.</p>
+
+                <p>Dankzij onze jarenlange ervaring in het begeleiden en adviseren van bestuurders, weten we wat er nodig is om overeind te blijven in een complexe dynamiek.</p>
+
+                <p>Oprichter van Stekelbaars, Sebastiaan, was onder meer de rechterhand van Marjolein Moorman, de Amsterdamse wethouder die nationaal bekend werd om haar ideaal van gelijke kansen, en hielp vele politici en hun bestuurders in het vormgeven van hun verhaal.</p>
+
+                <figure class="vw-body-photo"><img src="img/foto 10.jpg" alt=""></figure>
+
+                <p>Want vanaf jouw installatie als wethouder is het tegen de stroom in zwemmen. Er zijn complexe dossiers, tegenvallers en een politieke en ambtelijke dynamiek waar naar jou gekeken wordt voor sturing.</p>
+
+                <p>Om daarin succesvol te zijn, komt het op jouw leiderschap aan. Stekelbaars helpt je met het kraakhelder krijgen van je boodschap, hoe hierop te sturen en hoe je volhoudt.</p>
+
+                <p>Speciaal voor wethouders en college introduceren we daarom het STROOM-jaarprogramma: 12 maanden lang jouw strategische rugdekking.</p>
+
+                <p class="vw-body-intro">Wat we voor je doen:</p>
+            </div>
+
+            <div class="vw-programma-grid reveal">
+                <article class="vw-programma-item">
+                    <div class="vw-programma-check" aria-hidden="true"></div>
+                    <h3>Jouw ideaal als kompas</h3>
+                    <p>Scherp blijven op waarom je dit ook alweer wilde. Daarna nemen we ook je team mee.</p>
+                </article>
+                <article class="vw-programma-item">
+                    <div class="vw-programma-check" aria-hidden="true"></div>
+                    <h3>De munitiekist</h3>
+                    <p>Geen droge data, maar argumenten die standhouden. Zo heb je de wapens om te kunnen sturen. Van het lezen van je stukken, tot het voorbereiden op de raad en de bezoeken die je doet.</p>
+                </article>
+                <article class="vw-programma-item">
+                    <div class="vw-programma-check" aria-hidden="true"></div>
+                    <h3>De Red Phone</h3>
+                    <p>Directe hulp bij issues of crisis. &#128681;</p>
+                </article>
+                <article class="vw-programma-item">
+                    <div class="vw-programma-check" aria-hidden="true"></div>
+                    <h3>Autoriteit bouwen</h3>
+                    <p>Laat de wereld zien waar je voor staat. Met je socials, toespraken en interviews.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="wethouders-cta">
+        <div class="container container--wide">
+            <p class="wethouders-cta-text reveal">Benieuwd naar hoe we jou kunnen helpen in het sturen op je idealen?</p>
+            <a href="mailto:sebastiaan@stekelbaars.nl" class="btn btn--zwart reveal">Mail Sebastiaan</a>
+            <p class="wethouders-cta-back"><a href="index.html">&larr; Terug naar home</a></p>
+        </div>
+    </section>
+
+    <script>
+        // Reveal observer
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Word-by-word reveal voor de gele kop
+        const headingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    headingObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.page-photo-hero-heading').forEach(el => headingObserver.observe(el));
+
+        // Fish-rotator: 0° → 90° terwijl het visje door de viewport scrollt
+        const fish = document.querySelector('.fish-rotator');
+        if (fish && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            let ticking = false;
+            const updateFish = () => {
+                // Page scroll progress (0 = top, 1 = bottom)
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+                // Trigger: voorbij 12% scroll → vis flipt vloeiend van rechts naar links
+                if (scrollProgress > 0.12) {
+                    fish.classList.add('is-flipped');
+                } else {
+                    fish.classList.remove('is-flipped');
+                }
+                ticking = false;
+            };
+            const requestUpdate = () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateFish);
+                    ticking = true;
+                }
+            };
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', requestUpdate, { passive: true });
+            updateFish();
+        }
+    </script>
+
+</body>
+</html>

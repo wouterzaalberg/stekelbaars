@@ -1016,6 +1016,11 @@ body {
 /* Echt mobiel: "Terug naar home" verbergen (logo blijft klikbaar) */
 @media (max-width: 600px) {
     .simple-header-back { display: none; }
+    .vw-body-photo {
+        max-width: 88%;
+        margin-left: auto;
+        margin-right: 0;
+    }
 }
 
 /* Reduced motion — wethouders-page additions */

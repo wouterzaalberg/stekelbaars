@@ -1013,6 +1013,11 @@ body {
     .simple-header-logo img { height: 14px; }
 }
 
+/* Echt mobiel: "Terug naar home" verbergen (logo blijft klikbaar) */
+@media (max-width: 600px) {
+    .simple-header-back { display: none; }
+}
+
 /* Reduced motion — wethouders-page additions */
 @media (prefers-reduced-motion: reduce) {
     .page-photo-hero::before { animation: none; }

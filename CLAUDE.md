@@ -61,8 +61,8 @@ Bestanden in `Huisstijl/`.
    - **Mobiel**: Barcodes boven en onder de tekst (3 rijen elk), stromen afwisselend van links/rechts
 
 2. **Welkomstbanner** - Zwarte balk
-   - Tijdelijke tekst over launch half april
-   - "Half april" in Barlow Semi Condensed Bold uppercase
+   - Tijdelijke tekst over launch 1 juni
+   - "1 juni" in Barlow Semi Condensed Bold uppercase
    - Email link in geel
 
 3. **Over Stekelbaars** - Witte achtergrond

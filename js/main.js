@@ -822,6 +822,16 @@ if (modelScroll) {
             slide.classList.toggle('is-active', i === activeIndex);
         });
 
+        // Yellow-bg slides: indicator switches color so dots stay visible
+        const activeSlide = slides[activeIndex];
+        const indicator = document.querySelector('.model-flow-indicator');
+        if (indicator && activeSlide) {
+            const isYellow = !activeSlide.classList.contains('model-slide--photo-bg')
+                && !activeSlide.classList.contains('model-slide--intro')
+                && (activeIndex % 2 === 1);
+            indicator.classList.toggle('on-yellow', isYellow);
+        }
+
         if (scrollHint) {
             scrollHint.style.opacity = scrollLeft > viewportW * 0.3 ? '0' : '';
         }
@@ -941,11 +951,11 @@ if (modelScroll) {
     function init() {
         var W = modelScroll.scrollWidth;
         var H = modelScroll.offsetHeight;
-        var r = Math.min(40, H * 0.045);
+        var r = Math.min(120, H * 0.13);
 
         // Two arrows with different routes
         var moves1 = [
-            { dir: 'start', x: 0.00, y: 0.75 },
+            { dir: 'start', x: 0.085, y: 0.58 },
             { dir: 'right', v: 0.17 },
             { dir: 'up',    v: 0.35 },
             { dir: 'right', v: 0.25 },
@@ -998,16 +1008,17 @@ if (modelScroll) {
         defs.appendChild(clipBlack);
         defs.appendChild(clipYellow);
 
-        // Chevron clip for arrowheads
+        // Chevron clip for PNG-based arrowheads. PNG content: chevron-V begins at
+        // ~74% across the image (left of that is just transparent/shaft area).
         var sw = 80;
         var headH = sw / 0.30;
         var headW = headH * 2;
         var chevronClip = document.createElementNS(ns, 'clipPath');
         chevronClip.setAttribute('id', 'chevron-crop');
         var cropRect = document.createElementNS(ns, 'rect');
-        cropRect.setAttribute('x', (headW * 0.55).toString());
+        cropRect.setAttribute('x', (headW * 0.74).toString());
         cropRect.setAttribute('y', '0');
-        cropRect.setAttribute('width', (headW * 0.45).toString());
+        cropRect.setAttribute('width', (headW * 0.26).toString());
         cropRect.setAttribute('height', headH.toString());
         chevronClip.appendChild(cropRect);
         defs.appendChild(chevronClip);
@@ -1020,8 +1031,8 @@ if (modelScroll) {
             yp.setAttribute('fill', 'none');
             yp.setAttribute('stroke', '#FFE980');
             yp.setAttribute('stroke-width', '72.5');
-            yp.setAttribute('stroke-linecap', 'square');
-            yp.setAttribute('stroke-linejoin', 'miter');
+            yp.setAttribute('stroke-linecap', 'butt');
+            yp.setAttribute('stroke-linejoin', 'round');
             yp.setAttribute('opacity', '0.3');
             yp.setAttribute('clip-path', 'url(#clip-black)');
             svg.appendChild(yp);
@@ -1031,8 +1042,8 @@ if (modelScroll) {
             wp.setAttribute('fill', 'none');
             wp.setAttribute('stroke', '#FFFFFF');
             wp.setAttribute('stroke-width', '72.5');
-            wp.setAttribute('stroke-linecap', 'square');
-            wp.setAttribute('stroke-linejoin', 'miter');
+            wp.setAttribute('stroke-linecap', 'butt');
+            wp.setAttribute('stroke-linejoin', 'round');
             wp.setAttribute('opacity', '0.3');
             wp.setAttribute('clip-path', 'url(#clip-yellow)');
             svg.appendChild(wp);
@@ -1069,33 +1080,31 @@ if (modelScroll) {
         modelPage.appendChild(svg);
 
         function updateArrow(a, drawLength) {
-            var vis = drawLength - 36.3;
-            var off = (a.tl - Math.max(0, vis)).toFixed(1);
+            var tailEnd = Math.max(0, Math.min(drawLength, a.tl));
+            var off = (a.tl - tailEnd).toFixed(1);
             a.yp.style.strokeDashoffset = off;
             a.wp.style.strokeDashoffset = off;
 
-            // Position head where the stroke's linecap extension lands:
-            // at tail-visible-end + 36.3px along the tangent direction at tail end.
-            var tailEnd = Math.max(0, vis);
+            // Position PNG chevron so its BACK edge (left edge of the cropped region,
+            // at local headW*0.74, headH/2) lands at the stroke endpoint. Chevron tip
+            // then extends forward past ptEnd along the tangent direction.
             var ptEnd = a.yp.getPointAtLength(tailEnd);
-            var ptBehind = a.yp.getPointAtLength(Math.max(0, tailEnd - 10));
-            var rad = Math.atan2(ptEnd.y - ptBehind.y, ptEnd.x - ptBehind.x);
-            var extend = 36.3;
-            var pt = {
-                x: ptEnd.x + extend * Math.cos(rad),
-                y: ptEnd.y + extend * Math.sin(rad)
-            };
-            var angle = rad * 180 / Math.PI;
-            var tf = 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') translate(' + (-headW * 0.55) + ',' + (-headH / 2) + ')';
+            var sampleAt = Math.max(0, tailEnd - 2);
+            var ptBehind = a.yp.getPointAtLength(sampleAt);
+            var dx = ptEnd.x - ptBehind.x;
+            var dy = ptEnd.y - ptBehind.y;
+            if (dx === 0 && dy === 0) return;
+            var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            var tf = 'translate(' + ptEnd.x.toFixed(1) + ',' + ptEnd.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') translate(' + (-headW * 0.74) + ',' + (-headH / 2) + ')';
             a.hy.setAttribute('transform', tf);
             a.hw.setAttribute('transform', tf);
             a.hy.style.display = '';
             a.hw.style.display = '';
         }
 
-        // Snake arrow starts invisible until first scroll
+        // Snake arrow starts invisible until first scroll, then fades in subtly
         svg.style.opacity = '0';
-        svg.style.transition = 'opacity 0.5s ease-out';
+        svg.style.transition = 'opacity 1.4s ease-out';
 
         function updateSnake() {
             var scrollLeft = modelScroll.scrollLeft;
@@ -1104,10 +1113,12 @@ if (modelScroll) {
 
             svg.style.transform = 'translateX(' + (-scrollLeft) + 'px)';
 
-            // Hide snake entirely before the user has scrolled
-            svg.style.opacity = scrollLeft > 0 ? '1' : '0';
+            // Fade in on first scroll, fade out as snake reaches its endpoint
+            var fadeIn = scrollLeft > 0 ? 1 : 0;
+            var fadeOut = progress < 0.9 ? 1 : Math.max(0, 1 - (progress - 0.9) / 0.1);
+            svg.style.opacity = (fadeIn * fadeOut).toFixed(2);
 
-            var baseLength = modelScroll.offsetWidth * 0.5;
+            var baseLength = modelScroll.offsetWidth * 0.25;
             var dl1 = baseLength + progress * (arrow1.tl - baseLength);
             updateArrow(arrow1, dl1);
         }
@@ -1247,24 +1258,47 @@ function formatDate(dateStr) {
 // Init news if on news page
 loadNieuws();
 
-// Section 4: fish hover via mousemove tracking
-// (fish sit behind cards at z-index 1, so :hover can't trigger via cursor)
+// Fish push: one-time small nudge when cursor enters proximity (stays in place).
+// Used on contact page and section 4 of the index ("wat zoek jij?").
 (function() {
-    const section = document.querySelector('.section-watzoek');
-    if (!section) return;
-    const fishes = section.querySelectorAll('.wz-floaters img');
-    if (!fishes.length) return;
+    const sections = document.querySelectorAll('.contact-content, .section-watzoek');
+    if (!sections.length) return;
 
-    section.addEventListener('mousemove', (e) => {
-        const x = e.clientX, y = e.clientY;
-        fishes.forEach(fish => {
-            const r = fish.getBoundingClientRect();
-            const inside = x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
-            fish.classList.toggle('wz-fish-hovered', inside);
+    const radius = 180;    // px — proximity trigger range
+    const pushAmount = 35; // px — fixed displacement per push
+
+    sections.forEach(section => {
+        const fishes = section.querySelectorAll('.wz-floaters img');
+        if (!fishes.length) return;
+
+        const state = new WeakMap();
+        fishes.forEach(fish => state.set(fish, { x: 0, y: 0, inside: false }));
+
+        section.addEventListener('mousemove', (e) => {
+            const cx = e.clientX, cy = e.clientY;
+            fishes.forEach(fish => {
+                const r = fish.getBoundingClientRect();
+                const fcx = r.left + r.width / 2;
+                const fcy = r.top + r.height / 2;
+                const dx = fcx - cx;
+                const dy = fcy - cy;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                const s = state.get(fish);
+                const inside = dist < radius;
+
+                if (inside && !s.inside) {
+                    s.x += (dx / dist) * pushAmount;
+                    s.y += (dy / dist) * pushAmount;
+                    fish.style.translate = s.x.toFixed(1) + 'px ' + s.y.toFixed(1) + 'px';
+                }
+                s.inside = inside;
+            });
         });
-    });
 
-    section.addEventListener('mouseleave', () => {
-        fishes.forEach(fish => fish.classList.remove('wz-fish-hovered'));
+        section.addEventListener('mouseleave', () => {
+            fishes.forEach(fish => {
+                state.get(fish).inside = false;
+            });
+        });
     });
 })();

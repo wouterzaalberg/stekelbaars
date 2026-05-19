@@ -72,7 +72,7 @@ Bestanden in `Huisstijl/` en `img/`.
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
 8. **Contact** (`contact.html`) — Gele achtergrond, 3 zwemmende visjes (cursor push), zwarte nameplate-labels. Links: kop + intro + gegevens. Rechts: formulier.
 9. **AI-beleid** (`ai-beleid.html`) — Simpele legal-page met placeholder tekst
-10. **Algemene voorwaarden** (`algemene-voorwaarden.html`) — Simpele legal-page met placeholder tekst (8 secties)
+10. **Algemene voorwaarden** (`algemene-voorwaarden.html`) — Legal-page met definitieve klanttekst (23 artikelen). Gebruikt `.legal-body ul > li` met gele dash + caps-strong labels voor sub-bullets per artikel.
 
 ## Gedeeld page-head patroon (subpagina's)
 
@@ -133,8 +133,8 @@ Vervangt het oude zwarte page-header patroon:
 - **8 teamleden** in card-grid (was 6 — 2 echte + 4 placeholders):
     - Sebastiaan Timmermans (Mede-oprichter) — foto sebas.jpg
     - Dorien Kuiken (Mede-oprichter) — foto dorien.jpg
-    - Joris Tjaden (Public Affairs & onderzoek) — placeholder
-    - Cas van Kleef (Campagnestrateeg) — placeholder
+    - Joris Tjaden (Public Affairs & onderzoek) — foto joris.jpg
+    - Cas van Kleef (Campagnestrateeg) — foto cas.jpg
     - Florian ter Voert (Senior PR specialist, eigen email + LinkedIn) — placeholder
     - Wilmar Versprille (Creatief Strateeg) — placeholder, tekst volgt
     - Sofi (Organic social) — placeholder, tekst volgt, achternaam volgt
@@ -356,7 +356,7 @@ Vervangt het oude zwarte page-header patroon:
 - Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)
 - Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)
 - Diensten-pagina idem: 6 hoofddiensten + 5 sub onder Organic met klant-tekst letterlijk
-- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m42**. Bumpen bij grote CSS-wijzigingen.
-- AI-beleid + algemene-voorwaarden zijn **placeholder content** — definitieve tekst komt nog van klant
+- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m43**. Bumpen bij grote CSS-wijzigingen.
+- AI-beleid is **placeholder content** — definitieve tekst komt nog van klant. Algemene voorwaarden is definitief (klanttekst, 23 artikelen).
 - Sectie 2 testimonial-quotes zijn **placeholders** (door Claude verzonnen) — klant moet echte quotes/namen aanleveren
 - Legacy CSS-regels (`.pijler-block*`, `.manifest-*`, `.crisis-grid`, `.crisis-card`, `.vw-programma-grid`, `.vw-programma-item`, `.vw-programma-check`, `.vw-body-photo` etc.) staan er nog in `styles.css` maar worden niet meer gebruikt. Kunnen opgeruimd worden bij grote refactor.

@@ -1187,6 +1187,44 @@ p {
     background: var(--geel);
 }
 
+.legal-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+
+.legal-body ul li {
+    position: relative;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--zwart);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legal-body ul li:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legal-body ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.1rem;
+    width: 0.7rem;
+    height: 2px;
+    background: var(--geel);
+}
+
+.legal-body ul li strong {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--zwart);
+    margin-right: 0.35rem;
+}
+
 /* Dark overlay variant — gebruikt op voor-wie subpagina's */
 .page-photo-hero--dark::after {
     background: rgba(0, 0, 0, 0.5);

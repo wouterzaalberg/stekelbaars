@@ -87,7 +87,7 @@ Vervangt het oude zwarte page-header patroon:
     - Optioneel: `<p class="page-photo-hero-text">` broodtekst
     - Optioneel: `<a class="btn btn--zwart page-photo-hero-cta">` CTA (gebruikt op crisis)
 - **Achtergrond**: `::before` met `url("../img/foto 8.jpg")` default (modifiers `--foto6` → diensten, `--foto7` → voor-wie overzicht), `contactSubtleZoom` 24s ease-in-out infinite (scale 1↔1.06)
-- **Overlay**: `::after` rgba(255,255,255,0.65) default. **Donkere variant** via `--dark` modifier (rgba 0,0,0,0.5 + witte eyebrow). Diensten gebruikt `--foto6` met eigen donkere overlay (zelfde 50% zwart). De 3 voor-wie subpagina's gebruiken `--dark` voor matching look.
+- **Overlay**: `::after` rgba(255,255,255,0.65) default. **Donkere variant** via `--dark` modifier (rgba 0,0,0,0.5 + witte eyebrow). Diensten gebruikt `--foto6` met eigen overlay **rgba(0,0,0,0.6)** — iets donkerder dan `--dark` omdat foto 6 zelf lichter is, om perceptueel te matchen. De 3 voor-wie subpagina's, **crisis**, en **voor-wie overzicht** gebruiken allemaal `--dark` voor matching look (voor-wie overview: `--foto7 --dark`).
 - **Hoogte**: `.page-photo-hero--85 { min-height: 85vh; flex: none }`
 - **Uitlijning**: `.page-photo-hero-inner` gebruikt vertical padding only zodat `.container container--wide`'s horizontale padding niet wordt overschreven → eyebrow begint op dezelfde x-positie als het nav-logo
 
@@ -163,11 +163,15 @@ Vervangt het oude zwarte page-header patroon:
     - 04 Paid (was sub-card, nu eigen genummerd hoofd-dienst tussen Organic+subs en 360 campagnes)
     - 05 360 campagnes en activaties (was "ATL en Digitale campagnes")
     - 06 Crisiscommunicatie (CTA naar crisis hotline)
+- **Placeholder foto's** (`.dienst-photo`): tussen 1e en 2e alinea in dienst 02 (Training en Begeleiding) en dienst 05 (360 campagnes). `<figure>`-element met 16:10 aspect, diagonale streepjespatroon achtergrond, 6px gele onderbalk, witte caps-label "Foto volgt" gecentreerd. Max-width 720px (matched met body p). Klant levert definitieve foto's aan. Mobile: aspect 4:3.
 - **Organic sub-specialismen** (`.dienst-sub`, na dienst 03, vóór dienst 04):
-    - **Schoner ontwerp**: foto-bg verwijderd. Nu beige `#f6f5ef` sectie met 6px gele top-accent
-    - **3-koloms grid** (`repeat(3, 1fr)`, 5 cards in 3+2 layout)
-    - Kaarten (`.dienst-sub-card`) wit op beige met gele 2px underline op label, padding clamp(1.5rem, 2.2vw, 2rem)
+    - **Editorial nested list** — geen kaart-grid meer, geen beige bg, geen 6px top-accent. Volgt nu hetzelfde editorial ritme als de hoofd-`.dienst-row`'s (thin top/bottom borders, geen boxen)
+    - **Tab-indent**: `padding-left: calc(clamp(100px, 12vw, 160px) + clamp(2rem, 4vw, 4rem))` — uitgelijnd onder de "Organic" h3 (matched met nummerkolom + gap uit `.dienst-row`)
+    - **Eyebrow** "Binnen Organic — vijf specialismen" met gele 2.5rem horizontale streep ervoor (zelfde stijl als andere eyebrows)
+    - **`.dienst-sub-list`** (`<ol>`, geen list-style) met 5 `.dienst-sub-item` rijen
+    - Elke `.dienst-sub-item` = 2-koloms grid `clamp(60-100px) 1fr`: links **`.dienst-sub-marker`** (italic lowercase Roman: i, ii, iii, iv, v — gele Barlow), rechts **`.dienst-sub-title`** (Barlow caps, kleinere variant van h3) + body. Thin top-border tussen items, eerste item geen border.
     - 5 specialismen: Social, PR, PA, Design/website/fotografie, Events
+    - **Mobile (≤900px)**: marker boven titel (1-koloms), eyebrow zonder streep, geen indent
 - **Diensten-CTA** onderaan **gecentreerd** (`text-align: center`) in `<div class="container container--wide">` zodat "Benieuwd wat we voor jou kunnen betekenen?" netjes in het midden staat met btn eronder
 
 ### Voor wie (overzicht + 3 subpagina's)
@@ -178,17 +182,22 @@ Vervangt het oude zwarte page-header patroon:
         - Bedrijven: "Bouw aan structurele verandering"
         - Organisaties: "Zet jouw missie om in beweging"
         - BW: "Strategische rugdekking voor jouw hele termijn"
-    - **Body**: 2-3 intro-alinea's (geen body-photo meer — verwijderd voor zakelijker look)
+    - **Body**: 2-3 intro-alinea's. BW heeft 6 alinea's met `<figure class="dienst-photo">` placeholder na alinea 3, bedrijven heeft `dienst-photo` placeholder na alinea 2 (organisaties nog zonder placeholder). Zelfde styling als diensten 02/05.
     - **Editorial vertical stack** `.vw-mix-grid` (was 3-koloms card-grid, nu flex column met dividers):
         - Elke rij `.vw-mix-card` is 2-koloms grid: titel links (gele underline) + body rechts
         - Horizontale dividers tussen rijen, top/bottom van hele lijst
         - Geen card-boxen meer, geen hover-effecten
+        - **`max-width: 820px`** (matched met `.vw-body-wrap`) zodat de grid links/rechts uitlijnt met de body-paragrafen erboven en eronder
     - Specialismen per pagina:
         - **bedrijven/organisaties**: 3 items (PR & Media, Public Affairs, Eigen kanalen)
         - **bw**: 4 items (Jouw ideaal als kompas, De munitiekist, De Red Phone, Autoriteit bouwen). Was eerder programma-grid met checkmarks; nu zelfde editorial style als de andere twee.
     - **Closing alinea** onder de grid
     - **CTA-sectie** met heading (alle 3 hebben nu een h2 met "Zwem met ons mee" variant)
-- **CTA witte variant**: `.section--zwart` class verwijderd. CSS override via `.vw-cta:not(.section--zwart)` maakt bg wit, tekst zwart. Hoofdpagina voor-wie behoudt `.section--zwart` (blijft zwart).
+- **CTA varianten**:
+    - **Alle 3 subpagina's** (`voor-wie-bw.html`, `voor-wie-organisaties.html`, `voor-wie-bedrijven.html`): `.section--geel` op `.vw-cta` → gele bg. h2 `<em>` is wit (i.p.v. geel), button `btn btn--wit`, barcode-decoratie verborgen (`::before { display: none }`). Eerste opener-zin uit CTA-h2 verhuisd naar de body-tekst erboven (organisaties: "Laat de ruis voor wat het is." → openingszin van laatste body-alinea; bedrijven: "Stop met het jagen op de volgende viral." → openingszin van laatste body-alinea).
+    - **Wit-variant** (`.vw-cta:not(.section--zwart)`) is nu niet meer in gebruik op de voor-wie subpagina's, maar blijft als fallback voor toekomstige varianten.
+    - **Overzichtspagina** (`voor-wie.html`): `.section--geel` op `.vw-cta` → gele bg + zwarte tekst (matched met `.diensten-cta`). Button `btn btn--zwart`.
+    - Gele variant override: `.vw-cta.section--geel { background: var(--geel) }` + `::before { display: none }` + `h2 em { color: var(--wit) }`.
 
 ### Crisis hotline (crisis.html)
 
@@ -356,7 +365,7 @@ Vervangt het oude zwarte page-header patroon:
 - Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)
 - Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)
 - Diensten-pagina idem: 6 hoofddiensten + 5 sub onder Organic met klant-tekst letterlijk
-- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m43**. Bumpen bij grote CSS-wijzigingen.
+- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m50**. Bumpen bij grote CSS-wijzigingen.
 - AI-beleid is **placeholder content** — definitieve tekst komt nog van klant. Algemene voorwaarden is definitief (klanttekst, 23 artikelen).
 - Sectie 2 testimonial-quotes zijn **placeholders** (door Claude verzonnen) — klant moet echte quotes/namen aanleveren
 - Legacy CSS-regels (`.pijler-block*`, `.manifest-*`, `.crisis-grid`, `.crisis-card`, `.vw-programma-grid`, `.vw-programma-item`, `.vw-programma-check`, `.vw-body-photo` etc.) staan er nog in `styles.css` maar worden niet meer gebruikt. Kunnen opgeruimd worden bij grote refactor.

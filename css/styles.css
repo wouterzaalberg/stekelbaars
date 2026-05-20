@@ -1105,7 +1105,7 @@ p {
 }
 
 .page-photo-hero--foto6::after {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .page-photo-hero--foto6 .page-photo-hero-eyebrow {
@@ -2113,36 +2113,16 @@ p {
     transform: translateX(5px);
 }
 
-/* Organic sub-specialismen nested onder pijler 03 */
+/* Organic sub-specialismen — editorial nested list onder pijler 03 */
 .dienst-sub {
     position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    background: #f6f5ef;
-    border-top: 6px solid var(--geel);
-    padding: clamp(3rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem) clamp(4rem, 6vw, 6rem);
-    margin: clamp(2rem, 3.5vw, 3.5rem) 0;
+    padding: clamp(2rem, 3.5vw, 3.25rem) 0 clamp(2.5rem, 4vw, 3.75rem);
+    margin: 0;
+    /* tab-indent: sub-list start uitgelijnd onder de "Organic" titel
+       (= breedte nummerkolom + gap uit .dienst-row) */
+    padding-left: calc(clamp(100px, 12vw, 160px) + clamp(2rem, 4vw, 4rem));
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.dienst-sub::before {
-    content: none;
-    display: none;
-    position: absolute;
-    inset: 0;
-    background: url("../img/foto 3.jpg") center / cover no-repeat;
-    animation: contactSubtleZoom 24s ease-in-out infinite;
-    will-change: transform;
-    z-index: -2;
-}
-
-.dienst-sub::after {
-    content: none;
-    display: none;
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.78);
-    z-index: -1;
 }
 
 .dienst-sub-eyebrow {
@@ -2150,42 +2130,122 @@ p {
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     color: var(--grijs);
-    margin-bottom: 1.75rem;
+    margin: 0 0 clamp(1.5rem, 2.5vw, 2.25rem);
+    position: relative;
+    padding-left: 3.5rem;
 }
 
-.dienst-sub-grid {
+.dienst-sub-eyebrow::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--geel);
+    transform: translateY(-50%);
+}
+
+.dienst-sub-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dienst-sub-item {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.25rem, 2vw, 2rem);
+    grid-template-columns: clamp(60px, 7vw, 100px) 1fr;
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+    padding: clamp(1.5rem, 2.5vw, 2.25rem) 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    align-items: baseline;
 }
 
-.dienst-sub-card {
-    background: var(--wit);
-    padding: clamp(1.5rem, 2.2vw, 2rem);
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+.dienst-sub-item:first-child {
+    border-top: none;
+    padding-top: 0;
 }
 
-.dienst-sub-label {
+.dienst-sub-marker {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 800;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--zwart);
-    padding-bottom: 0.6rem;
-    border-bottom: 2px solid var(--geel);
-    align-self: flex-start;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    color: var(--geel);
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    font-style: italic;
 }
 
-.dienst-sub-card p {
-    font-size: 0.92rem;
-    line-height: 1.6;
+.dienst-sub-content {
+    min-width: 0;
+}
+
+.dienst-sub-title {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+    text-transform: uppercase;
+    color: var(--zwart);
+    letter-spacing: -0.005em;
+    line-height: 1;
+    margin: 0 0 0.9rem;
+}
+
+.dienst-sub-content p {
+    font-size: 1.02rem;
+    line-height: 1.7;
     color: var(--zwart);
     margin: 0;
+    max-width: 720px;
+}
+
+/* Placeholder foto binnen dienst-body (tussen alinea's) */
+.dienst-photo {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    max-width: 720px;
+    width: 100%;
+    margin: clamp(2rem, 3.5vw, 3rem) 0;
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            rgba(0, 0, 0, 0.04),
+            rgba(0, 0, 0, 0.04) 16px,
+            rgba(0, 0, 0, 0.07) 16px,
+            rgba(0, 0, 0, 0.07) 18px
+        ),
+        #ededea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.dienst-photo::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6px;
+    background: var(--geel);
+}
+
+.dienst-photo-label {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--zwart);
+    background: var(--wit);
+    padding: 0.65rem 1.25rem;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* --- Extra diensten (legacy) --- */
@@ -2540,8 +2600,12 @@ p {
 
 .vw-body .vw-mix-grid,
 .vw-body .vw-programma-grid {
-    max-width: 1100px;
+    max-width: 820px;
     margin: clamp(2rem, 3.5vw, 3.5rem) auto;
+}
+
+.vw-body-wrap .dienst-photo {
+    max-width: 100%;
 }
 
 .vw-body-photo {
@@ -3073,6 +3137,13 @@ p {
 .vw-cta:not(.section--zwart) .vw-cta-back { color: rgba(0, 0, 0, 0.55); }
 .vw-cta:not(.section--zwart) .vw-cta-back:hover { color: var(--zwart); }
 .vw-cta:not(.section--zwart)::before { filter: invert(1); opacity: 0.04; }
+
+/* Gele variant (overview voor-wie + voor-wie-bw) — matched met diensten-cta */
+.vw-cta.section--geel { background: var(--geel); }
+.vw-cta.section--geel::before { display: none; }
+.vw-cta.section--geel h2 em { color: var(--wit); }
+.vw-cta.section--geel .vw-cta-back { color: rgba(0, 0, 0, 0.55); }
+.vw-cta.section--geel .vw-cta-back:hover { color: var(--zwart); }
 
 @media (max-width: 900px) {
     .vw-card {
@@ -3751,6 +3822,16 @@ p {
 }
 
 .btn--outline:hover {
+    background: var(--zwart);
+    color: var(--wit);
+}
+
+.btn--wit {
+    background: var(--wit);
+    color: var(--zwart);
+}
+
+.btn--wit:hover {
     background: var(--zwart);
     color: var(--wit);
 }
@@ -4675,18 +4756,24 @@ p {
         font-size: clamp(2.25rem, 10vw, 3.25rem);
     }
     .dienst-sub {
-        padding-left: clamp(1rem, 4vw, 2rem);
-        padding-right: clamp(1rem, 4vw, 2rem);
+        padding-left: 0;
     }
-    .dienst-sub-grid {
+    .dienst-sub-eyebrow {
+        padding-left: 0;
+    }
+    .dienst-sub-eyebrow::before {
+        display: none;
+    }
+    .dienst-sub-item {
         grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 2rem 0;
     }
-    .dienst-sub-card:nth-child(1),
-    .dienst-sub-card:nth-child(2),
-    .dienst-sub-card:nth-child(3),
-    .dienst-sub-card:nth-child(4),
-    .dienst-sub-card:nth-child(5) {
-        grid-column: 1;
+    .dienst-sub-marker {
+        font-size: 1.4rem;
+    }
+    .dienst-photo {
+        aspect-ratio: 4 / 3;
     }
     /* Legacy pijler/extra/org rules (verouderd) */
     .pijler-block,

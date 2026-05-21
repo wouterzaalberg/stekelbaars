@@ -18,23 +18,85 @@ document.querySelectorAll('.wie-intro-heading').forEach(el => observer.observe(e
 document.querySelectorAll('.contact-animated-heading').forEach(el => observer.observe(el));
 document.querySelectorAll('.page-photo-hero-heading').forEach(el => observer.observe(el));
 
-// Section 2 (stroom): koptekst fade + translate upward tijdens scrollen
+// Sectie 3 (methode): stapsgewijze inset-expansie tijdens scroll-in (4 stappen)
+(function() {
+    const section = document.querySelector('.section-methode-v2');
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        section.style.setProperty('--step', 4);
+        return;
+    }
+    const STEPS = 4;
+    const STEP_PX = 95;
+    let lastStep = -1;
+    function update() {
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const distance = vh - rect.top;
+        const step = Math.max(0, Math.min(STEPS, Math.floor(distance / STEP_PX)));
+        if (step !== lastStep) {
+            lastStep = step;
+            section.style.setProperty('--step', step);
+        }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+})();
+
+// Section 2 (stroom): X-pattern — kop schuift van links → midden → rechts,
+// tekst van rechts → midden → links. Beide faden in tijdens convergentie.
 (function() {
     const section = document.querySelector('.section-stroom');
     if (!section) return;
     const heading = section.querySelector('.stroom-heading');
-    if (!heading) return;
+    const tekst = section.querySelector('.stroom-tekst');
+    if (!heading || !tekst) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Phase boundaries (over de totale section + viewport scroll-doorgang van 0→1)
+    const IN_START = 0.10;
+    const IN_END = 0.38;
+    const HOLD_END = 0.62;
+    const OUT_END = 0.85;
+
+    function smoothstep(t) { return t * t * (3 - 2 * t); }
 
     function update() {
         const rect = section.getBoundingClientRect();
-        const sh = section.offsetHeight;
-        const scrolled = -rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / sh));
-        // Start vroeg (progress 0.03) en loop door tot 0.8; smoothstep easing voor soepele beweging
-        const raw = Math.max(0, Math.min(1, (progress - 0.03) / 0.77));
-        const eased = raw * raw * (3 - 2 * raw);
-        heading.style.transform = 'translateY(' + (-eased * 110).toFixed(2) + '%)';
-        heading.style.opacity = (1 - eased).toFixed(3);
+        const sh = rect.height;
+        const vh = window.innerHeight;
+        const totalRange = sh + vh;
+        const scrolled = vh - rect.top;
+        const p = Math.max(0, Math.min(1, scrolled / totalRange));
+
+        // Heading: links → midden → rechts (translateX)
+        // Tekst+button: rechts → midden op IN, maar OMHOOG (translateY) op OUT
+        let headingX, textX, textY, opacity;
+        if (p < IN_START) {
+            headingX = -100; textX = 100; textY = 0; opacity = 0;
+        } else if (p < IN_END) {
+            const t = smoothstep((p - IN_START) / (IN_END - IN_START));
+            headingX = -100 * (1 - t);
+            textX = 100 * (1 - t);
+            textY = 0;
+            opacity = t;
+        } else if (p < HOLD_END) {
+            headingX = 0; textX = 0; textY = 0; opacity = 1;
+        } else if (p < OUT_END) {
+            const t = smoothstep((p - HOLD_END) / (OUT_END - HOLD_END));
+            headingX = 100 * t;
+            textX = 0;
+            textY = -80 * t;
+            opacity = 1 - t;
+        } else {
+            headingX = 100; textX = 0; textY = -80; opacity = 0;
+        }
+
+        heading.style.transform = 'translateX(' + headingX.toFixed(2) + '%)';
+        heading.style.opacity = opacity.toFixed(3);
+        tekst.style.transform = 'translate(' + textX.toFixed(2) + '%, ' + textY.toFixed(2) + '%)';
+        tekst.style.opacity = opacity.toFixed(3);
     }
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
@@ -1113,8 +1175,8 @@ if (modelScroll) {
 
             svg.style.transform = 'translateX(' + (-scrollLeft) + 'px)';
 
-            // Fade in on first scroll, fade out as snake reaches its endpoint
-            var fadeIn = scrollLeft > 0 ? 1 : 0;
+            // Fade in pas na ~2 scrolls (200px), fade out aan eindpunt
+            var fadeIn = scrollLeft > 200 ? 1 : 0;
             var fadeOut = progress < 0.9 ? 1 : Math.max(0, 1 - (progress - 0.9) / 0.1);
             svg.style.opacity = (fadeIn * fadeOut).toFixed(2);
 

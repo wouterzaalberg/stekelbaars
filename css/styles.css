@@ -2793,6 +2793,7 @@ p {
 
 .vw-body-wrap .dienst-photo {
     max-width: 100%;
+    aspect-ratio: 4 / 3;
 }
 
 .vw-body-photo {
@@ -4984,6 +4985,24 @@ p {
         display: flex;
     }
 
+    /* Hamburger streepjes geel als header transparant is (hero index, nav--zwart subpagina's bovenin).
+       Wisselt automatisch terug naar zwart zodra .nav--scrolled actief wordt (witte achtergrond). */
+    .nav:not(.nav--scrolled) .nav-hamburger span {
+        background: var(--geel);
+    }
+
+    /* Mobiel menu links-uitgelijnd ipv gecentreerd */
+    .nav-mobile {
+        align-items: flex-start;
+        padding-left: clamp(1.5rem, 6vw, 3rem);
+    }
+
+    /* Hero logo: max-width 90vw zodat het nooit van het scherm valt op smalle telefoons.
+       Browser past hoogte automatisch aan om aspect-ratio te behouden (geen height: auto nodig). */
+    .hero-logo-flicker {
+        max-width: 90vw;
+    }
+
     .wie-grid,
     .team-intro-grid,
     .contact-grid {
@@ -5398,18 +5417,57 @@ p {
 
 .methode-photo {
     position: relative;
-    background-image: url("../img/foto 9.jpg");
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(1) contrast(1.08);
+    overflow: hidden;
 }
 
-.methode-photo::after {
+/* Foto via ::before zodat kinderelementen (gele balken) eigen kleur behouden */
+.methode-photo::before {
     content: "";
-    position: absolute; inset: 0;
-    box-shadow: inset 0 0 0 6px rgba(254, 219, 0, 0.18);
-    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: url("../img/foto 9.jpg") center / cover no-repeat;
+    z-index: 0;
 }
+
+/* Vier gele balken (~30px, 25% opacity) — overlappen op hoeken zodat daar 50% ontstaat */
+.methode-photo-bar {
+    position: absolute;
+    background: rgba(254, 219, 0, 0.25);
+    pointer-events: none;
+    z-index: 1;
+}
+.methode-photo-bar--top    { top: 0;    left: 0;  right: 0;  height: 30px; }
+.methode-photo-bar--bottom { bottom: 0; left: 0;  right: 0;  height: 30px; }
+.methode-photo-bar--left   { top: 0;    bottom: 0; left: 0;  width: 30px; }
+.methode-photo-bar--right  { top: 0;    bottom: 0; right: 0; width: 30px; }
+
+/* Stroommodel — zwemmende zwarte visjes op gele slides (1 per slide, decoratief, achter content) */
+.model-fish {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+.model-fish img {
+    display: block;
+    width: clamp(75px, 7vw, 110px);
+    opacity: 0.13;
+    filter: brightness(0);
+    animation: contactFishFloat 8s ease-in-out infinite;
+    will-change: transform;
+}
+.model-fish--flip img {
+    animation-name: contactFishFloatFlip;
+}
+
+/* Gele variant voor donkere achtergronden (photo-bg slides) */
+.model-fish--yellow img {
+    filter: none;
+    opacity: 0.22;
+}
+
+/* Grootte-modifiers voor wat variatie tussen visjes */
+.model-fish--lg img { width: clamp(110px, 10vw, 160px); }
+.model-fish--xl img { width: clamp(140px, 13vw, 210px); }
 
 .methode-pane {
     position: relative;

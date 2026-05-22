@@ -1439,7 +1439,11 @@ loadNieuws();
             body: encode(data)
         })
         .then(response => {
-            if (!response.ok) throw new Error('Network error');
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error('HTTP ' + response.status + ' — ' + (text.slice(0, 200) || response.statusText));
+                });
+            }
             form.reset();
             if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
             showFeedback('success', 'Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.');
@@ -1447,7 +1451,8 @@ loadNieuws();
             submitBtn.disabled = false;
         })
         .catch(err => {
-            showFeedback('error', 'Er ging iets mis met het versturen. Probeer het opnieuw of mail direct naar info@stekelbaars.nl.');
+            console.error('Contactform error:', err);
+            showFeedback('error', 'Er ging iets mis: ' + (err && err.message ? err.message : 'onbekende fout') + '. Mail anders direct naar info@stekelbaars.nl.');
             submitBtn.textContent = originalLabel;
             submitBtn.disabled = false;
         });

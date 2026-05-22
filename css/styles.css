@@ -3969,6 +3969,37 @@ p {
     resize: vertical;
 }
 
+.form-hp {
+    position: absolute;
+    left: -9999px;
+}
+
+.form-group--recaptcha {
+    margin-top: 0.5rem;
+}
+
+.form-feedback {
+    margin-top: 1.25rem;
+    padding: 1rem 1.2rem;
+    font-family: Calibri, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-left: 4px solid var(--zwart);
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--zwart);
+}
+
+.form-feedback--success {
+    border-left-color: var(--zwart);
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.form-feedback--error {
+    border-left-color: #c0392b;
+    background: rgba(192, 57, 43, 0.10);
+    color: #8b1e14;
+}
+
 /* ============================================
    BUTTONS
    ============================================ */
@@ -5304,22 +5335,18 @@ p {
     position: relative;
     width: 100%; min-height: 90vh;
     background: var(--zwart); color: #fff; overflow: hidden;
-    /* Stapsgewijze inset-expansie tijdens scroll-in (4 stappen, set via JS --step) */
-    --step: 0;
-    --max-inset-x: 72px;
-    --max-inset-top: 50px;
-    clip-path: inset(
-        calc(var(--max-inset-top) * (1 - var(--step) / 4))
-        calc(var(--max-inset-x) * (1 - var(--step) / 4))
-        0
-        calc(var(--max-inset-x) * (1 - var(--step) / 4))
-    );
-    transition: clip-path 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    /* Twee-fase scroll-driven reveal — vars set via JS:
+       Fase 1: smalle middenkolom (--x-inset ~42%) knalt snel naar de randen (~5%)
+       Fase 2: rustige finish naar 0 inset met top-relief afbouw */
+    --x-inset: 42%;
+    --top-inset: 50px;
+    clip-path: inset(var(--top-inset) var(--x-inset) 0 var(--x-inset));
+    will-change: clip-path;
 }
 @media (prefers-reduced-motion: reduce) {
     .section-methode-v2 {
-        clip-path: none;
-        transition: none;
+        --x-inset: 0%;
+        --top-inset: 0px;
     }
 }
 
@@ -5737,6 +5764,14 @@ p {
     }
     .model-intro-video {
         /* keep playing on mobile */
+    }
+    /* Mobile: tekst altijd zichtbaar — .is-active triggert niet op verticale stack */
+    .model-slide .model-slide-number,
+    .model-slide h2,
+    .model-slide p {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 
     /* --- Diensten pijler-block photo sizing --- */

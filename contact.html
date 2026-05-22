@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=m65">
+    <link rel="stylesheet" href="css/styles.css?v=m67">
 </head>
 <body>
 
@@ -95,7 +95,17 @@
                 </div>
 
                 <div class="reveal contact-form-col">
-                    <form class="contact-form" onsubmit="event.preventDefault(); alert('Formulier verstuurd (demo)');">
+                    <form class="contact-form"
+                          name="contact"
+                          method="POST"
+                          data-netlify="true"
+                          netlify-honeypot="bot-field"
+                          data-netlify-recaptcha="true"
+                          id="contactForm">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="form-hp" hidden>
+                            <label>Niet invullen: <input name="bot-field"></label>
+                        </p>
                         <div class="form-group">
                             <label for="naam">Naam</label>
                             <input type="text" id="naam" name="naam" required>
@@ -112,7 +122,11 @@
                             <label for="bericht">Bericht</label>
                             <textarea id="bericht" name="bericht" required></textarea>
                         </div>
+                        <div class="form-group form-group--recaptcha">
+                            <div data-netlify-recaptcha="true"></div>
+                        </div>
                         <button type="submit" class="btn btn--zwart">Verstuur</button>
+                        <div class="form-feedback" id="formFeedback" hidden></div>
                     </form>
                 </div>
             </div>

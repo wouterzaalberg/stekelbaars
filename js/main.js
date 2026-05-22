@@ -18,26 +18,47 @@ document.querySelectorAll('.wie-intro-heading').forEach(el => observer.observe(e
 document.querySelectorAll('.contact-animated-heading').forEach(el => observer.observe(el));
 document.querySelectorAll('.page-photo-hero-heading').forEach(el => observer.observe(el));
 
-// Sectie 3 (methode): stapsgewijze inset-expansie tijdens scroll-in (4 stappen)
+// Sectie 3 (methode): twee-fase reveal — eerst snel een smalle kolom die uit het midden
+// naar de randen knalt, daarna een rustige inset-relief naar full-bleed
 (function() {
     const section = document.querySelector('.section-methode-v2');
     if (!section) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        section.style.setProperty('--step', 4);
+        section.style.setProperty('--x-inset', '0%');
+        section.style.setProperty('--top-inset', '0px');
         return;
     }
-    const STEPS = 4;
-    const STEP_PX = 95;
-    let lastStep = -1;
+    // Eindwaarden ophalen uit CSS-vars (zodat finishing-state in CSS aanpasbaar blijft)
+    const START_X_PCT = 42;     // smalle middenkolom (links+rechts 42% verborgen)
+    const MID_X_PCT = 5;        // bijna full-bleed na fase 1
+    const END_X_PCT = 0;
+    const START_TOP_PX = 50;
+    const END_TOP_PX = 0;
+    const TOTAL_PX = 700;       // totaal scroll-bereik voor de hele reveal
+    const PHASE1_END = 0.35;    // ~245px: snelle middenkolom-expansie
+
     function update() {
         const rect = section.getBoundingClientRect();
         const vh = window.innerHeight;
         const distance = vh - rect.top;
-        const step = Math.max(0, Math.min(STEPS, Math.floor(distance / STEP_PX)));
-        if (step !== lastStep) {
-            lastStep = step;
-            section.style.setProperty('--step', step);
+        const p = Math.max(0, Math.min(1, distance / TOTAL_PX));
+
+        let xPct, topPx;
+        if (p < PHASE1_END) {
+            // Fase 1 — rapid expand (ease-out cubic)
+            const t = p / PHASE1_END;
+            const e = 1 - Math.pow(1 - t, 3);
+            xPct = START_X_PCT - (START_X_PCT - MID_X_PCT) * e;
+            topPx = START_TOP_PX;
+        } else {
+            // Fase 2 — rustige finish (smoothstep)
+            const t = (p - PHASE1_END) / (1 - PHASE1_END);
+            const e = t * t * (3 - 2 * t);
+            xPct = MID_X_PCT - (MID_X_PCT - END_X_PCT) * e;
+            topPx = START_TOP_PX - (START_TOP_PX - END_TOP_PX) * e;
         }
+        section.style.setProperty('--x-inset', xPct.toFixed(2) + '%');
+        section.style.setProperty('--top-inset', topPx.toFixed(1) + 'px');
     }
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
@@ -55,14 +76,21 @@ document.querySelectorAll('.page-photo-hero-heading').forEach(el => observer.obs
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     // Phase boundaries (over de totale section + viewport scroll-doorgang van 0→1)
-    const IN_START = 0.10;
-    const IN_END = 0.38;
-    const HOLD_END = 0.62;
-    const OUT_END = 0.85;
+    const DESKTOP_PHASES = { IN_START: 0.10, IN_END: 0.38, HOLD_END: 0.62, OUT_END: 0.85 };
+    // Mobiel: eerder op eindpositie (sectie is verhoudingsgewijs hoger t.o.v. viewport,
+    // dus dezelfde p-waarde komt later in beeld — phases naar voren halen)
+    const MOBILE_PHASES = { IN_START: 0.02, IN_END: 0.20, HOLD_END: 0.55, OUT_END: 0.80 };
+    const mobileQuery = window.matchMedia('(max-width: 900px)');
 
     function smoothstep(t) { return t * t * (3 - 2 * t); }
 
     function update() {
+        const phases = mobileQuery.matches ? MOBILE_PHASES : DESKTOP_PHASES;
+        const IN_START = phases.IN_START;
+        const IN_END = phases.IN_END;
+        const HOLD_END = phases.HOLD_END;
+        const OUT_END = phases.OUT_END;
+
         const rect = section.getBoundingClientRect();
         const sh = rect.height;
         const vh = window.innerHeight;
@@ -1361,6 +1389,67 @@ loadNieuws();
             fishes.forEach(fish => {
                 state.get(fish).inside = false;
             });
+        });
+    });
+})();
+
+// Contact form: AJAX submit naar Netlify Forms + inline bevestiging
+(function() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const feedback = document.getElementById('formFeedback');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    function encode(data) {
+        return Object.keys(data)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+            .join('&');
+    }
+
+    function showFeedback(type, message) {
+        feedback.hidden = false;
+        feedback.classList.remove('form-feedback--success', 'form-feedback--error');
+        feedback.classList.add('form-feedback--' + type);
+        feedback.textContent = message;
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // reCAPTCHA validatie: token moet aanwezig zijn
+        if (typeof grecaptcha !== 'undefined') {
+            const token = grecaptcha.getResponse();
+            if (!token) {
+                showFeedback('error', 'Bevestig eerst dat je geen robot bent.');
+                return;
+            }
+        }
+
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((v, k) => { data[k] = v; });
+
+        submitBtn.disabled = true;
+        const originalLabel = submitBtn.textContent;
+        submitBtn.textContent = 'Versturen...';
+
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode(data)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network error');
+            form.reset();
+            if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
+            showFeedback('success', 'Bedankt voor je bericht! We nemen zo snel mogelijk contact met je op.');
+            submitBtn.textContent = originalLabel;
+            submitBtn.disabled = false;
+        })
+        .catch(err => {
+            showFeedback('error', 'Er ging iets mis met het versturen. Probeer het opnieuw of mail direct naar info@stekelbaars.nl.');
+            submitBtn.textContent = originalLabel;
+            submitBtn.disabled = false;
         });
     });
 })();

@@ -5568,7 +5568,7 @@ p {
 .vb-title.visible .vb-word-anim:nth-of-type(5) { transition-delay: 0.45s; }
 .vb-title.visible .vb-word-anim:nth-of-type(6) { transition-delay: 0.55s; }
 .vb-lede {
-    font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.85);
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem); line-height: 1.6; color: rgba(255,255,255,0.85);
     max-width: 520px; margin-bottom: 4vh;
 }
 .vb-right {

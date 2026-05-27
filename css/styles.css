@@ -1567,6 +1567,13 @@ p {
     flex: 0 0 58%;
 }
 
+/* Laptop-range: --xl foto's iets smaller zodat tekst-kolom (R-slide) ruimte krijgt */
+@media (max-width: 1280px) and (min-width: 901px) {
+    .model-slide-foto--xl {
+        flex: 0 0 48%;
+    }
+}
+
 /* Gele balk-inset: foto neemt ~helft sectie, gele ruimte boven/rechts/onder
    Linkerkant blijft tegen tekstkolom (geen margin) */
 .model-slide-foto--inset-yellow {
@@ -3854,6 +3861,18 @@ p {
 
 .contact-content .contact-animated-heading {
     color: var(--zwart);
+    position: relative;
+    z-index: 3;
+}
+
+/* Gele halo achter de letters zodat zwemmende visjes niet door de tekst snijden */
+.contact-content .contact-animated-heading .contact-word {
+    text-shadow:
+        0 0 14px var(--geel),
+        0 0 14px var(--geel),
+        0 0 22px var(--geel),
+        0 0 22px var(--geel),
+        0 0 30px var(--geel);
 }
 
 .contact-content .contact-detail-label {
@@ -4388,89 +4407,80 @@ p {
     margin-bottom: 0;
 }
 
-/* Testimonials onderin sectie 2 */
-.stroom-testimonials {
+/* Partners onderin sectie 2 — logo-rij ipv testimonials */
+.stroom-partners {
     position: relative;
     z-index: 1;
     max-width: var(--content-wide);
     margin: 14vh auto 0;
     padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 4rem) 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(2rem, 4vw, 4rem);
     border-top: 2px solid rgba(0, 0, 0, 0.18);
-}
-
-.stroom-testimonial {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.stroom-testimonial-quote {
-    margin-bottom: auto;
-}
-
-.stroom-testimonial-logo {
-    height: clamp(40px, 5vw, 60px);
-    width: auto;
-    max-width: 70%;
-    object-fit: contain;
-    filter: grayscale(100%) brightness(0);
-    opacity: 0.78;
-}
-
-.stroom-testimonial-quote {
-    font-family: Calibri, 'Segoe UI', sans-serif;
-    font-style: italic;
-    font-size: clamp(0.95rem, 1.05vw, 1.05rem);
-    line-height: 1.6;
-    color: var(--zwart);
-    margin: 0;
-}
-
-.stroom-testimonial-naam {
+.stroom-partners-label {
     font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
     font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--zwart);
-    padding-top: 0.5rem;
-    border-top: 2px solid var(--zwart);
-    align-self: stretch;
-    position: relative;
+    margin: 0;
+    text-align: center;
 }
 
-.stroom-testimonial {
-    transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.stroom-testimonial-logo {
-    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.stroom-testimonial:hover .stroom-testimonial-logo {
-    opacity: 1;
-    transform: scale(1.05);
-}
-.stroom-testimonial-naam::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -2px;
-    width: 0;
-    height: 4px;
-    background: var(--geel);
-    transition: width 0.55s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.stroom-testimonial:hover .stroom-testimonial-naam::before {
+.stroom-partners-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
     width: 100%;
 }
 
+.stroom-partner-logo {
+    height: clamp(40px, 5vw, 60px);
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0);
+    opacity: 0.78;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.stroom-partner-logo:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.stroom-partner-logo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    border: 2px dashed rgba(0, 0, 0, 0.35);
+    background: transparent;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    filter: none;
+    opacity: 1;
+}
+
+.stroom-partner-logo--placeholder:hover {
+    opacity: 1;
+    transform: none;
+}
+
 @media (max-width: 900px) {
-    .stroom-testimonials {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+    .stroom-partners-logos {
+        gap: 2rem 2.5rem;
     }
 }
 
@@ -5188,15 +5198,31 @@ p {
     }
 }
 
-/* Medium monitors (901-1280px): team foto's iets kleiner zodat tekst beter zichtbaar is */
+/* Medium monitors (901-1280px): hele team-cards iets kleiner zodat ze beter in beeld vallen */
 @media (max-width: 1280px) and (min-width: 901px) {
-    .team-member-img {
-        max-width: 340px;
+    .team-grid {
+        max-width: 900px;
+        gap: clamp(2.5rem, 4vw, 4rem) clamp(1.5rem, 2.5vw, 2.5rem);
+    }
+    .team-member {
+        max-width: 380px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
+    .team-member-tekst {
+        padding: clamp(1.5rem, 2.2vw, 2rem);
+        padding-top: calc(18px + clamp(1.4rem, 2.2vw, 2rem));
+    }
+    .team-member-tekst p {
+        font-size: 0.95rem;
+    }
     .team-member-name {
-        font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+        font-size: clamp(1rem, 1.7vw, 1.3rem);
+        padding: 10px clamp(14px, 2vw, 22px);
+    }
+    .team-member-rol {
+        font-size: 0.78rem;
     }
 }
 

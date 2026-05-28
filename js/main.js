@@ -489,6 +489,14 @@ if (hamburger && mobileNav) {
         window.addEventListener('wheel', (e) => {
             e.preventDefault();
 
+            // If kinetic is idle, the page may have been moved by something
+            // external (anchor jump, scrollbar drag, arrow keys). Sync first
+            // so we don't snap back to a stale target.
+            if (!animating) {
+                targetScroll = window.scrollY;
+                currentScroll = window.scrollY;
+            }
+
             // Accumulate scroll target
             targetScroll += e.deltaY;
 
@@ -498,7 +506,6 @@ if (hamburger && mobileNav) {
 
             if (!animating) {
                 animating = true;
-                currentScroll = window.scrollY;
                 requestAnimationFrame(animate);
             }
         }, { passive: false });
@@ -962,26 +969,33 @@ if (modelScroll) {
         requestAnimationFrame(animateScroll);
     }
 
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Attach wheel handler unconditionally — laptop trackpads (incl. on
+     // touch-screen laptops) fire wheel events; pure touchscreen taps don't.
+    modelScroll.addEventListener('wheel', (e) => {
+        // Pick the dominant axis: trackpads send deltaX for horizontal swipes
+        // and deltaY for vertical. Both should drive horizontal movement.
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        if (delta === 0) return;
 
-    if (!isTouch) {
-        modelScroll.addEventListener('wheel', (e) => {
-            e.preventDefault();
+        e.preventDefault();
 
-            // Map vertical wheel to horizontal movement
-            targetLeft += e.deltaY;
+        // If kinetic is idle, sync to actual position (handles arrow keys,
+        // touchscreen swipes, native horizontal scroll).
+        if (!scrolling) {
+            targetLeft = modelScroll.scrollLeft;
+            currentLeft = modelScroll.scrollLeft;
+        }
 
-            // Clamp to scroll bounds
-            const maxLeft = modelScroll.scrollWidth - modelScroll.offsetWidth;
-            targetLeft = Math.max(0, Math.min(targetLeft, maxLeft));
+        targetLeft += delta;
 
-            if (!scrolling) {
-                scrolling = true;
-                currentLeft = modelScroll.scrollLeft;
-                requestAnimationFrame(animateScroll);
-            }
-        }, { passive: false });
-    }
+        const maxLeft = modelScroll.scrollWidth - modelScroll.offsetWidth;
+        targetLeft = Math.max(0, Math.min(targetLeft, maxLeft));
+
+        if (!scrolling) {
+            scrolling = true;
+            requestAnimationFrame(animateScroll);
+        }
+    }, { passive: false });
 
     // Sync on manual scroll (drag, touch)
     modelScroll.addEventListener('scroll', () => {

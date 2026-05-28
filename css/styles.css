@@ -1567,10 +1567,17 @@ p {
     flex: 0 0 58%;
 }
 
-/* Laptop-range: --xl foto's iets smaller zodat tekst-kolom (R-slide) ruimte krijgt */
+/* Laptop-range: --xl foto's smaller zodat tekst-kolom (R-slide) volledig leesbaar blijft */
 @media (max-width: 1280px) and (min-width: 901px) {
     .model-slide-foto--xl {
-        flex: 0 0 48%;
+        flex: 0 0 42%;
+    }
+}
+
+/* Tussenstap voor 13-15" laptops (1281-1440px) — foto net iets kleiner dan default 58% */
+@media (max-width: 1440px) and (min-width: 1281px) {
+    .model-slide-foto--xl {
+        flex: 0 0 50%;
     }
 }
 
@@ -2069,6 +2076,82 @@ p {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
     transition: background-color 0.4s ease;
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+}
+
+.dienst-sub-item {
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+}
+
+/* ---------- Dienst jump-menu (in vw-body-wrap intro) ---------- */
+.dienst-jump {
+    margin-top: clamp(2.5rem, 4vw, 3.5rem);
+    padding-top: clamp(1.75rem, 2.5vw, 2.25rem);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.dienst-jump-label {
+    display: inline-block;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.78rem;
+    color: var(--zwart);
+    margin-bottom: 1.1rem;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.dienst-jump-label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 2.25rem;
+    height: 2px;
+    background: var(--geel);
+    transform: translateY(-50%);
+}
+
+.dienst-jump-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.7rem;
+}
+
+.dienst-jump-list a {
+    display: inline-block;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    color: var(--zwart);
+    text-decoration: none;
+    padding: 0.55rem 1rem;
+    border: 1.5px solid var(--zwart);
+    background: transparent;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    line-height: 1.1;
+}
+
+.dienst-jump-list a:hover,
+.dienst-jump-list a:focus-visible {
+    background: var(--geel);
+    color: var(--zwart);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+@media (max-width: 600px) {
+    .dienst-jump-list a {
+        font-size: 0.82rem;
+        padding: 0.5rem 0.85rem;
+    }
 }
 
 .dienst-row::before {
@@ -2768,6 +2851,11 @@ p {
 .vw-body--diensten {
     position: relative;
     padding-top: clamp(4rem, 7vw, 6rem);
+    padding-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
+.vw-body--diensten + .diensten-lijst {
+    padding-top: clamp(2rem, 3.5vw, 3rem);
 }
 
 .vw-body--diensten::before {
@@ -4454,6 +4542,12 @@ p {
 .stroom-partner-logo:hover {
     opacity: 1;
     transform: scale(1.05);
+}
+
+/* JPG-logos met witte achtergrond: multiply laat wit samenvallen met geel */
+.stroom-partner-logo--multiply {
+    filter: none;
+    mix-blend-mode: multiply;
 }
 
 .stroom-partner-logo--placeholder {

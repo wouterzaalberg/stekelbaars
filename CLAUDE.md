@@ -391,7 +391,7 @@ Vervangt het oude zwarte page-header patroon:
 - Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)
 - Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)
 - Diensten-pagina idem: 6 hoofddiensten + 5 sub onder Organic met klant-tekst letterlijk
-- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m76**. Bumpen bij grote CSS-wijzigingen.
+- Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m83**. Bumpen bij grote CSS-wijzigingen.
 - AI-beleid is **placeholder content** — definitieve tekst komt nog van klant. Algemene voorwaarden is definitief (klanttekst, 23 artikelen).
 - Sectie 2 testimonial-quotes zijn **placeholders** (door Claude verzonnen) — klant moet echte quotes/namen aanleveren
 - **Video's gecomprimeerd via Premiere Pro** (H.264, 1280px breed, ~1.5 Mbps VBR, geen audio, faststart-multiplexer): `intro stekelbaars.mp4` 2.9→1.9MB, `intro stroommodel.mp4` 3.8→2.6MB. Totaal -33% bandbreedte per bezoeker — belangrijk voor Netlify credit-quotum.

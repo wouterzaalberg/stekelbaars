@@ -147,7 +147,7 @@ Vervangt het oude zwarte page-header patroon:
     - Joris Tjaden (Public Affairs & onderzoek) — foto joris.jpg
     - Cas van Kleef (Campagnestrateeg) — foto cas.jpg
     - Florian ter Voert (Senior PR specialist, eigen email + LinkedIn) — placeholder
-    - Wilmar Versprille (Creatief Strateeg) — placeholder, tekst volgt
+    - Wilmar Versprille (Creatief Strateeg) — foto wilmar.jpg + definitieve bio
     - Sofi (Organic social) — placeholder, tekst volgt, achternaam volgt
     - Wouter Zaalberg (Fotograaf & Filmmaker) — placeholder, tekst volgt
 - **Card grid** (`.team-grid`): 2 kolommen, max-width 1120px, centered
@@ -187,7 +187,7 @@ Vervangt het oude zwarte page-header patroon:
 
 ### Voor wie (overzicht + 3 subpagina's)
 
-- **Overzichtspagina** (`voor-wie.html`): nav--zwart + page-photo-hero met eyebrow "Voor wie" (85vh, **foto 11 met `background-position: center top`**). Daaronder 3 grote klikbare kaarten (vw-card, 1400px container) met **definitieve klantfoto's in kleur**: BW=foto 15, Organisaties=foto 16, Bedrijven=foto 17. **Grayscale-filter op `.vw-card-visual img` verwijderd** sinds klantfoto's in kleur zijn aangeleverd.
+- **Overzichtspagina** (`voor-wie.html`): nav--zwart + page-photo-hero met eyebrow "Voor wie" (85vh, **foto 11 met `background-position: center top`**). Heading (lowercase, géén text-transform): "stekelbaars is er voor iedereen met een ideaal" (8 woorden word-reveal). Daaronder 3 grote klikbare kaarten (vw-card, 1400px container) met **definitieve klantfoto's in kleur**: BW=foto 15, Organisaties=foto 16, Bedrijven=foto 17. **Grayscale-filter op `.vw-card-visual img` verwijderd** sinds klantfoto's in kleur zijn aangeleverd.
 - **3 subpagina's geünificeerd** — zelfde flow, zelfde styling:
     - **Photo-hero** met **`page-photo-hero--dark` modifier** (rgba 0,0,0,0.5 + witte eyebrow + gele underline). Echte heading (geen placeholder meer):
         - Bedrijven: "Bouw aan structurele verandering"
@@ -386,7 +386,7 @@ Vervangt het oude zwarte page-header patroon:
 ## Notities
 - Geen build tools, plain HTML/CSS/JS
 - Calibri is Windows systeemfont, fallback naar sans-serif
-- KvK, BTW, adressen in footer zijn placeholders
+- Footer-adres: Stekelbaars, Singel 425, 1012 WP Amsterdam (KvK/BTW nog placeholders)
 - **Contactformulier werkt** via Netlify Forms (zie Contact-sectie hierboven). Bevestigd live op `stekelbaars.netlify.app/contact.html` na het eenmalig aanzetten van "Enable form detection" in Netlify dashboard.
 - Stekelbaars is opgericht door Dorien en Sebastiaan (twee oprichters)
 - Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Stekelbaars</title>
+    <meta name="description" content="Neem contact op met Stekelbaars. We denken graag vrijblijvend met je mee.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=m79">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav nav--zwart">
+        <div class="nav-inner">
+            <a href="index.html">
+                <img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="nav-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="model.html">Het Stroommodel</a></li>
+                <li><a href="wat-we-doen.html">Diensten</a></li>
+                <li class="nav-dropdown">
+                    <a href="voor-wie.html">Voor wie</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a></li>
+                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
+                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
+                    </ul>
+                </li>
+                <li><a href="crisis.html" class="nav-crisis">Crisis hotline</a></li>
+                <li><a href="wie-we-zijn.html">Team</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="nav-hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="nav-mobile">
+        <a href="model.html">Het Stroommodel</a>
+        <a href="wat-we-doen.html">Diensten</a>
+        <a href="voor-wie.html">Voor wie</a>
+        <div class="nav-mobile-sub">
+            <a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a>
+            <a href="voor-wie-organisaties.html">Organisaties</a>
+            <a href="voor-wie-bedrijven.html">Bedrijven</a>
+        </div>
+        <a href="crisis.html">Crisis hotline</a>
+        <a href="wie-we-zijn.html">Team</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- CONTACT -->
+    <section class="contact-content">
+        <div class="wz-floaters" aria-hidden="true">
+            <img src="Huisstijl/baars_1_zwart.png" alt="" style="top: 22%; left: 6%;">
+            <img src="Huisstijl/baars_3_zwart.png" alt="" class="wz-fish-flip" style="top: 38%; left: 84%;">
+            <img src="Huisstijl/baars_2_zwart.png" alt="" style="top: 90%; left: 26%;">
+        </div>
+        <div class="container container--wide">
+            <div class="contact-grid">
+                <h2 class="contact-animated-heading">
+                    <span class="contact-word">Laten</span>
+                    <span class="contact-word">we</span>
+                    <span class="contact-word">kennismaken</span>
+                </h2>
+                <div class="contact-info">
+                    <p class="reveal">Heb je een vraag, wil je sparren over een communicatievraagstuk of ben je benieuwd wat we voor je kunnen betekenen? Neem gerust contact op. We reageren altijd binnen een werkdag.</p>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Email</div>
+                        <p><a href="mailto:dorien@stekelbaars.nl">dorien@stekelbaars.nl</a><br><a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a></p>
+                    </div>
+
+                    <!-- Telefoon-blok tijdelijk verborgen tot definitief nummer beschikbaar is
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Telefoon</div>
+                        <p>020 volgt</p>
+                    </div>
+                    -->
+
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Adres</div>
+                        <p>Stekelbaars, Singel 425, 1012 WP Amsterdam</p>
+                    </div>
+
+                    <div class="contact-detail">
+                        <div class="contact-detail-label">Vergaderlocatie</div>
+                        <p>Het Buurthuisje, Waterkersweg 416, Amsterdam</p>
+                    </div>
+                </div>
+
+                <div class="reveal contact-form-col">
+                    <form class="contact-form"
+                          name="contact"
+                          method="POST"
+                          data-netlify="true"
+                          netlify-honeypot="bot-field"
+                          data-netlify-recaptcha="true"
+                          id="contactForm">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="form-hp" hidden>
+                            <label>Niet invullen: <input name="bot-field"></label>
+                        </p>
+                        <div class="form-group">
+                            <label for="naam">Naam</label>
+                            <input type="text" id="naam" name="naam" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organisatie">Organisatie</label>
+                            <input type="text" id="organisatie" name="organisatie">
+                        </div>
+                        <div class="form-group">
+                            <label for="bericht">Bericht</label>
+                            <textarea id="bericht" name="bericht" required></textarea>
+                        </div>
+                        <div class="form-group form-group--recaptcha">
+                            <div data-netlify-recaptcha="true"></div>
+                        </div>
+                        <button type="submit" class="btn btn--zwart">Verstuur</button>
+                        <div class="form-feedback" id="formFeedback" hidden></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container container--wide">
+            <div class="footer-inner footer-inner--4col">
+                <div class="footer-brand">
+                    <img src="Huisstijl/stekelbaars logo_in wit.png" alt="Stekelbaars" class="footer-logo">
+                    <p>Strategisch communicatiebureau dat samen met jou je idealen waarmaakt.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>Pagina's</h4>
+                    <ul>
+                        <li><a href="wat-we-doen.html">Diensten</a></li>
+                        <li><a href="model.html">Het Stroommodel</a></li>
+                        <li class="nav-dropdown">
+                    <a href="voor-wie.html">Voor wie</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a></li>
+                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
+                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
+                    </ul>
+                </li>
+                        <li><a href="wie-we-zijn.html">Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav">
+                    <h4>Overig</h4>
+                    <ul>
+                        <li><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></li>
+                        <li><a href="ai-beleid.html">AI-beleid</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <a href="mailto:dorien@stekelbaars.nl">dorien@stekelbaars.nl</a><br>
+                    <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a><br>
+                    <a href="mailto:info@stekelbaars.nl">info@stekelbaars.nl</a>
+                    <div class="footer-adres">
+                        <p>Stekelbaars</p>
+                        <p>Singel 425</p>
+                        <p>1012 WP Amsterdam</p>
+                        <p>KvK: 42052516</p>
+                        <p>BTW: NL869488788B01</p>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4>Vergaderlocatie</h4>
+                    <div class="footer-adres">
+                        <p>Het Buurthuisje</p>
+                        <p>Waterkersweg 416</p>
+                        <p>Amsterdam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Stekelbaars. Alle rechten voorbehouden.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=m30"></script>
+
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5039f458836c4ebdb71d0c7ad9f4d81d"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

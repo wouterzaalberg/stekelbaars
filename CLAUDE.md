@@ -8,14 +8,17 @@ Website voor Stekelbaars, communicatiebureau.
 
 ## Branches & Hosting
 
+**Sinds de launch (31 mei 2026): de volledige nieuwe site is live op `stekelbaars.nl` via Netlify.**
+
 | Branch | Hosting | URL | Doel |
 |---|---|---|---|
-| `main` | GitHub Pages | stekelbaars.nl | Live landingspagina |
-| `nieuwe-site` | Netlify | stekelbaars.netlify.app | Volledige site in ontwikkeling |
+| `main` | Netlify | stekelbaars.nl | **Live productie** (volledige site) |
+| `nieuwe-site` | — | — | Legacy dev-branch, met pensioen (identiek aan `main` op moment van switch; mag verwijderd) |
 
-- Tekstwijzigingen live site → op `main`
-- Nieuwe site bouwen → op `nieuwe-site`
-- CMS (Decap): `stekelbaars.netlify.app/admin/` via Netlify Identity (git-gateway)
+- **GitHub Pages is uitgezet** (was de oude landingspagina-host). De domein-cutover liep via Squarespace DNS (Google Cloud nameservers): apex A → `75.2.60.5`, `www` CNAME → `stekelbaars.netlify.app`, `www` is primary. MX (Google Workspace) onaangeroerd.
+- **Wijzigingen live site → op `main`** (Netlify deployt `main`). Let op: `main` staat in een aparte git-worktree (`../stekelbaars-main`); de hoofdmap staat nog op `nieuwe-site`.
+- Oude URL `wethouders.html` → 301-redirect naar `voor-wie-bw.html` via `_redirects`.
+- CMS (Decap): `stekelbaars.nl/admin/` via Netlify Identity (git-gateway), `branch: main`.
 
 ## Huisstijl
 

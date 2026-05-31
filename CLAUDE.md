@@ -241,7 +241,7 @@ Vervangt het oude zwarte page-header patroon:
 - Dropdown Voor wie: B&W, Organisaties, Bedrijven → **direct** naar subpagina's
 - "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
 - **Dropdown positie**: `left: 0` (links-uitgelijnd met V van "Voor wie")
-- Footer paginalinks: Diensten, Het Stroommodel, Voor wie (met dropdown), Team, Nieuws
+- Footer paginalinks: Diensten, Het Stroommodel, Voor wie (met dropdown), Team. **Nieuws-links verborgen** (klant wil nieuws later pas live; `nieuws.html` bestaat nog maar wordt nergens meer gelinkt). Terugzetten = `<li><a href="nieuws.html">Nieuws</a></li>` weer toevoegen in footer Pagina's + Overig.
 - Hamburger-menu op mobiel (volledig scherm overlay)
 
 ### Page headers (oud patroon — alleen nog voor nieuws)
@@ -392,7 +392,7 @@ Vervangt het oude zwarte page-header patroon:
 - Subpagina-teksten op voor-wie zijn **aangeleverd door klant en letterlijk overgenomen** (geen rewrites, geen uitgevonden tussenkoppen)
 - Diensten-pagina idem: 6 hoofddiensten + 5 sub onder Organic met klant-tekst letterlijk
 - Cache-busting: `styles.css?v=mX` in alle HTML's, **huidige versie: m83**. Bumpen bij grote CSS-wijzigingen.
-- AI-beleid is **placeholder content** — definitieve tekst komt nog van klant. Algemene voorwaarden is definitief (klanttekst, 23 artikelen).
+- AI-beleid is nu **definitieve tekst** (klant keurde de eerder geschreven concepttekst goed; "Placeholder —"-markeringen en "datum volgt" verwijderd, datum op "mei 2026"). Algemene voorwaarden is definitief (klanttekst, 23 artikelen).
 - Sectie 2 testimonial-quotes zijn **placeholders** (door Claude verzonnen) — klant moet echte quotes/namen aanleveren
 - **Video's gecomprimeerd via Premiere Pro** (H.264, 1280px breed, ~1.5 Mbps VBR, geen audio, faststart-multiplexer): `intro stekelbaars.mp4` 2.9→1.9MB, `intro stroommodel.mp4` 3.8→2.6MB. Totaal -33% bandbreedte per bezoeker — belangrijk voor Netlify credit-quotum.
 - **Launch plan**: site gaat volgende week (na 22 mei 2026) live op `stekelbaars.nl`. Migratie-strategie van GitHub Pages (`main`) naar Netlify-deploy nog te bepalen. **Aandachtspunt**: bij switch naar Netlify als productie verlies je géén Netlify Forms / Decap CMS-functionaliteit; bij GitHub Pages wel.

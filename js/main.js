@@ -1472,3 +1472,25 @@ loadNieuws();
         });
     });
 })();
+
+/* Achtergrond-video autoplay-fallback (vooral iOS Safari) */
+(function () {
+    var vids = document.querySelectorAll('video[autoplay]');
+    if (!vids.length) return;
+    function kick() {
+        vids.forEach(function (v) {
+            v.muted = true; // property zetten, niet alleen het attribuut — iOS-vereiste voor autoplay
+            var p = v.play();
+            if (p && p.catch) { p.catch(function () {}); }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', kick);
+    window.addEventListener('load', kick);
+    // Eerste gebruikersinteractie als laatste redmiddel (bv. na Low Power Mode-blokkade)
+    ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+        window.addEventListener(ev, function once() {
+            kick();
+            window.removeEventListener(ev, once);
+        }, { passive: true });
+    });
+})();

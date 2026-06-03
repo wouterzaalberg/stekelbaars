@@ -317,6 +317,19 @@ Vervangt het oude zwarte page-header patroon:
 - **≤ 600px** (telefoons): extra typografie-schaling, testimonial cards 80vw breed
 - Breakpoints 1280/900/600px worden consistent gebruikt
 
+## SEO
+
+Toegevoegd in juni 2026 (op `main` = productie):
+
+- **Per pagina in `<head>`**: unieke `<title>` + `<meta name="description">`, `<link rel="canonical">` (absoluut, `https://stekelbaars.nl/...`), favicon-set, en volledige **Open Graph + Twitter Card** tags (`og:type/site_name/locale/url/title/description/image` + `twitter:card=summary_large_image`).
+- **og:image**: `img/og-image.jpg` (1200×630) — geel logo op zwarte achtergrond, gegenereerd met ImageMagick uit `Huisstijl/stekelbaars logo_in geel.png`. Op álle pagina's als uniform deelplaatje.
+- **Favicons** (root): `favicon.ico` (16/32/48 multi-res), `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180×180) — gele baars (`baars_2_geel.png`) op zwart vierkant.
+- **Structured data**: JSON-LD `ProfessionalService` op `index.html` (naam, adres Singel 425, e-mail info@, url, logo). Goed voor merk-/lokale SEO.
+- **`robots.txt`** (root): allow all, `Disallow: /admin/`, verwijst naar sitemap.
+- **`sitemap.xml`** (root): 12 publieke pagina's. **`nieuws.html` staat er bewust NIET in** (nog niet gelanceerd) en heeft `<meta name="robots" content="noindex, follow">`.
+- **Bij nieuwe pagina's**: kopieer het head-blok (title/description/canonical/favicon/og/twitter) en voeg de URL toe aan `sitemap.xml`. Bij live zetten van nieuws: noindex weghalen + url aan sitemap toevoegen.
+- **Nog te doen na deploy**: sitemap indienen in Google Search Console (`https://stekelbaars.nl/sitemap.xml`).
+
 ## Bestandsstructuur
 
 ```

@@ -327,8 +327,9 @@ Toegevoegd in juni 2026 (op `main` = productie):
 - **Structured data**: JSON-LD `ProfessionalService` op `index.html` (naam, adres Singel 425, e-mail info@, url, logo). Goed voor merk-/lokale SEO.
 - **`robots.txt`** (root): allow all, `Disallow: /admin/`, verwijst naar sitemap.
 - **`sitemap.xml`** (root): 12 publieke pagina's. **`nieuws.html` staat er bewust NIET in** (nog niet gelanceerd) en heeft `<meta name="robots" content="noindex, follow">`.
-- **Bij nieuwe pagina's**: kopieer het head-blok (title/description/canonical/favicon/og/twitter) en voeg de URL toe aan `sitemap.xml`. Bij live zetten van nieuws: noindex weghalen + url aan sitemap toevoegen.
-- **Nog te doen na deploy**: sitemap indienen in Google Search Console (`https://stekelbaars.nl/sitemap.xml`).
+- **Alle absolute URLs gebruiken `https://www.stekelbaars.nl/`** (canonical, og:url/og:image, sitemap-loc, robots). `www` is het primaire domein; de apex `stekelbaars.nl` 301-redirect ernaartoe — daarom wijzen canonical/og direct naar www (geen redirect-hop voor crawlers/scrapers).
+- **Bij nieuwe pagina's**: kopieer het head-blok (title/description/canonical/favicon/og/twitter, met `www`) en voeg de URL toe aan `sitemap.xml`. Bij live zetten van nieuws: noindex weghalen + url aan sitemap toevoegen.
+- **Nog te doen na deploy**: sitemap indienen in Google Search Console (`https://www.stekelbaars.nl/sitemap.xml`).
 
 ## Bestandsstructuur
 

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://stekelbaars.nl/sitemap.xml
+Sitemap: https://www.stekelbaars.nl/sitemap.xml

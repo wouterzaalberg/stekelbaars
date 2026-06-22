@@ -11,13 +11,11 @@ Want toen we met Stekelbaars begonnen, wisten we meteen wat onze droomopdracht z
 
 Terwijl je kunt stellen dat een sterke vakbond relevanter is dan ooit. Wat is de toekomst van werk in relatie tot AI? Hoe gaan we om met de vergrijzing? Hoe beschermen we werknemers tegen roofkapitalisme en techbro’s?
 
-Tel daarbij op een kabinet dat fors wil bezuinigen op sociale zekerheid en de zorg en je hebt een uitstekende positie. Het lukte de nieuwe voorzitter Hans Spekman al een aantal bezuinigingen van tafel te krijgen. Nu is het - aan de vooravond van een reeks stakingen - de opdracht een alternatief te formuleren. Dat goed is voor Nederland, herkend wordt door de vaste achterban en relevant is voor nieuwe leden.
+Tel daarbij op een kabinet dat fors wil bezuinigen op sociale zekerheid en de zorg en je hebt een uitstekende positie. Het lukte de nieuwe voorzitter Hans Spekman al een aantal plannen van tafel te krijgen, maar het kabinet wil nog steeds fors bezuinigen. Nu is het - aan de vooravond van een reeks stakingen - de opdracht een alternatief te formuleren. Dat goed is voor Nederland, herkend wordt door de vaste achterban en relevant is voor nieuwe leden.
 
 Sebastiaan heeft bovendien een verleden bij de vakbond. Hij was hoofd marketing en communicatie bij de AOb.
 
 ![Sebastiaan in actie voor de AOb](/img/uploads/whatsapp-image-2026-06-22-at-16.51.00.jpeg)
-
-
 
 Dus, Duik mee in de FNV
 
@@ -27,7 +25,7 @@ De FNV is een gigantische club. Honderduizenden leden, tientallen sectoren, hond
 
 De afgelopen decennia daalde de organisatiegraad van de vakbonden flink.  Dat is een probleem, want de macht van het getal - je collectieve macht - weegt zwaar. Je kunt wel dreigen met een staking, maar als er niemand meedoet staat het knap lullig. Het gemiddelde lid is oud en man. De laatste jaren lijkt er een voorzichtige kentering. Er worden meer jongeren en vrouwen lid van de [bond.](https://www.cbs.nl/nl-nl/nieuws/2025/44/meer-jonge-vakbondsleden-na-jarenlange-daling) En het lukte om met acties de CAO-lonen flink te laten stijgen. 
 
-Het is nog niet genoeg. Arbeid verandert. De traditionele arbeideris verandert in een veel diversere groep. Arbeidsmigranten doen veel van het laag betaaldste werk. Vrouwen en jongeren zijn oververtegenwoordigd in beroepen met een onzeker arbeidscontract. Mensen hoppen vaker van baan. Maar natuurlijk zijn er ook nog genoeg mensen die wel hun 25 jaar ‘bij de baas’ volmaken op de werkvloer.
+Het is nog niet genoeg. Arbeid verandert. De traditionele arbeider is verandert in een veel diversere groep. Arbeidsmigranten doen veel van het laag betaaldste werk. Vrouwen en jongeren zijn oververtegenwoordigd in beroepen met een onzeker arbeidscontract. Mensen hoppen vaker van baan. Maar natuurlijk zijn er ook nog genoeg mensen die wel hun 25 jaar ‘bij de baas’ volmaken op de werkvloer.
 
 Bovendien zijn steeds meer mensen  zzp’er (met de nieuwe wetgeving lijkt dat aantal te stabiliseren). Sebastiaan weet uit eigen ervaring dat de FNV moeite heeft om het lidmaatschap voor ZZP’ers waardevol te maken. Je ‘krijgt’ immers geen CAO’s of collectieve onderhandelmacht. 
 

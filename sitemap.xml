@@ -51,6 +51,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.stekelbaars.nl/nieuws.html</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.stekelbaars.nl/ai-beleid.html</loc>
     <lastmod>2026-06-03</lastmod>
     <priority>0.3</priority>

@@ -1292,7 +1292,7 @@ async function loadNieuws() {
 
     try {
         // List all .md files in nieuws/berichten/ via GitHub API
-        const apiUrl = 'https://api.github.com/repos/wouterzaalberg/stekelbaars/contents/nieuws/berichten?ref=nieuwe-site';
+        const apiUrl = 'https://api.github.com/repos/wouterzaalberg/stekelbaars/contents/nieuws/berichten?ref=main';
         const response = await fetch(apiUrl);
         const files = await response.json();
 

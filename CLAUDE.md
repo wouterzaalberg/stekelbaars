@@ -244,7 +244,7 @@ Vervangt het oude zwarte page-header patroon:
 - Dropdown Voor wie: B&W, Organisaties, Bedrijven → **direct** naar subpagina's
 - "Crisis hotline" als gele button met zwarte tekst (witte tekst bij scroll)
 - **Dropdown positie**: `left: 0` (links-uitgelijnd met V van "Voor wie")
-- Footer paginalinks: Diensten, Het Stroommodel, Voor wie (met dropdown), Team. **Nieuws-links verborgen** (klant wil nieuws later pas live; `nieuws.html` bestaat nog maar wordt nergens meer gelinkt). Terugzetten = `<li><a href="nieuws.html">Nieuws</a></li>` weer toevoegen in footer Pagina's + Overig.
+- Footer paginalinks: Diensten, Het Stroommodel, Voor wie (met dropdown), Team, **Nieuws** (live sinds 24 juni 2026; link staat in footer Pagina's + Overig op alle pagina's behalve model.html).
 - Hamburger-menu op mobiel (volledig scherm overlay)
 
 ### Page headers (oud patroon — alleen nog voor nieuws)
@@ -270,10 +270,12 @@ Vervangt het oude zwarte page-header patroon:
 ## Nieuws CMS
 
 - **Decap CMS** via Netlify Identity (git-gateway backend)
-- Admin: `stekelbaars.netlify.app/admin/`
+- Admin: `stekelbaars.nl/admin/`, `backend.branch: main`
 - Berichten: markdown files in `nieuws/berichten/` met frontmatter (title, date, image, excerpt, body)
-- Nieuwspagina laadt berichten automatisch via GitHub API (public repo, geen index nodig)
+- Nieuwspagina laadt berichten automatisch via GitHub API uit `?ref=main` (`js/main.js` → `loadNieuws()`) — **moet matchen met `admin/config.yml`'s `backend.branch`**, anders verschijnen nieuwe CMS-berichten niet (was eerder `ref=nieuwe-site` terwijl CMS naar `main` schreef — stille bug, gefixt 24 juni 2026, zie [[project_nieuws_live]])
 - Publiceren via CMS → commit op GitHub → Netlify rebuild → live
+- **Nieuws is live sinds 24 juni 2026**: links staan terug in nav/footer, `noindex` van `nieuws.html` verwijderd, toegevoegd aan `sitemap.xml`. De 4 placeholder/test-berichten zijn verwijderd uit `nieuws/berichten/`; klant kan nu via de CMS echte berichten plaatsen.
+- **Bekende beperking** (nog niet gebouwd): de nieuwspagina toont alleen titel/datum/samenvatting, geen detailpagina en geen markdown-rendering van de body. Klikbare kaarten → detailpagina is toekomstig werk.
 
 ## Animaties
 
@@ -326,9 +328,9 @@ Toegevoegd in juni 2026 (op `main` = productie):
 - **Favicons** (root): `favicon.ico` (16/32/48 multi-res), `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png` (180×180) — gele baars (`baars_2_geel.png`) op zwart vierkant.
 - **Structured data**: JSON-LD `ProfessionalService` op `index.html` (naam, adres Singel 425, e-mail info@, url, logo). Goed voor merk-/lokale SEO.
 - **`robots.txt`** (root): allow all, `Disallow: /admin/`, verwijst naar sitemap.
-- **`sitemap.xml`** (root): 12 publieke pagina's. **`nieuws.html` staat er bewust NIET in** (nog niet gelanceerd) en heeft `<meta name="robots" content="noindex, follow">`.
+- **`sitemap.xml`** (root): 13 publieke pagina's, inclusief `nieuws.html` (toegevoegd 24 juni 2026 bij live zetten).
 - **Alle absolute URLs gebruiken `https://www.stekelbaars.nl/`** (canonical, og:url/og:image, sitemap-loc, robots). `www` is het primaire domein; de apex `stekelbaars.nl` 301-redirect ernaartoe — daarom wijzen canonical/og direct naar www (geen redirect-hop voor crawlers/scrapers).
-- **Bij nieuwe pagina's**: kopieer het head-blok (title/description/canonical/favicon/og/twitter, met `www`) en voeg de URL toe aan `sitemap.xml`. Bij live zetten van nieuws: noindex weghalen + url aan sitemap toevoegen.
+- **Bij nieuwe pagina's**: kopieer het head-blok (title/description/canonical/favicon/og/twitter, met `www`) en voeg de URL toe aan `sitemap.xml`.
 - **Nog te doen na deploy**: sitemap indienen in Google Search Console (`https://www.stekelbaars.nl/sitemap.xml`).
 
 ## Bestandsstructuur

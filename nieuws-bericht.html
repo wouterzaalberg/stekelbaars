@@ -9,11 +9,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="canonical" href="https://www.stekelbaars.nl/nieuws.html">
-    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://www.stekelbaars.nl/nieuws-bericht.html">
+    <meta property="og:type" content="article">
     <meta property="og:site_name" content="Stekelbaars">
     <meta property="og:locale" content="nl_NL">
-    <meta property="og:url" content="https://www.stekelbaars.nl/nieuws.html">
+    <meta property="og:url" content="https://www.stekelbaars.nl/nieuws-bericht.html">
     <meta property="og:title" content="Nieuws — Stekelbaars">
     <meta property="og:description" content="Het laatste nieuws van Stekelbaars. Inzichten, cases en updates.">
     <meta property="og:image" content="https://www.stekelbaars.nl/img/og-image.jpg">
@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://www.stekelbaars.nl/img/og-image.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css?v=m85">
 </head>
 <body>
@@ -73,19 +73,12 @@
         <a href="contact.html">Contact</a>
     </div>
 
-    <!-- PAGE HEADER -->
-    <section class="page-header">
+    <!-- NIEUWS DETAIL (loaded via JS from nieuws/berichten/*.md) -->
+    <section class="legal-page nieuws-detail-page">
         <div class="container container--wide">
-            <h1>Nieuws</h1>
-            <p>Inzichten, cases en updates van Stekelbaars.</p>
-        </div>
-    </section>
-
-    <!-- NIEUWS GRID (loaded from JSON) -->
-    <section>
-        <div class="container container--wide">
-            <div class="nieuws-grid">
-                <div class="nieuws-empty"><p>Berichten worden geladen...</p></div>
+            <a href="nieuws.html" class="nieuws-detail-back">&larr; Terug naar nieuws</a>
+            <div class="nieuws-detail">
+                <p>Bericht wordt geladen...</p>
             </div>
         </div>
     </section>

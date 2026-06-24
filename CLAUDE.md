@@ -275,7 +275,8 @@ Vervangt het oude zwarte page-header patroon:
 - Nieuwspagina laadt berichten automatisch via GitHub API uit `?ref=main` (`js/main.js` → `loadNieuws()`) — **moet matchen met `admin/config.yml`'s `backend.branch`**, anders verschijnen nieuwe CMS-berichten niet (was eerder `ref=nieuwe-site` terwijl CMS naar `main` schreef — stille bug, gefixt 24 juni 2026, zie [[project_nieuws_live]])
 - Publiceren via CMS → commit op GitHub → Netlify rebuild → live
 - **Nieuws is live sinds 24 juni 2026**: links staan terug in nav/footer, `noindex` van `nieuws.html` verwijderd, toegevoegd aan `sitemap.xml`. De 4 placeholder/test-berichten zijn verwijderd uit `nieuws/berichten/`; klant kan nu via de CMS echte berichten plaatsen.
-- **Bekende beperking** (nog niet gebouwd): de nieuwspagina toont alleen titel/datum/samenvatting, geen detailpagina en geen markdown-rendering van de body. Klikbare kaarten → detailpagina is toekomstig werk.
+- **Detailpagina** (`nieuws-bericht.html`, toegevoegd 24 juni 2026): kaarten op `nieuws.html` linken naar `nieuws-bericht.html?slug=<bestandsnaam-zonder-.md>`. De pagina haalt de specifieke markdown direct op via `raw.githubusercontent.com` (geen API rate-limit) en rendert titel/datum/hero-foto + body. **Eigen lichte markdown-renderer** in `js/main.js` (`renderMarkdownBody`/`renderInline`, geen library) ondersteunt: paragrafen, **bold**, *italic*, ~~strikethrough~~, links, inline + standalone afbeeldingen (met figcaption uit de alt-tekst), blockquotes, genummerde/ongenummerde lijsten, `##`/`###` koppen. HTML wordt eerst geëscaped voor de markdown-parsing begint (XSS-bescherming voor content uit de CMS). Styling in `css/styles.css` onder `.nieuws-detail-*`.
+- **Bekende beperking**: client-side rendering betekent dat social media previews (Facebook/WhatsApp/Twitter) bij het delen van een artikel-link de generieke nieuws-meta tonen, niet de artikel-specifieke titel/afbeelding — die crawlers voeren geen JS uit. `document.title` en `canonical` worden wel dynamisch bijgewerkt voor browser/Google.
 
 ## Animaties
 
@@ -348,6 +349,7 @@ Toegevoegd in juni 2026 (op `main` = productie):
 ├── crisis.html
 ├── wie-we-zijn.html
 ├── nieuws.html
+├── nieuws-bericht.html
 ├── contact.html
 ├── ai-beleid.html
 ├── algemene-voorwaarden.html

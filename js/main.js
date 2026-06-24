@@ -1307,21 +1307,23 @@ async function loadNieuws() {
         const posts = await Promise.all(mdFiles.map(async (file) => {
             const res = await fetch(file.download_url);
             const text = await res.text();
-            return parseFrontmatter(text);
+            return { ...parseFrontmatter(text), slug: file.name.replace(/\.md$/, '') };
         }));
 
         // Sort by date descending
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         grid.innerHTML = posts.map(post => `
-            <article class="nieuws-card reveal">
-                ${post.image ? `<img src="${post.image}" alt="${post.title}" class="nieuws-card-img">` : ''}
-                <div class="nieuws-card-body">
-                    <div class="nieuws-card-date">${formatDate(post.date)}</div>
-                    <h3>${post.title}</h3>
-                    <p>${post.excerpt}</p>
-                </div>
-            </article>
+            <a href="nieuws-bericht.html?slug=${encodeURIComponent(post.slug)}" class="nieuws-card-link">
+                <article class="nieuws-card reveal">
+                    ${post.image ? `<img src="${post.image}" alt="${post.title}" class="nieuws-card-img">` : ''}
+                    <div class="nieuws-card-body">
+                        <div class="nieuws-card-date">${formatDate(post.date)}</div>
+                        <h3>${post.title}</h3>
+                        <p>${post.excerpt}</p>
+                    </div>
+                </article>
+            </a>
         `).join('');
 
         // Re-observe new elements
@@ -1332,23 +1334,62 @@ async function loadNieuws() {
     }
 }
 
-// Parse YAML frontmatter from markdown
+// News detail page: load a single post by slug and render its markdown body
+async function loadNieuwsDetail() {
+    const container = document.querySelector('.nieuws-detail');
+    if (!container) return;
+
+    const slug = new URLSearchParams(window.location.search).get('slug');
+    if (!slug) {
+        container.innerHTML = '<p>Bericht niet gevonden.</p>';
+        return;
+    }
+
+    try {
+        const rawUrl = `https://raw.githubusercontent.com/wouterzaalberg/stekelbaars/main/nieuws/berichten/${slug}.md`;
+        const response = await fetch(rawUrl);
+        if (!response.ok) throw new Error('not found');
+        const text = await response.text();
+        const post = parseFrontmatter(text);
+
+        document.title = `${post.title} — Stekelbaars`;
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.href = `https://www.stekelbaars.nl/nieuws-bericht.html?slug=${encodeURIComponent(slug)}`;
+
+        container.innerHTML = `
+            <div class="nieuws-detail-date">${formatDate(post.date)}</div>
+            <h1 class="nieuws-detail-title">${post.title}</h1>
+            ${post.image ? `<img src="${post.image}" alt="${post.title}" class="nieuws-detail-hero">` : ''}
+            <div class="nieuws-detail-body">${renderMarkdownBody(post.body || '')}</div>
+        `;
+    } catch (e) {
+        container.innerHTML = '<p>Dit bericht kon niet geladen worden.</p>';
+    }
+}
+
+// Parse YAML frontmatter from markdown, returns frontmatter fields plus the remaining body text
 function parseFrontmatter(markdown) {
-    const match = markdown.match(/^---\n([\s\S]*?)\n---/);
-    if (!match) return {};
+    const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+    if (!match) return { body: markdown };
     const frontmatter = {};
-    match[1].split('\n').forEach(line => {
-        const idx = line.indexOf(':');
-        if (idx === -1) return;
-        const key = line.slice(0, idx).trim();
-        let value = line.slice(idx + 1).trim();
-        // Strip quotes
-        if ((value.startsWith('"') && value.endsWith('"')) ||
-            (value.startsWith("'") && value.endsWith("'"))) {
-            value = value.slice(1, -1);
+    let currentKey = null;
+    match[1].split(/\r?\n/).forEach(line => {
+        const kv = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        if (kv) {
+            currentKey = kv[1];
+            let value = kv[2].trim();
+            // Strip quotes
+            if ((value.startsWith('"') && value.endsWith('"')) ||
+                (value.startsWith("'") && value.endsWith("'"))) {
+                value = value.slice(1, -1);
+            }
+            frontmatter[currentKey] = value;
+        } else if (currentKey && line.trim()) {
+            // Continuation line of a folded YAML scalar (e.g. a wrapped excerpt)
+            frontmatter[currentKey] += ' ' + line.trim();
         }
-        frontmatter[key] = value;
     });
+    frontmatter.body = match[2];
     return frontmatter;
 }
 
@@ -1359,8 +1400,64 @@ function formatDate(dateStr) {
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 }
 
-// Init news if on news page
+function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Inline markdown: images, links, bold, strikethrough, italic
+function renderInline(text) {
+    text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+    text = text.replace(/\[([^\]]*)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    return text;
+}
+
+// Minimal markdown-to-HTML renderer for nieuws body text (no build step / no library available)
+function renderMarkdownBody(markdown) {
+    const escaped = escapeHtml(markdown.trim());
+    const blocks = escaped.split(/\n{2,}/);
+
+    return blocks.map(block => {
+        block = block.trim();
+        if (!block) return '';
+
+        const imgOnly = block.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+        if (imgOnly) {
+            return `<figure class="nieuws-detail-image"><img src="${imgOnly[2]}" alt="${imgOnly[1]}" loading="lazy">${imgOnly[1] ? `<figcaption>${imgOnly[1]}</figcaption>` : ''}</figure>`;
+        }
+
+        const heading = block.match(/^(#{2,3})\s+(.*)$/);
+        if (heading) {
+            const level = heading[1].length;
+            return `<h${level}>${renderInline(heading[2])}</h${level}>`;
+        }
+
+        const lines = block.split('\n').map(l => l.trim());
+
+        if (lines.every(l => l.startsWith('>'))) {
+            const content = lines.map(l => renderInline(l.replace(/^>\s?/, ''))).join('<br>');
+            return `<blockquote>${content}</blockquote>`;
+        }
+
+        if (lines.every(l => /^\d+\.\s+/.test(l))) {
+            const items = lines.map(l => `<li>${renderInline(l.replace(/^\d+\.\s+/, ''))}</li>`).join('');
+            return `<ol>${items}</ol>`;
+        }
+
+        if (lines.every(l => /^[-*]\s+/.test(l))) {
+            const items = lines.map(l => `<li>${renderInline(l.replace(/^[-*]\s+/, ''))}</li>`).join('');
+            return `<ul>${items}</ul>`;
+        }
+
+        return `<p>${lines.map(renderInline).join('<br>')}</p>`;
+    }).join('\n');
+}
+
+// Init news pages
 loadNieuws();
+loadNieuwsDetail();
 
 // Fish push: one-time small nudge when cursor enters proximity (stays in place).
 // Used on contact page and section 4 of the index ("wat zoek jij?").

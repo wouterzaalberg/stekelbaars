@@ -71,7 +71,7 @@ Bestanden in `Huisstijl/` en `img/`.
     - `voor-wie-organisaties.html` — Maatschappelijke organisaties (3 items: PR, PA, Eigen kanalen)
     - `voor-wie-bedrijven.html` — Bedrijven met een ideaal (3 items: PR, PA, Eigen kanalen)
 5. **Crisis hotline** (`crisis.html`) — Photo-hero (foto 10, donker) met 24/7 CTA, context-sectie (2 alinea's), **editorial lijst 4 items** (Snelle respons, Heldere boodschap, Media strategie, Procesregie) met nummer-flip
-6. **Team** (`wie-we-zijn.html`) — Gele pagina, **9 teamleden** (Sebastiaan, Dorien, Joris, Cas, Florian, Wilmar, Nicolette, Wouter, Sanne — Sofi tijdelijk verborgen) in 2-koloms card-grid met **functie-rol-labels**. Geen photo-hero meer, geen "Over Stekelbaars" sectie meer.
+6. **Team** (`wie-we-zijn.html`) — Gele pagina, **8 teamleden** (Sebastiaan, Dorien, Joris, Florian, Wilmar, Nicolette, Wouter, Sanne — Sofi tijdelijk verborgen, Cas verwijderd) in 2-koloms card-grid met **functie-rol-labels**. Geen photo-hero meer, geen "Over Stekelbaars" sectie meer.
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
 8. **Contact** (`contact.html`) — Gele achtergrond, 3 zwemmende visjes (cursor push), zwarte nameplate-labels. Links: kop + intro + gegevens. Rechts: **werkend formulier via Netlify Forms** met reCAPTCHA 2 + honeypot + inline bevestiging (AJAX submit naar `/`). Email-notificaties naar info@, dorien@, sebastiaan@ ingesteld in Netlify dashboard.
 9. **AI-beleid** (`ai-beleid.html`) — Simpele legal-page met placeholder tekst
@@ -144,11 +144,10 @@ Vervangt het oude zwarte page-header patroon:
 - **GEEN "Over Stekelbaars" sectie meer** — pagina eindigt na de team-grid.
 - **Achtergrond geel**, tekst zwart
 - **Zwarte baarzen** op achtergrond — links + rechts gespiegeld, opacity 0.08, z-index 0
-- **9 teamleden** in card-grid:
+- **8 teamleden** in card-grid:
     - Sebastiaan Timmermans (Mede-oprichter) — foto sebas.jpg
     - Dorien Kuiken (Mede-oprichter) — foto dorien.jpg
     - Joris Tjaden (Public Affairs & onderzoek) — foto joris.jpg
-    - Cas van Kleef (Campagnestrateeg) — foto cas.jpg
     - Florian ter Voert (Senior PR specialist, eigen email + LinkedIn) — placeholder
     - Wilmar Versprille (Creatief Strateeg) — foto wilmar.jpg + definitieve bio
     - Nicolette Rodenburg (Woordvoerder & PR-strateeg) — foto nicolette.jpg, contact via eigen website (nicoletterodenburg.nl)

@@ -71,7 +71,7 @@ Bestanden in `Huisstijl/` en `img/`.
     - `voor-wie-organisaties.html` — Maatschappelijke organisaties (3 items: PR, PA, Eigen kanalen)
     - `voor-wie-bedrijven.html` — Bedrijven met een ideaal (3 items: PR, PA, Eigen kanalen)
 5. **Crisis hotline** (`crisis.html`) — Photo-hero (foto 10, donker) met 24/7 CTA, context-sectie (2 alinea's), **editorial lijst 4 items** (Snelle respons, Heldere boodschap, Media strategie, Procesregie) met nummer-flip
-6. **Team** (`wie-we-zijn.html`) — Gele pagina, **8 teamleden** (Sebastiaan, Dorien + Joris, Cas, Florian, Wilmar, Sofi, Wouter) in 2-koloms card-grid met **functie-rol-labels**. Geen photo-hero meer, geen "Over Stekelbaars" sectie meer.
+6. **Team** (`wie-we-zijn.html`) — Gele pagina, **9 teamleden** (Sebastiaan, Dorien, Joris, Cas, Florian, Wilmar, Nicolette, Wouter, Sanne — Sofi tijdelijk verborgen) in 2-koloms card-grid met **functie-rol-labels**. Geen photo-hero meer, geen "Over Stekelbaars" sectie meer.
 7. **Nieuws** (`nieuws.html`) — Laadt berichten automatisch via GitHub API uit `nieuws/berichten/*.md`
 8. **Contact** (`contact.html`) — Gele achtergrond, 3 zwemmende visjes (cursor push), zwarte nameplate-labels. Links: kop + intro + gegevens. Rechts: **werkend formulier via Netlify Forms** met reCAPTCHA 2 + honeypot + inline bevestiging (AJAX submit naar `/`). Email-notificaties naar info@, dorien@, sebastiaan@ ingesteld in Netlify dashboard.
 9. **AI-beleid** (`ai-beleid.html`) — Simpele legal-page met placeholder tekst
@@ -144,15 +144,17 @@ Vervangt het oude zwarte page-header patroon:
 - **GEEN "Over Stekelbaars" sectie meer** — pagina eindigt na de team-grid.
 - **Achtergrond geel**, tekst zwart
 - **Zwarte baarzen** op achtergrond — links + rechts gespiegeld, opacity 0.08, z-index 0
-- **8 teamleden** in card-grid (was 6 — 2 echte + 4 placeholders):
+- **9 teamleden** in card-grid:
     - Sebastiaan Timmermans (Mede-oprichter) — foto sebas.jpg
     - Dorien Kuiken (Mede-oprichter) — foto dorien.jpg
     - Joris Tjaden (Public Affairs & onderzoek) — foto joris.jpg
     - Cas van Kleef (Campagnestrateeg) — foto cas.jpg
     - Florian ter Voert (Senior PR specialist, eigen email + LinkedIn) — placeholder
     - Wilmar Versprille (Creatief Strateeg) — foto wilmar.jpg + definitieve bio
-    - Sofi (Organic social) — placeholder, tekst volgt, achternaam volgt
+    - Nicolette Rodenburg (Woordvoerder & PR-strateeg) — foto nicolette.jpg, contact via eigen website (nicoletterodenburg.nl)
     - Wouter Zaalberg (Fotograaf & Filmmaker) — placeholder, tekst volgt
+    - Sanne van de Goor (Grafisch ontwerp en huisstijl) — placeholder-foto, contact via eigen website
+    - *Sofi (Organic social) — tijdelijk verborgen (uitgecomment) tot tekst + foto klaar zijn*
 - **Card grid** (`.team-grid`): 2 kolommen, max-width 1120px, centered
 - **Team member card** (`.team-member`):
     - Portret foto (3:4 aspect, grayscale contrast 1.05) of placeholder met 45° streepjespatroon
@@ -277,6 +279,15 @@ Vervangt het oude zwarte page-header patroon:
 - **Nieuws is live sinds 24 juni 2026**: links staan terug in nav/footer, `noindex` van `nieuws.html` verwijderd, toegevoegd aan `sitemap.xml`. De 4 placeholder/test-berichten zijn verwijderd uit `nieuws/berichten/`; klant kan nu via de CMS echte berichten plaatsen.
 - **Detailpagina** (`nieuws-bericht.html`, toegevoegd 24 juni 2026): kaarten op `nieuws.html` linken naar `nieuws-bericht.html?slug=<bestandsnaam-zonder-.md>`. De pagina haalt de specifieke markdown direct op via `raw.githubusercontent.com` (geen API rate-limit) en rendert titel/datum/hero-foto + body. **Eigen lichte markdown-renderer** in `js/main.js` (`renderMarkdownBody`/`renderInline`, geen library) ondersteunt: paragrafen, **bold**, *italic*, ~~strikethrough~~, links, inline + standalone afbeeldingen (met figcaption uit de alt-tekst), blockquotes, genummerde/ongenummerde lijsten, `##`/`###` koppen. HTML wordt eerst geëscaped voor de markdown-parsing begint (XSS-bescherming voor content uit de CMS). Styling in `css/styles.css` onder `.nieuws-detail-*`.
 - **Bekende beperking**: client-side rendering betekent dat social media previews (Facebook/WhatsApp/Twitter) bij het delen van een artikel-link de generieke nieuws-meta tonen, niet de artikel-specifieke titel/afbeelding — die crawlers voeren geen JS uit. `document.title` en `canonical` worden wel dynamisch bijgewerkt voor browser/Google.
+
+### Klanten toevoegen aan de CMS (Netlify Identity)
+Puur dashboard-werk, geen code. Admin én `index.html` hebben de `netlify-identity-widget.js` al, dus de invite-flow werkt soepel.
+1. Netlify dashboard → site → **Identity** (of *Site configuration → Identity*).
+2. **Registration preferences → "Invite only"** (aanrader). Git Gateway moet aan staan (is zo).
+3. **Invite users** → e-mailadres(sen) invullen → versturen.
+4. Klant klikt invite-mail → landt op `stekelbaars.nl` met `#invite_token` → widget popt open → wachtwoord kiezen → daarna inloggen op `/admin/`. (Pop-up niet? Klant gaat naar `/admin/` → "wachtwoord vergeten".)
+- **Geen rollen**: elke uitgenodigde gebruiker krijgt volledige CMS-toegang (alle berichten maken/bewerken/publiceren). Geen "alleen nieuws"-rol, maar nieuws is toch de enige collectie.
+- Gratis tier dekt ruim genoeg gebruikers (~1000 actief).
 
 ## Animaties
 

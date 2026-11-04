@@ -1352,7 +1352,7 @@ async function loadNieuwsDetail() {
         const text = await response.text();
         const post = parseFrontmatter(text);
 
-        document.title = `${post.title} — Stekelbaars`;
+        document.title = `${post.title} — Buro Stekelbaars`;
         const canonical = document.querySelector('link[rel="canonical"]');
         if (canonical) canonical.href = `https://www.stekelbaars.nl/nieuws-bericht.html?slug=${encodeURIComponent(slug)}`;
 

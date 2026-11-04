@@ -436,6 +436,13 @@ p {
     z-index: 2;
 }
 
+/* Ondertitel staat binnen de H1 (SEO) — eigen typografie i.p.v. die van de tagline */
+.hero-tagline .hero-sub {
+    display: block;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
 .hero--video .hero-tagline .line-barcode {
     opacity: 0;
     filter: brightness(0) saturate(100%) invert(85%) sepia(60%) saturate(1000%) hue-rotate(5deg) brightness(105%);

@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="canonical" href="https://www.stekelbaars.nl/wie-we-zijn.html">
+    <meta name="theme-color" content="#000000">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Buro Stekelbaars">
     <meta property="og:locale" content="nl_NL">
@@ -19,36 +20,32 @@
     <meta property="og:image" content="https://www.stekelbaars.nl/img/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo van Buro Stekelbaars in geel op zwart">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Team — Buro Stekelbaars">
     <meta name="twitter:description" content="Maak kennis met het team van Buro Stekelbaars: communicatiestrategen, PR- en public affairs-specialisten, woordvoerders en makers.">
     <meta name="twitter:image" content="https://www.stekelbaars.nl/img/og-image.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=m84">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=m86">
+    <link rel="stylesheet" href="css/home.css?v=h8">
+    <link rel="stylesheet" href="css/pagina.css?v=p3">
 </head>
-<body>
+<body class="page-v2">
 
-    <!-- NAVIGATION -->
-    <nav class="nav nav--zwart">
+    <!-- NAVIGATIE -->
+    <nav class="nav nav--zwart" aria-label="Hoofdmenu">
         <div class="nav-inner">
-            <a href="index.html">
-                <img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="nav-logo">
+            <a href="index.html" aria-label="Buro Stekelbaars — home">
+                <img src="Huisstijl/stekelbaars logo_in geel.png" alt="Stekelbaars" class="nav-logo" width="1128" height="78">
             </a>
             <ul class="nav-links">
-                <li><a href="model.html">Het Stroommodel</a></li>
+                <li><a href="voor-wie.html">Voor wie</a></li>
                 <li><a href="wat-we-doen.html">Diensten</a></li>
-                <li class="nav-dropdown">
-                    <a href="voor-wie.html">Voor wie</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a></li>
-                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
-                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
-                    </ul>
-                </li>
-                <li><a href="crisis.html" class="nav-crisis">Crisis hotline</a></li>
-                <li><a href="wie-we-zijn.html" class="active">Team</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="aanpak.html">Aanpak</a></li>
+                <li><a href="wie-we-zijn.html" class="active" aria-current="page">Team</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <button class="nav-hamburger" aria-label="Menu">
@@ -59,215 +56,251 @@
         </div>
     </nav>
 
+    <!-- MOBIELE NAVIGATIE -->
     <div class="nav-mobile">
-        <a href="model.html">Het Stroommodel</a>
-        <a href="wat-we-doen.html">Diensten</a>
         <a href="voor-wie.html">Voor wie</a>
-        <div class="nav-mobile-sub">
-            <a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a>
-            <a href="voor-wie-organisaties.html">Organisaties</a>
-            <a href="voor-wie-bedrijven.html">Bedrijven</a>
-        </div>
-        <a href="crisis.html">Crisis hotline</a>
+        <a href="wat-we-doen.html">Diensten</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="aanpak.html">Aanpak</a>
         <a href="wie-we-zijn.html">Team</a>
         <a href="contact.html">Contact</a>
     </div>
 
-    <!-- TEAM CONTENT -->
-    <section class="team-page team-page--no-hero">
-        <!-- Decoratieve baarzen -->
-        <img src="Huisstijl/baars_1_zwart.png" alt="" class="wie-visie-baars">
-        <img src="Huisstijl/baars_1_zwart.png" alt="" class="wie-visie-baars wie-visie-baars--left">
+    <main>
 
-        <!-- Team members -->
-        <div class="container container--wide team-grid">
-            <!-- Sebastiaan -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/sebas.jpg" alt="Sebastiaan Timmermans">
-                    <h2 class="team-member-name">Sebastiaan Timmermans</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Mede-oprichter</span>
-                    <p>Samen met Dorien is Sebastiaan de oprichter van Stekelbaars. Hij heeft jarenlange leidinggevende ervaring en werkte in de media (Volkskrant, DWDD, Pauw), in de politiek en bij maatschappelijke organisaties als Wereld Natuur Fonds, Greenpeace en de Belangenbehartiger voor Belastingplichtigen. Hij is gespecialiseerd in de ontwikkeling en uitvoer van een narratief in een complexe en politieke dynamiek.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a>
-                        <a href="https://www.linkedin.com/in/sebastiaan-timmermans-15128b1a/" target="_blank" rel="noopener">LinkedIn</a>
+        <!-- HERO -->
+        <section class="ph" aria-labelledby="ph-title">
+            <div class="ph-text">
+                <h1 class="hm-title ph-title" id="ph-title" data-words>Het team</h1>
+                <p class="ph-lede">Stekelbaars is een bureau dat alleen werkt met experts die ruime ervaring hebben in hun vakgebied.</p>
+                <img src="Huisstijl/baars_2_zwart.png" alt="" class="ph-fish" width="2359" height="861" aria-hidden="true">
+            </div>
+            <figure class="ph-photo">
+                <img src="img/training.jpg" alt="Het team van Buro Stekelbaars aan het werk" width="1500" height="1126" fetchpriority="high">
+                <span class="hm-frame hm-frame--top" aria-hidden="true"></span>
+                <span class="hm-frame hm-frame--right" aria-hidden="true"></span>
+                <span class="hm-frame hm-frame--bottom" aria-hidden="true"></span>
+                <span class="hm-frame hm-frame--left" aria-hidden="true"></span>
+            </figure>
+        </section>
+
+        <!-- TEAM CONTENT -->
+        <section class="team-page">
+            <!-- Decoratieve baarzen -->
+            <img src="Huisstijl/baars_1_zwart.png" alt="" class="wie-visie-baars">
+            <img src="Huisstijl/baars_1_zwart.png" alt="" class="wie-visie-baars wie-visie-baars--left">
+    
+            <!-- Team members -->
+            <div class="container container--wide team-grid">
+                <!-- Sebastiaan -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/sebas.jpg" alt="Sebastiaan Timmermans">
+                        <h2 class="team-member-name">Sebastiaan Timmermans</h2>
                     </div>
-                </div>
-            </article>
-
-            <!-- Dorien -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/dorien.jpg" alt="Dorien Kuiken">
-                    <h2 class="team-member-name">Dorien Kuiken</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Mede-oprichter</span>
-                    <p>Samen met Sebastiaan is Dorien de oprichter van Stekelbaars. Zij was voorheen co-founder en Managing Director van PR-bureau Fitzgerald en Head of PR bij ACE. In die hoedanigheid werkte Dorien voor bedrijven en organisaties als L'Oréal, SIRE, UN Women, Kruidvat en ANWB. Zij heeft ruim vijftien jaar ervaring in het adviseren van corporate directies over reputatie en merkcommunicatie, met name gefocust op maatschappelijke thema's.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:dorien@stekelbaars.nl">dorien@stekelbaars.nl</a>
-                        <a href="https://www.linkedin.com/in/dorien-kuiken-155410a5/" target="_blank" rel="noopener">LinkedIn</a>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Mede-oprichter</span>
+                        <p>Samen met Dorien is Sebastiaan de oprichter van Stekelbaars. Hij heeft jarenlange leidinggevende ervaring en werkte in de media (Volkskrant, DWDD, Pauw), in de politiek en bij maatschappelijke organisaties als Wereld Natuur Fonds, Greenpeace en de Belangenbehartiger voor Belastingplichtigen. Hij is gespecialiseerd in de ontwikkeling en uitvoer van een narratief in een complexe en politieke dynamiek.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:sebastiaan@stekelbaars.nl">sebastiaan@stekelbaars.nl</a>
+                            <a href="https://www.linkedin.com/in/sebastiaan-timmermans-15128b1a/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
                     </div>
-                </div>
-            </article>
-
-            <!-- Joris Tjaden -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/joris.jpg" alt="Joris Tjaden">
-                    <h2 class="team-member-name">Joris Tjaden</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Public Affairs &amp; onderzoek</span>
-                    <p>Joris Tjaden is een expert op het gebied van onderzoek en public affairs. Hij was onder meer onderdeel van het onderzoeksteam van Barack Obama tijdens diens herverkiezing, de politiek adviseur van de Amsterdamse wethouder Marjolein Moorman, werkte als strateeg bij campagnebureau BKB en voor tal van maatschappelijke en commerci&euml;le projecten en organisaties.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:joris@stekelbaars.nl">joris@stekelbaars.nl</a>
-                        <a href="https://www.linkedin.com/in/joris-tjaden-4204b424/" target="_blank" rel="noopener">LinkedIn</a>
+                </article>
+    
+                <!-- Dorien -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/dorien.jpg" alt="Dorien Kuiken">
+                        <h2 class="team-member-name">Dorien Kuiken</h2>
                     </div>
-                </div>
-            </article>
-
-            <!-- Florian ter Voert -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/Florian.jpg" alt="Florian ter Voert">
-                    <h2 class="team-member-name">Florian ter Voert</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Senior PR specialist</span>
-                    <p>Florian is een pr-specialist met tien jaar ervaring. Hij werkte voornamelijk aan bureauzijde voor merken in alle haarvaten van de maatschappij. In die rol ondersteunde hij merken als ABN AMRO, Bibliotheek Rotterdam, Kruidvat, SIRE en VeiligheidNL. Met een scherp oog voor nieuwswaarde en timing beweegt hij zich op het snijvlak van media, merk en maatschappij. Hij staat dagelijks in contact met journalisten en vertaalt complexe boodschappen naar verhalen die landen bij de juiste doelgroep. Florian gelooft dat zijn liefde voor Muay Thai hem helpt in zijn werk, waar het kiezen van het juiste moment, het spel tussen proactief en reactief handelen en het hoofd koel houden onder druk bepalend zijn.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:florian@stekelbaars.nl">florian@stekelbaars.nl</a>
-                        <a href="https://www.linkedin.com/in/floriantervoert/" target="_blank" rel="noopener">LinkedIn</a>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Mede-oprichter</span>
+                        <p>Samen met Sebastiaan is Dorien de oprichter van Stekelbaars. Zij was voorheen co-founder en Managing Director van PR-bureau Fitzgerald en Head of PR bij ACE. In die hoedanigheid werkte Dorien voor bedrijven en organisaties als L'Oréal, SIRE, UN Women, Kruidvat en ANWB. Zij heeft ruim vijftien jaar ervaring in het adviseren van corporate directies over reputatie en merkcommunicatie, met name gefocust op maatschappelijke thema's.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:dorien@stekelbaars.nl">dorien@stekelbaars.nl</a>
+                            <a href="https://www.linkedin.com/in/dorien-kuiken-155410a5/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
                     </div>
-                </div>
-            </article>
-
-            <!-- Wilmar Versprille -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <div class="team-img-zoom"><img src="img/wilmar.jpg" alt="Wilmar Versprille"></div>
-                    <h2 class="team-member-name">Wilmar Versprille</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Creatief Strateeg</span>
-                    <p>Wilmar is creatief strateeg en copywriter. In de afgelopen 15 jaar bedacht hij onder andere campagnes voor Volkswagen, KPN, De Gezonde Generatie, de Belastingdienst en het Ministerie van VWS. Steeds zoekt hij naar creatieve manieren om ingewikkelde verhalen zo menselijk en toegankelijk mogelijk te vertellen. Via tv-commercials, digitale campagnes, printadvertenties en PR-activaties.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:wilmar@stekelbaars.nl">wilmar@stekelbaars.nl</a>
-                        <a href="https://www.linkedin.com/in/wilmar-versprille-8438a318/" target="_blank" rel="noopener">LinkedIn</a>
+                </article>
+    
+                <!-- Arun Chaudhary (foto volgt) -->
+                <article class="team-member reveal">
+                    <div class="team-member-img team-member-img--placeholder">
+                        <h2 class="team-member-name">Arun Chaudhary</h2>
                     </div>
-                </div>
-            </article>
-
-            <!-- Sofi tijdelijk verborgen — terugzetten zodra tekst + foto klaar zijn
-            <article class="team-member reveal">
-                <div class="team-member-img team-member-img--placeholder">
-                    <h2 class="team-member-name">Sofi</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Organic social</span>
-                    <p>Omschrijving volgt.</p>
-                </div>
-            </article>
-            -->
-
-
-            <!-- Nicolette Rodenburg -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/nicolette.jpg" alt="Nicolette Rodenburg">
-                    <h2 class="team-member-name">Nicolette Rodenburg</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Woordvoerder &amp; PR-strateeg</span>
-                    <p>Nicolette is een ervaren woordvoerder en PR-strateeg en in 2026 voor zichzelf begonnen. Eerder werkte zij bij het ministerie van OCW, het ministerie van IenW en D66. Ze was onder meer de woordvoerder van minister Dijkgraaf en staatssecretaris van Van Veldhoven.</p>
-                    <p>Ze is strategisch sterk, komt snel tot de kern en stelt de juiste vragen om jou verder te helpen.</p>
-                    <div class="team-member-contact">
-                        <a href="https://www.nicoletterodenburg.nl" target="_blank" rel="noopener">nicoletterodenburg.nl</a>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Executive Creative Director</span>
+                        <p>Chaudhary is één van de meest ervaren creatief directeuren in de internationale politiek. Hij deed dat onder meer voor de Amerikaanse senator Bernie Sanders en was de eerste videograaf van president Obama. De afgelopen jaren is Chaudhary actief over de hele wereld. Hij overzag campagnes in 44 landen, met name in Europa en Latijns-Amerika.</p>
+                        <p>Zijn meest recente overwinning: Arun was als senior creative advisor betrokken bij de historische Senaatswinst van de Democraten in Mississippi.</p>
+                        <p>De samenwerking tussen buro Stekelbaars en Chaudhary houdt concreet in dat Chaudhary zowel als executive creative director zal fungeren op specifieke projecten, als dat hij een aantal creatieve workshops zal geven, samen met het team van Stekelbaars.</p>
                     </div>
-                </div>
-            </article>
-
-            <!-- Alies Pronk -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/alies.jpg" alt="Alies Pronk">
-                    <h2 class="team-member-name">Alies Pronk</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Datastrateeg</span>
-                    <p>Alies is datastrateeg. Ze onderzoekt beschikbare data om inzicht te krijgen in de behoeften van het publiek en gebruikt die inzichten als input voor het verdere strategische proces. Jarenlang werkte ze bij communicatiebureau True Ideas (voorheen Johnny Wonder), voor maatschappelijke organisaties als NS, ProRail en UWV. Met onderzoek, analyses en strategie hielp ze organisaties hun communicatie scherper te maken en de impact van hun online communicatie te vergroten.</p>
-                    <div class="team-member-contact">
-                        <a href="mailto:alies@stekelbaars.nl">alies@stekelbaars.nl</a>
+                </article>
+    
+                <!-- Joris Tjaden -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/joris.jpg" alt="Joris Tjaden">
+                        <h2 class="team-member-name">Joris Tjaden</h2>
                     </div>
-                </div>
-            </article>
-
-            <!-- Wouter Zaalberg -->
-            <article class="team-member reveal">
-                <div class="team-member-img">
-                    <img src="img/wouter.jpg" alt="Wouter Zaalberg">
-                    <h2 class="team-member-name">Wouter Zaalberg</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Fotograaf &amp; Filmmaker</span>
-                    <p>Wouter is fotograaf en filmmaker. Hij vertaalt het verhaal van een organisatie naar beeld dat blijft hangen &mdash; van het portret van een bestuurder tot de campagnefilm waarin een ideaal tot leven komt. Voor Stekelbaars maakt hij de fotografie en video's waarmee onze klanten zichtbaar worden in een verzadigd medialandschap.</p>
-                    <div class="team-member-contact">
-                        <a href="https://www.wouterzaalberg.nl" target="_blank" rel="noopener">wouterzaalberg.nl</a>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Public Affairs &amp; onderzoek</span>
+                        <p>Joris Tjaden is een expert op het gebied van onderzoek en public affairs. Hij was onder meer onderdeel van het onderzoeksteam van Barack Obama tijdens diens herverkiezing, de politiek adviseur van de Amsterdamse wethouder Marjolein Moorman, werkte als strateeg bij campagnebureau BKB en voor tal van maatschappelijke en commerci&euml;le projecten en organisaties.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:joris@stekelbaars.nl">joris@stekelbaars.nl</a>
+                            <a href="https://www.linkedin.com/in/joris-tjaden-4204b424/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
                     </div>
-                </div>
-            </article>
-
-            <!-- Sanne van de Goor -->
-            <article class="team-member reveal">
-                <div class="team-member-img team-member-img--placeholder">
-                    <h2 class="team-member-name">Sanne van de Goor</h2>
-                </div>
-                <div class="team-member-tekst">
-                    <span class="team-member-rol">Grafisch ontwerp en huisstijl</span>
-                    <p>Sanne van de Goor is grafisch ontwerper. Ze werkt zowel in opdracht als aan zelf ge&iuml;nitieerde projecten rondom patronen, kleur en gedrag. Daarnaast geeft ze regelmatig les aan de Willem de Kooning Academie.</p>
-                    <p>Voor Stekelbaars maakte Sanne de eigen huisstijl en al het ontwerp van Door de Helft.</p>
-                    <div class="team-member-contact">
-                        <a href="https://sannevandegoor.nl" target="_blank" rel="noopener">sannevandegoor.nl</a>
+                </article>
+    
+                <!-- Florian ter Voert -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/Florian.jpg" alt="Florian ter Voert">
+                        <h2 class="team-member-name">Florian ter Voert</h2>
                     </div>
-                </div>
-            </article>
-        </div>
-    </section>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Senior PR specialist</span>
+                        <p>Florian is een pr-specialist met tien jaar ervaring. Hij werkte voornamelijk aan bureauzijde voor merken in alle haarvaten van de maatschappij. In die rol ondersteunde hij merken als ABN AMRO, Bibliotheek Rotterdam, Kruidvat, SIRE en VeiligheidNL. Met een scherp oog voor nieuwswaarde en timing beweegt hij zich op het snijvlak van media, merk en maatschappij. Hij staat dagelijks in contact met journalisten en vertaalt complexe boodschappen naar verhalen die landen bij de juiste doelgroep. Florian gelooft dat zijn liefde voor Muay Thai hem helpt in zijn werk, waar het kiezen van het juiste moment, het spel tussen proactief en reactief handelen en het hoofd koel houden onder druk bepalend zijn.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:florian@stekelbaars.nl">florian@stekelbaars.nl</a>
+                            <a href="https://www.linkedin.com/in/floriantervoert/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Wilmar Versprille -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <div class="team-img-zoom"><img src="img/wilmar.jpg" alt="Wilmar Versprille"></div>
+                        <h2 class="team-member-name">Wilmar Versprille</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Creatief Strateeg</span>
+                        <p>Wilmar is creatief strateeg en copywriter. In de afgelopen 15 jaar bedacht hij onder andere campagnes voor Volkswagen, KPN, De Gezonde Generatie, de Belastingdienst en het Ministerie van VWS. Steeds zoekt hij naar creatieve manieren om ingewikkelde verhalen zo menselijk en toegankelijk mogelijk te vertellen. Via tv-commercials, digitale campagnes, printadvertenties en PR-activaties.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:wilmar@stekelbaars.nl">wilmar@stekelbaars.nl</a>
+                            <a href="https://www.linkedin.com/in/wilmar-versprille-8438a318/" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Sofi tijdelijk verborgen — terugzetten zodra tekst + foto klaar zijn
+                <article class="team-member reveal">
+                    <div class="team-member-img team-member-img--placeholder">
+                        <h2 class="team-member-name">Sofi</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Organic social</span>
+                        <p>Omschrijving volgt.</p>
+                    </div>
+                </article>
+                -->
+    
+    
+                <!-- Nicolette Rodenburg -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/nicolette.jpg" alt="Nicolette Rodenburg">
+                        <h2 class="team-member-name">Nicolette Rodenburg</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Woordvoerder &amp; PR-strateeg</span>
+                        <p>Nicolette is een ervaren woordvoerder en PR-strateeg en in 2026 voor zichzelf begonnen. Eerder werkte zij bij het ministerie van OCW, het ministerie van IenW en D66. Ze was onder meer de woordvoerder van minister Dijkgraaf en staatssecretaris van Van Veldhoven.</p>
+                        <p>Ze is strategisch sterk, komt snel tot de kern en stelt de juiste vragen om jou verder te helpen.</p>
+                        <div class="team-member-contact">
+                            <a href="https://www.nicoletterodenburg.nl" target="_blank" rel="noopener">nicoletterodenburg.nl</a>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Alies Pronk -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/alies.jpg" alt="Alies Pronk">
+                        <h2 class="team-member-name">Alies Pronk</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Datastrateeg</span>
+                        <p>Alies is datastrateeg. Ze onderzoekt beschikbare data om inzicht te krijgen in de behoeften van het publiek en gebruikt die inzichten als input voor het verdere strategische proces. Jarenlang werkte ze bij communicatiebureau True Ideas (voorheen Johnny Wonder), voor maatschappelijke organisaties als NS, ProRail en UWV. Met onderzoek, analyses en strategie hielp ze organisaties hun communicatie scherper te maken en de impact van hun online communicatie te vergroten.</p>
+                        <div class="team-member-contact">
+                            <a href="mailto:alies@stekelbaars.nl">alies@stekelbaars.nl</a>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Tessel Verschoor -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/tessel.jpg" alt="Tessel Verschoor">
+                        <h2 class="team-member-name">Tessel Verschoor</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Projectmanager &amp; communicatie</span>
+                        <p>Tessel is een veelzijdige projectmanager en communicatieprofessional met ervaring in zowel de creatieve als maatschappelijke sector. Ze werkte onder andere voor De Reclamefabriek en GasTerug, waar ze zich bezighield met projectmanagement, communicatie en het organiseren van evenementen. Ze schakelt snel, houdt overzicht en zorgt met een praktische en gestructureerde aanpak dat ideeën worden omgezet in concrete acties en projecten soepel verlopen.</p>
+                        <p>Bij Stekelbaars houdt ze zich bezig met de interne organisatie, communicatie en PR-werkzaamheden.</p>
+                    </div>
+                </article>
+    
+                <!-- Wouter Zaalberg -->
+                <article class="team-member reveal">
+                    <div class="team-member-img">
+                        <img src="img/wouter.jpg" alt="Wouter Zaalberg">
+                        <h2 class="team-member-name">Wouter Zaalberg</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Fotograaf &amp; Filmmaker</span>
+                        <p>Wouter is fotograaf en filmmaker. Hij vertaalt het verhaal van een organisatie naar beeld dat blijft hangen &mdash; van het portret van een bestuurder tot de campagnefilm waarin een ideaal tot leven komt. Voor Stekelbaars maakt hij de fotografie en video's waarmee onze klanten zichtbaar worden in een verzadigd medialandschap.</p>
+                        <div class="team-member-contact">
+                            <a href="https://www.wouterzaalberg.nl" target="_blank" rel="noopener">wouterzaalberg.nl</a>
+                        </div>
+                    </div>
+                </article>
+    
+                <!-- Sanne van de Goor -->
+                <article class="team-member reveal">
+                    <div class="team-member-img team-member-img--placeholder">
+                        <h2 class="team-member-name">Sanne van de Goor</h2>
+                    </div>
+                    <div class="team-member-tekst">
+                        <span class="team-member-rol">Grafisch ontwerp en huisstijl</span>
+                        <p>Sanne van de Goor is grafisch ontwerper. Ze werkt zowel in opdracht als aan zelf ge&iuml;nitieerde projecten rondom patronen, kleur en gedrag. Daarnaast geeft ze regelmatig les aan de Willem de Kooning Academie.</p>
+                        <p>Voor Stekelbaars maakte Sanne de eigen huisstijl en al het ontwerp van Door de Helft.</p>
+                        <div class="team-member-contact">
+                            <a href="https://sannevandegoor.nl" target="_blank" rel="noopener">sannevandegoor.nl</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    
+    </main>
 
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container container--wide">
             <div class="footer-inner footer-inner--4col">
                 <div class="footer-brand">
-                    <img src="Huisstijl/stekelbaars logo_in wit.png" alt="Stekelbaars" class="footer-logo">
+                    <img src="Huisstijl/stekelbaars logo_in wit.png" alt="Stekelbaars" class="footer-logo" loading="lazy">
                     <p>Strategisch communicatiebureau dat samen met jou je idealen waarmaakt.</p>
                 </div>
                 <div class="footer-nav">
                     <h4>Pagina's</h4>
                     <ul>
+                        <li><a href="voor-wie.html">Voor wie</a></li>
                         <li><a href="wat-we-doen.html">Diensten</a></li>
-                        <li><a href="model.html">Het Stroommodel</a></li>
-                        <li class="nav-dropdown">
-                    <a href="voor-wie.html">Voor wie</a>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="voor-wie-bw.html">Wethouders &amp; Burgemeesters</a></li>
-                        <li><a href="voor-wie-organisaties.html">Organisaties</a></li>
-                        <li><a href="voor-wie-bedrijven.html">Bedrijven</a></li>
-                    </ul>
-                </li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="aanpak.html">Aanpak</a></li>
                         <li><a href="wie-we-zijn.html">Team</a></li>
-                        <li><a href="nieuws.html">Nieuws</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-nav">
                     <h4>Overig</h4>
                     <ul>
+                        <li><a href="nieuws.html">Nieuws</a></li>
                         <li><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></li>
                         <li><a href="ai-beleid.html">AI-beleid</a></li>
-                        <li><a href="nieuws.html">Nieuws</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -298,7 +331,8 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=m38"></script>
+    <script src="js/home.js?v=h7"></script>
 
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5039f458836c4ebdb71d0c7ad9f4d81d"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

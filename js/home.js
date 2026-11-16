@@ -71,7 +71,7 @@
     }
 
     /* ---------- 2. Eén observer voor alle "is-in" triggers ---------- */
-    var inTargets = document.querySelectorAll('[data-words], .hm-duo-photo');
+    var inTargets = document.querySelectorAll('[data-words], .hm-duo-photo, .ph-photo, .pg-dienst');
     if (reduceMotion || !('IntersectionObserver' in window)) {
         inTargets.forEach(function (el) { el.classList.add('is-in'); });
     } else {

@@ -4,7 +4,8 @@
    Alles hieronder is prefix .hm- en alleen op index.html geladen.
    ============================================ */
 
-.home-v2 {
+.home-v2,
+.page-v2 {
     /* Eén kopmaat en één tekstmaat voor alle blokken */
     --hm-title-size: clamp(2.5rem, 4.6vw, 5.5rem);
     --hm-body-size: clamp(1rem, 0.95vw, 1.125rem);
@@ -182,6 +183,56 @@
     width: clamp(160px, 15vw, 290px);
     height: auto;
     animation: hmBob 6s ease-in-out infinite;
+}
+
+/* ============================================
+   EVENEMENT-BANNER (tijdelijk — tussen blok 2 en 3)
+   Wit vlak tussen geel en zwart; barcode-streepjes als accent links.
+   ============================================ */
+
+.hm-event {
+    position: relative;
+    z-index: 2;
+    background: var(--wit);
+    border-top: 6px solid var(--zwart);
+    padding: clamp(2.5rem, 4vw, 4rem) 0;
+}
+.hm-event-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 4vw, 4rem);
+}
+.hm-event-text {
+    position: relative;
+    padding-left: clamp(1.25rem, 2vw, 2rem);
+    border-left: 6px solid var(--geel);
+}
+.hm-event-eyebrow {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+}
+.hm-event-title {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 3.6vw, 3.75rem);
+    line-height: 0.98;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem;
+}
+.hm-event-lede {
+    font-size: var(--hm-body-size);
+    max-width: 36em;
+    margin: 0;
+}
+.hm-event-btn { flex: none; }
+
+@media (max-width: 900px) {
+    .hm-event-inner { flex-direction: column; align-items: flex-start; }
 }
 
 /* ============================================

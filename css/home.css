@@ -1,0 +1,485 @@
+/* ============================================
+   HOME v2 (ombouw 2026)
+   Blok 1 (hero) gebruikt nog de bestaande styles.css.
+   Alles hieronder is prefix .hm- en alleen op index.html geladen.
+   ============================================ */
+
+.home-v2 {
+    /* Eén kopmaat en één tekstmaat voor alle blokken */
+    --hm-title-size: clamp(2.5rem, 4.6vw, 5.5rem);
+    --hm-body-size: clamp(1rem, 0.95vw, 1.125rem);
+    --hm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Gedeelde typografie ---------- */
+
+.hm-title {
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: var(--hm-title-size);
+    line-height: 0.98;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    color: var(--zwart);
+    margin-bottom: var(--hm-title-size); /* kop-spacing = font-size */
+}
+
+.hm-body p {
+    font-size: var(--hm-body-size);
+    line-height: 1.6;
+    color: var(--zwart);
+}
+.hm-body p + p { margin-top: 1.3em; }
+
+/* Woord-voor-woord reveal: elk woord schuift uit een masker omhoog */
+.hm-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+}
+.hm-word > span {
+    display: inline-block;
+    transform: translateY(105%);
+    transition: transform 0.9s var(--hm-ease);
+    transition-delay: calc(var(--i, 0) * 0.07s);
+}
+[data-words].is-in .hm-word > span { transform: none; }
+
+/* Gedeelde reveal-timing: iets soepeler dan de standaard .reveal */
+.home-v2 .reveal {
+    transform: translateY(24px);
+    transition: opacity 0.9s var(--hm-ease), transform 0.9s var(--hm-ease);
+}
+.home-v2 .reveal.visible { transform: none; }
+
+/* ---------- Knop ----------
+   Compact, zwart met gele letters. Hover subtiel: gele lijn groeit onder de tekst. */
+
+.hm-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8em 1.4em;
+    background: var(--zwart);
+    color: var(--geel);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.hm-btn span {
+    background: linear-gradient(var(--geel), var(--geel)) 0 100% / 0 1.5px no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 0.45s var(--hm-ease);
+}
+.hm-btn:hover,
+.hm-btn:focus-visible { background: #161616; }
+.hm-btn:hover span,
+.hm-btn:focus-visible span { background-size: 100% 1.5px; }
+.hm-btn:focus-visible { outline: 2px solid var(--zwart); outline-offset: 3px; }
+
+/* Tekstlink met visje dat vooruit zwemt bij hover */
+.hm-fishlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.95rem, 1vw, 1.1rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--zwart);
+    text-decoration: none;
+}
+.hm-fishlink span {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+    transition: background-size 0.4s var(--hm-ease);
+    padding-bottom: 2px;
+}
+/* Visje zweeft rustig, altijd (geen hover-animatie) */
+.hm-fishlink img {
+    width: 3.4em;
+    height: auto;
+    animation: hmFloat 4.5s ease-in-out infinite;
+}
+.hm-fishlink:hover span,
+.hm-fishlink:focus-visible span { background-size: 100% 2px; }
+.hm-fishlink--geel { color: var(--geel); }
+
+@keyframes hmFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+}
+
+@keyframes hmBob {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25%      { transform: translate(5px, -4px) rotate(1.5deg); }
+    50%      { transform: translate(0, 4px) rotate(0deg); }
+    75%      { transform: translate(-5px, -2px) rotate(-1.5deg); }
+}
+
+/* ============================================
+   BLOK 2 — Voor organisaties en voor mensen
+   ============================================ */
+
+/* Asymmetrische vlakverdeling: kop op één regel links op de as van de hero-tekst,
+   tekst + knop in een rechterkolom, visje vult het vlak linksonder.
+   Leesrichting: diagonaal van linksboven naar rechtsonder. */
+
+.hm-intro {
+    position: relative;
+    z-index: 2; /* schuift over de sticky hero */
+    background: var(--geel);
+    padding: clamp(6rem, 10vw, 10rem) 0 clamp(6rem, 9vw, 9rem);
+    overflow: clip;
+}
+
+.hm-intro-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 2rem);
+    grid-template-areas:
+        "head head head head head head head head head head head head"
+        "fish fish fish fish fish .    col  col  col  col  col  col";
+}
+
+.hm-intro-title { grid-area: head; }
+
+/* Letters liggen plat (achterover op hun onderkant) en komen overeind via JS-scroll */
+.hm-flip-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+.hm-flip-letter {
+    display: inline-block;
+    transform-origin: 50% 88%; /* scharnier op de basislijn */
+    transform: perspective(600px) rotateX(90deg);
+    will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+    .hm-flip-letter { transform: none !important; }
+}
+/* Past bij elke desktopbreedte op één regel (gemeten: 1248px bij 1272px container op 1920) */
+@media (min-width: 901px) {
+    .hm-intro-title,
+    .hm-title--aanpak { white-space: nowrap; }
+}
+
+.hm-intro-col { grid-area: col; }
+.hm-intro .hm-body { margin-bottom: clamp(2rem, 3vw, 3rem); }
+
+.hm-swimlane {
+    grid-area: fish;
+    align-self: end;
+    padding-bottom: 0.5rem;
+}
+.hm-swimmer {
+    display: block;
+    width: clamp(160px, 15vw, 290px);
+    height: auto;
+    animation: hmBob 6s ease-in-out infinite;
+}
+
+/* ============================================
+   BLOK 3 — Klanten
+   ============================================ */
+
+.hm-clients {
+    background: var(--zwart);
+    padding: clamp(4rem, 7vw, 7rem) 0 clamp(3rem, 5vw, 5rem);
+    overflow: hidden;
+}
+
+.hm-clients-title {
+    --fs: clamp(1.6rem, 2.6vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25em 0.45em;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 800;
+    font-size: var(--fs);
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--geel);
+    margin-bottom: var(--fs);
+}
+.hm-clients-logo {
+    height: 0.82em;
+    width: auto;
+    align-self: center;
+}
+
+/* Logo-band: loopt langzaam door, pauzeert bij hover */
+.hm-marquee {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.hm-marquee-track {
+    --gap: clamp(1.25rem, 2.5vw, 2.75rem);
+    display: flex;
+    gap: var(--gap);
+    width: max-content;
+    list-style: none;
+    /* padding-right = gap, zodat -50% precies één set items is (naadloze loop) */
+    padding: 1rem var(--gap) 1rem 0;
+}
+.hm-marquee.is-running .hm-marquee-track {
+    animation: hmMarquee var(--hm-marquee-duration, 40s) linear infinite;
+}
+.hm-marquee:hover .hm-marquee-track,
+.hm-marquee:focus-within .hm-marquee-track { animation-play-state: paused; }
+
+@keyframes hmMarquee {
+    to { transform: translateX(-50%); }
+}
+
+.hm-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(140px, 11vw, 200px);
+    aspect-ratio: 3 / 2;
+    color: var(--wit);
+    text-decoration: none;
+    opacity: 0.55;
+    filter: grayscale(1);
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s var(--hm-ease);
+}
+.hm-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.hm-logo:hover,
+.hm-logo:focus-visible {
+    opacity: 1;
+    filter: none;
+    transform: translateY(-4px);
+}
+
+/* Placeholder-tegel tot de echte logo's er zijn */
+.hm-logo--placeholder {
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 12px);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+.hm-logo--placeholder:hover { border-color: var(--geel); color: var(--geel); }
+
+.hm-clients-foot {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: clamp(2.5rem, 5vw, 5rem);
+}
+
+/* ============================================
+   BLOK 4 — Een unieke combinatie
+   Binnen .container--wide: foto lijnt rechts uit op "Contact" in de nav.
+   ============================================ */
+
+.hm-duo {
+    background: var(--wit);
+    padding: clamp(5rem, 8vw, 8rem) 0;
+    overflow: clip;
+}
+
+.hm-duo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    column-gap: clamp(2.5rem, 5vw, 6rem);
+    align-items: center;
+}
+
+.hm-duo-text .hm-body { margin-bottom: clamp(2rem, 3vw, 3rem); }
+
+.hm-duo-photo {
+    --frame: clamp(12px, 1.4vw, 26px);
+    position: relative;
+    display: block;
+    align-self: stretch;
+    min-height: clamp(520px, 46vw, 860px);
+    overflow: hidden;
+    background: #222;
+}
+.hm-duo-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(1) contrast(1.05);
+}
+
+/* Geel-transparante lijst rondom de foto (zoals in de schets), schuift in bij reveal */
+.hm-frame {
+    position: absolute;
+    z-index: 1;
+    background: var(--geel);
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    transition: transform 1.1s var(--hm-ease);
+}
+.hm-frame--top    { top: 0; left: 0; right: 0; height: var(--frame); transform: scaleX(0); transform-origin: left; }
+.hm-frame--bottom { bottom: 0; left: 0; right: 0; height: var(--frame); transform: scaleX(0); transform-origin: right; }
+.hm-frame--left   { top: var(--frame); bottom: var(--frame); left: 0; width: var(--frame); transform: scaleY(0); transform-origin: bottom; transition-delay: 0.25s; }
+.hm-frame--right  { top: var(--frame); bottom: var(--frame); right: 0; width: var(--frame); transform: scaleY(0); transform-origin: top; transition-delay: 0.25s; }
+.hm-duo-photo.is-in .hm-frame { transform: none; }
+
+/* Hotspots: per persoon verschijnt een geel vierkant + naam bij hover */
+.hm-duo-photo .foto-hotspot {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+.hm-duo-photo .foto-hotspot-ring {
+    position: absolute;
+    width: clamp(130px, 11vw, 220px);
+    aspect-ratio: 1;
+    border: clamp(10px, 0.9vw, 16px) solid rgba(254, 219, 0, 0.6);
+    opacity: 0;
+    transform: scale(1.18);
+    transition: opacity 0.35s ease-out, transform 0.5s var(--hm-ease);
+    pointer-events: auto;
+    cursor: pointer;
+}
+.hm-duo-photo .foto-hotspot-naam {
+    position: absolute;
+    padding: 0.3rem 0.65rem;
+    background: var(--zwart);
+    color: var(--geel);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.85rem, 1vw, 1.05rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease-out, transform 0.45s var(--hm-ease);
+    pointer-events: none;
+}
+.hm-duo-photo .foto-hotspot:hover .foto-hotspot-ring {
+    opacity: 1;
+    transform: none;
+}
+.hm-duo-photo .foto-hotspot:hover .foto-hotspot-naam {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0.08s;
+}
+
+/* ============================================
+   BLOK 5 — En een unieke aanpak
+   Binnen .container--wide: foto lijnt rechts uit op "Contact" in de nav.
+   ============================================ */
+
+.hm-aanpak {
+    background: var(--geel);
+    padding: clamp(6rem, 10vw, 10rem) 0 clamp(5rem, 8vw, 8rem);
+    overflow: clip;
+}
+
+/* Spiegelbeeld van blok 4 (tekst links / foto rechts) → hier foto links / tekst rechts.
+   Kop op één regel links, foto onder de kop op dezelfde linkeras, tekst verticaal
+   gecentreerd ernaast. Het visje zwemt rechtsonder "verder" naast de knop. */
+.hm-aanpak-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 2rem);
+    grid-template-areas:
+        "head  head  head  head  head  head  head  head  head  head  head  head"
+        "photo photo photo photo photo .     text  text  text  text  text  text";
+    align-items: center;
+}
+
+.hm-title--aanpak { grid-area: head; }
+
+.hm-aanpak-text { grid-area: text; }
+
+.hm-aanpak-cta { margin-top: clamp(1.75rem, 2.5vw, 2.5rem); }
+
+.hm-aanpak-photo {
+    grid-area: photo;
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+}
+.hm-aanpak-photo img {
+    position: absolute;
+    inset: -6% 0;
+    width: 100%;
+    height: 112%;
+    object-fit: cover;
+    filter: grayscale(1);
+    will-change: transform;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+
+@media (max-width: 900px) {
+    .hm-intro { padding: 5rem 0 4rem; }
+    .hm-intro-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: "head" "col" "fish";
+    }
+    .hm-swimlane { margin-top: 3.5rem; }
+    .hm-swimmer { width: 150px; }
+
+    .hm-duo { padding: 4.5rem 0; }
+    .hm-duo-grid {
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+    }
+    .hm-duo-photo {
+        min-height: 0;
+        aspect-ratio: 4 / 5;
+    }
+
+    .hm-aanpak-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "head"
+            "photo"
+            "text";
+    }
+    .hm-aanpak-photo { margin-bottom: 2.5rem; }
+
+    .hm-clients-foot { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+    .hm-btn { padding: 0.85em 1.1em; }
+    .hm-clients-logo { height: 0.75em; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .hm-word > span,
+    .hm-frame { transform: none !important; transition: none !important; }
+    .hm-swimmer,
+    .hm-fishlink img { animation: none !important; }
+    .hm-marquee .hm-marquee-track { animation: none !important; flex-wrap: wrap; width: auto; }
+    .hm-marquee { -webkit-mask-image: none; mask-image: none; }
+    .hm-aanpak-photo img { transform: none !important; }
+}

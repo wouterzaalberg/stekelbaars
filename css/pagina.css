@@ -641,11 +641,11 @@
 .pg-cases-b { padding-top: 0; }
 .pg-cases-b .pg-casefull:first-child { border-top: 0; }
 
-/* 9 logo's op één rij, zelfde breedte en goot als de cases */
+/* 8 logo's op één rij, zelfde breedte en goot als de cases */
 .pg-logos {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(9, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
     gap: clamp(1rem, 2vw, 2rem);
 }
 .pg-logo {
@@ -734,7 +734,7 @@
     .pg-logos { gap: 0.75rem; }
 }
 @media (max-width: 900px) {
-    .pg-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pg-logos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .pg-testimonial-grid { grid-template-columns: 1fr; row-gap: 2.5rem; }
     .pg-testimonial-photo,
     .pg-testimonial-quote { grid-column: auto; }

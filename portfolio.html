@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css?v=m86">
     <link rel="stylesheet" href="css/home.css?v=h8">
-    <link rel="stylesheet" href="css/pagina.css?v=p3">
+    <link rel="stylesheet" href="css/pagina.css?v=p6">
 </head>
 <body class="page-v2">
 
@@ -84,8 +84,27 @@
             </figure>
         </section>
 
+        <!-- OPDRACHTGEVERS: 9 logo's, uitgelijnd op de cases eronder -->
+        <section class="pg-section pg-logos-section" aria-labelledby="pg-logos-title">
+            <div class="container container--wide">
+                <h2 class="pg-eyebrow" id="pg-logos-title">Opdrachtgevers</h2>
+                <ul class="pg-logos">
+                    <li class="pg-logo"><img src="img/logo's/MUFG_logo.png" alt="MUFG" width="1280" height="461" loading="lazy" decoding="async"></li>
+                    <li class="pg-logo"><img src="img/logo's/concertgebouw.jpg" alt="Het Concertgebouw" width="1500" height="981" loading="lazy" decoding="async"></li>
+                    <li class="pg-logo"><img src="img/logo's/Logo DLT.png" alt="Duurzame Luchtvaart Tafel" width="210" height="154" loading="lazy" decoding="async"></li>
+                    <li class="pg-logo"><img src="img/logo's/ddh_logo_groen.png" alt="Door de Helft" width="252" height="182" loading="lazy" decoding="async"></li>
+                    <!-- PLACEHOLDERS: logo's volgen -->
+                    <li class="pg-logo pg-logo--leeg"><span>Parkinson Nederland</span></li>
+                    <li class="pg-logo pg-logo--leeg"><span>Brouwerij &rsquo;t IJ</span></li>
+                    <li class="pg-logo pg-logo--leeg"><span>SOL</span></li>
+                    <li class="pg-logo pg-logo--leeg"><span>Logo volgt</span></li>
+                    <li class="pg-logo pg-logo--leeg"><span>Logo volgt</span></li>
+                </ul>
+            </div>
+        </section>
+
         <!-- CASES — later een Decap CMS-collectie (titel, klant, dienst, foto's, video's) -->
-        <section class="pg-section" aria-label="Cases">
+        <section class="pg-section pg-cases-a" aria-label="Cases">
             <div class="container container--wide">
                 <ol class="pg-caselist">
 
@@ -120,6 +139,30 @@
                             </a>
                         </div>
                     </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- TESTIMONIAL: zwarte band met foto + quote van opdrachtgever -->
+        <!-- PLACEHOLDER: foto, quote en naam vervangen door aangeleverde testimonial -->
+        <section class="pg-section pg-section--zwart pg-testimonial" aria-label="Wat opdrachtgevers zeggen">
+            <div class="container container--wide pg-testimonial-grid">
+                <figure class="pg-photo pg-photo--bw pg-testimonial-photo reveal">
+                    <img src="img/foto 10.jpg" alt="" width="1500" height="1126" loading="lazy" decoding="async">
+                </figure>
+                <blockquote class="pg-testimonial-quote reveal">
+                    <p>Hier komt de testimonial van de opdrachtgever.</p>
+                    <footer class="pg-testimonial-cite">
+                        <span class="pg-testimonial-name">Naam</span>
+                        <span class="pg-testimonial-role">Functie, organisatie</span>
+                    </footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="pg-section pg-cases-b" aria-label="Meer cases">
+            <div class="container container--wide">
+                <ol class="pg-caselist">
 
                     <li class="pg-casefull" id="mufg">
                         <!-- Beeld volgt; tot die tijd het logo -->

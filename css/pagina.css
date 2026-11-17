@@ -739,3 +739,14 @@
     .pg-testimonial-photo,
     .pg-testimonial-quote { grid-column: auto; }
 }
+
+/* Testimonial-band direct gevolgd door een zwarte sectie (aanpak):
+   dunne gele lijn als scheiding, uitgelijnd op de content */
+.pg-testimonial + .pg-section--zwart { padding-top: 0; }
+.pg-testimonial + .pg-section--zwart > .container::before {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-bottom: clamp(5rem, 9vw, 9rem);
+    background: var(--geel);
+}

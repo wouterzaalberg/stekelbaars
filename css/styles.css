@@ -6289,3 +6289,12 @@ p {
         align-self: flex-start;
     }
 }
+
+/* Contact mobiel: eerste visje uit de introtekst, naar de lege ruimte naast de kop */
+@media (max-width: 900px) {
+    .contact-content .wz-floaters img:nth-child(1) {
+        top: 6% !important;
+        left: auto !important;
+        right: 6%;
+    }
+}

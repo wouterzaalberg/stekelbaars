@@ -229,6 +229,16 @@
     max-width: 36em;
     margin: 0;
 }
+.hm-event-date {
+    display: inline-block;
+    margin: 0 0 1rem;
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(var(--geel), var(--geel)) 0 92% / 100% 0.4em no-repeat;
+}
 .hm-event-btn { flex: none; }
 
 @media (max-width: 900px) {

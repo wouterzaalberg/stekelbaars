@@ -839,3 +839,32 @@
 @media (max-width: 900px) {
     .pg-testimonial-photo--staand { justify-self: start; max-width: 320px; }
 }
+
+/* Foto naast de introtekst (workshop: Arun met Obama, bron 646×436) */
+.ws-side-photo {
+    grid-column: 9 / -1;
+    align-self: center;
+    aspect-ratio: auto;
+    max-width: 646px;
+    background: none;
+    overflow: visible;
+}
+.ws-side-photo img { height: auto; }
+.ws-side-photo figcaption {
+    margin-top: 0.75rem;
+    padding-top: 0.6rem;
+    border-top: 2px solid var(--geel);
+    font-family: 'Barlow Semi Condensed', Calibri, sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--zwart);
+}
+@media (max-width: 900px) {
+    .ws-side-photo { grid-column: 1 / -1; margin-top: 2.5rem; }
+}
+
+
+/* Aanmeldknop onder de feitenrij (workshop) */
+.ws-facts-cta { margin-top: clamp(2.5rem, 4vw, 4rem); }

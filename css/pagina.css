@@ -806,3 +806,25 @@
 @media (max-width: 900px) {
     .ph--sticky { position: relative; top: auto; }
 }
+
+/* Portretfoto bij testimonial (klein bronbestand, 400×400): vierkant en niet groter dan het origineel */
+.pg-testimonial-photo--portret {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 400px;
+    justify-self: end;
+}
+@media (max-width: 900px) {
+    .pg-testimonial-photo--portret { justify-self: start; max-width: 280px; }
+}
+
+
+/* Adres als link naar Google Maps (workshop) */
+.ws-maplink {
+    color: inherit;
+    text-decoration: none;
+    background: linear-gradient(var(--geel), var(--geel)) 0 100% / 100% 0.18em no-repeat;
+    transition: background-size 0.25s ease;
+}
+.ws-maplink:hover,
+.ws-maplink:focus-visible { background-size: 100% 100%; }

@@ -828,3 +828,14 @@
 }
 .ws-maplink:hover,
 .ws-maplink:focus-visible { background-size: 100% 100%; }
+
+/* Staande portretfoto bij testimonial (portfolio, 563×750) */
+.pg-testimonial-photo--staand {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    max-width: 460px;
+    justify-self: end;
+}
+@media (max-width: 900px) {
+    .pg-testimonial-photo--staand { justify-self: start; max-width: 320px; }
+}

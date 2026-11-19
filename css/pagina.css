@@ -76,6 +76,8 @@
     animation: phZoom 2.4s var(--hm-ease) forwards;
 }
 .ph-photo.is-in .hm-frame { transform: none; }
+/* Kleurbeeld (bv. workshop-collage met gele pijlen): geen grijsfilter */
+.ph-photo--kleur img { filter: none; }
 
 @keyframes phIn { to { opacity: 1; transform: none; } }
 @keyframes phZoom { to { transform: scale(1); } }

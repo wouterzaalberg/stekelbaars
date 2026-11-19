@@ -5,3 +5,6 @@
 /voor-wie-organisaties.html  /voor-wie.html     301
 /voor-wie-bedrijven.html     /voor-wie.html     301
 /wethouders.html             /voor-wie.html     301
+
+# Interne bestanden niet publiek serveren
+/CLAUDE.md                   /                  404!
